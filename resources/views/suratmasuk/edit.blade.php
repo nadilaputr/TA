@@ -4,15 +4,7 @@
 
 @section('plugins.BsCustomFileInput', true)
 
-@section('title', 'Tambah Surat Masuk')
-
-@section('content_header')
-
-    @php
-        $config = ['format' => 'L'];
-    @endphp
-
-@stop
+@section('title', 'Edit Surat Masuk')
 
 @section('content')
     <h1>Edit Surat Masuk</h1>

@@ -337,12 +337,13 @@ return [
 
         [
             'text' => 'Data Operator',
-            'url'  => 'admin/settings',
+            'url'  => 'dataoperator',
             'icon' => 'fas fa-users-cog',
         ],
+
         [
-            'text' => 'Ubah Password',
-            'url'  => 'admin/settings',
+            'text' => 'Bidang',
+            'url'  => 'bidang',
             'icon' => 'fas fa-fw fa-lock',
         ],
         // [

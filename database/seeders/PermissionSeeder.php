@@ -21,33 +21,33 @@ class PermissionSeeder extends Seeder
     {
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
-        Permission::create(['name' => 'view surat']);
-        Permission::create(['name' => 'view disposisi']);
-        Permission::create(['name' => 'create surat']);
-        Permission::create(['name' => 'edit surat']);
-        Permission::create(['name' => 'edit disposisi']);
-        Permission::create(['name' => 'delete surat']);
-        Permission::create(['name' => 'delete dataoperator']);
-        Permission::create(['name' => 'publish']);
-        Permission::create(['name' => 'unpublish']);
+        // Permission::create(['name' => 'view surat']);
+        // Permission::create(['name' => 'view disposisi']);
+        // Permission::create(['name' => 'create surat']);
+        // Permission::create(['name' => 'edit surat']);
+        // Permission::create(['name' => 'edit disposisi']);
+        // Permission::create(['name' => 'delete surat']);
+        // Permission::create(['name' => 'delete dataoperator']);
+        // Permission::create(['name' => 'publish']);
+        // Permission::create(['name' => 'unpublish']);
 
         $adminRole = Role::create(['name' => 'admin']);
         
         $sekretarisRole = Role::create(['name' => 'sekretaris']);
-        $sekretarisRole->givePermissionTo('view surat');
-        $sekretarisRole->givePermissionTo('edit disposisi');
-        $sekretarisRole->givePermissionTo('delete surat');
-        $sekretarisRole->givePermissionTo('publish');
-        $sekretarisRole->givePermissionTo('unpublish');
+        // $sekretarisRole->givePermissionTo('view surat');
+        // $sekretarisRole->givePermissionTo('edit disposisi');
+        // $sekretarisRole->givePermissionTo('delete surat');
+        // $sekretarisRole->givePermissionTo('publish');
+        // $sekretarisRole->givePermissionTo('unpublish');
         
         $kepalaDinasRole = Role::create(['name' => 'kepaladinas']);
-        $kepalaDinasRole->givePermissionTo('view surat');
-        $kepalaDinasRole->givePermissionTo('edit disposisi');
-        $kepalaDinasRole->givePermissionTo('publish');
+        // $kepalaDinasRole->givePermissionTo('view surat');
+        // $kepalaDinasRole->givePermissionTo('edit disposisi');
+        // $kepalaDinasRole->givePermissionTo('publish');
 
         $kepalaBidangRole = Role::create(['name' => 'kepalabidang']);
-        $kepalaBidangRole->givePermissionTo('view surat');
-        $kepalaBidangRole->givePermissionTo('edit disposisi');
+        // $kepalaBidangRole->givePermissionTo('view surat');
+        // $kepalaBidangRole->givePermissionTo('edit disposisi');
 
 
 

@@ -27,9 +27,22 @@ class SuratMasukController extends Controller
      */
     public function index()
     {
-        $surat = SuratMasuk::all();
-        return view('surat_masuk', [
-            "surat" => $surat,
+        $heads = [
+        'No', 
+        'Nomor Surat', 
+        'Tanggal Surat', 
+        'Alamat Surat',
+        'Tanggal Masuk', 
+        'Perihal', 
+        'Status', 
+        'File', 
+        ['label' => 'Actions', 'no-export' => true, 'width' => 5]];
+        
+        $suratmasuk = SuratMasuk::all();
+        
+        return view('suratmasuk.index', [
+            "suratmasuk" => $suratmasuk,
+            "heads" =>$heads,
         ]);
     }
 
@@ -40,7 +53,7 @@ class SuratMasukController extends Controller
      */
     public function create()
     {
-        return view('tambahsuratmasuk');
+        return view('suratmasuk.create');
     }
 
     /**
@@ -99,11 +112,13 @@ class SuratMasukController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(int $id)
-    {
+    {   
+        $config = ['format' => 'L'];
         $surat = SuratMasuk::findOrFail($id);
 
-        return view('editsuratmasuk', [
+        return view('suratmasuk.edit', [
             "surat" => $surat,
+            "config" => $config
         ]);
     }
 
