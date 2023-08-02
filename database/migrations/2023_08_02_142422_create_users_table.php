@@ -17,10 +17,11 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('jabatan');
-            $table->string('bidang')->nullable;
+            $table->unsignedBigInteger('id_bidang');
             $table->string('username')->unique();
             $table->string('password');
             $table->rememberToken();
+            $table->foreign('id_bidang')->references('id')->on('bidang');
             $table->timestamps();
         });
     }

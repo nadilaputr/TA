@@ -25,6 +25,11 @@ class User extends Authenticatable
         'jabatan',
     ];
 
+    public function bidang()
+    {
+        return $this->belongsTo(Bidang::class, 'id_bidang');
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *

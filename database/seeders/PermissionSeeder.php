@@ -55,7 +55,7 @@ class PermissionSeeder extends Seeder
             'name' => 'Admin',
             'password' => Hash::make('password'),
             'username' => 'admin',
-            'bidang' => 'contohbidang',
+            'id_bidang' => 1,
             'jabatan' => 'contoh jabatan',
         ]);
         $user->assignRole($adminRole);
@@ -64,7 +64,7 @@ class PermissionSeeder extends Seeder
             'name' => 'Sekretaris',
             'password' => Hash::make('password'),
             'username' => 'sekretaris',
-            'bidang' => 'contohbidang',
+            'id_bidang' => 1,
             'jabatan' => 'contoh jabatan',
         ]);
         $user->assignRole($sekretarisRole);
@@ -73,7 +73,7 @@ class PermissionSeeder extends Seeder
             'name' => 'Kepala Dinas',
             'password' => Hash::make('password'),
             'username' => 'kepaladinas',
-            'bidang' => 'contohbidang',
+            'id_bidang' => 1,
             'jabatan' => 'contoh jabatan',
         ]);
         $user->assignRole($kepalaDinasRole);
@@ -82,7 +82,7 @@ class PermissionSeeder extends Seeder
             'name' => 'Kepala Bidang',
             'password' => Hash::make('password'),
             'username' => 'kepalabidang',
-            'bidang' => 'contohbidang',
+            'id_bidang' => 1,
             'jabatan' => 'contoh jabatan',
         ]);
         $user->assignRole($kepalaBidangRole);

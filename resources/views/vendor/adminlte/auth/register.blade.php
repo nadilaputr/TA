@@ -1,14 +1,14 @@
 @extends('adminlte::auth.auth-page', ['auth_type' => 'register'])
-
-@php( $login_url = View::getSection('login_url') ?? config('adminlte.login_url', 'login') )
-@php( $register_url = View::getSection('register_url') ?? config('adminlte.register_url', 'register') )
+@php($roles = Spatie\Permission\Models\Role::all()->pluck('name'))
+@php($login_url = View::getSection('login_url') ?? config('adminlte.login_url', 'login'))
+@php($register_url = View::getSection('register_url') ?? config('adminlte.register_url', 'register'))
 
 @if (config('adminlte.use_route_url', false))
-    @php( $login_url = $login_url ? route($login_url) : '' )
-    @php( $register_url = $register_url ? route($register_url) : '' )
+    @php($login_url = $login_url ? route($login_url) : '')
+    @php($register_url = $register_url ? route($register_url) : '')
 @else
-    @php( $login_url = $login_url ? url($login_url) : '' )
-    @php( $register_url = $register_url ? url($register_url) : '' )
+    @php($login_url = $login_url ? url($login_url) : '')
+    @php($register_url = $register_url ? url($register_url) : '')
 @endif
 
 @section('auth_header', __('adminlte::adminlte.register_message'))
@@ -20,18 +20,18 @@
         {{-- bidang field --}}
         <div class="form-group">
             <select class="form-control" name="bidang">
-                    <option selected>Pilih Bidang</option>
-                    @foreach ($bidang as $row)
-                    <option value="{{$row->id}}">{{ $row->namabidang }}</option>
-                    @endforeach
-    
-                </select>
-            </div>
+                <option selected>Pilih Bidang</option>
+                @foreach ($bidang as $row)
+                    <option value="{{ $row->id }}">{{ $row->namabidang }}</option>
+                @endforeach
+
+            </select>
+        </div>
 
         {{-- jabatan field --}}
         <div class="input-group mb-3">
             <input type="jabatan" name="jabatan" class="form-control @error('jabatan') is-invalid @enderror"
-                   value="{{ old('jabatan') }}" placeholder="Jabatan">
+                value="{{ old('jabatan') }}" placeholder="Jabatan">
 
             <div class="input-group-append">
                 <div class="input-group-text">
@@ -49,7 +49,7 @@
         {{-- Name field --}}
         <div class="input-group mb-3">
             <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
-                   value="{{ old('name') }}" placeholder="{{ __('adminlte::adminlte.full_name') }}" autofocus>
+                value="{{ old('name') }}" placeholder="{{ __('adminlte::adminlte.full_name') }}" autofocus>
 
             <div class="input-group-append">
                 <div class="input-group-text">
@@ -67,7 +67,7 @@
         {{-- username field --}}
         <div class="input-group mb-3">
             <input type="username" name="username" class="form-control @error('username') is-invalid @enderror"
-                   value="{{ old('username') }}" placeholder="Username">
+                value="{{ old('username') }}" placeholder="Username">
 
             <div class="input-group-append">
                 <div class="input-group-text">
@@ -82,10 +82,21 @@
             @enderror
         </div>
 
+        {{-- role field --}}
+        <div class="form-group">
+            <select class="form-control" id="role" name="role">
+                <option selected>Pilih Role</option>
+                @foreach ($roles as $role)
+                    <option value="{{ $role }}">
+                        {{ $role }}</option>
+                @endforeach
+            </select>
+        </div>
+
         {{-- Password field --}}
         <div class="input-group mb-3">
             <input type="password" name="password" class="form-control @error('password') is-invalid @enderror"
-                   placeholder="{{ __('adminlte::adminlte.password') }}">
+                placeholder="{{ __('adminlte::adminlte.password') }}">
 
             <div class="input-group-append">
                 <div class="input-group-text">
@@ -103,8 +114,8 @@
         {{-- Confirm password field --}}
         <div class="input-group mb-3">
             <input type="password" name="password_confirmation"
-                   class="form-control @error('password_confirmation') is-invalid @enderror"
-                   placeholder="{{ __('adminlte::adminlte.retype_password') }}">
+                class="form-control @error('password_confirmation') is-invalid @enderror"
+                placeholder="{{ __('adminlte::adminlte.retype_password') }}">
 
             <div class="input-group-append">
                 <div class="input-group-text">
@@ -119,18 +130,7 @@
             @enderror
         </div>
 
-        {{-- <div class="row">
-            <div class="col-sm-12">
-            <select class="form-control">
-            <option>option 1</option>
-            <option>option 2</option>
-            <option>option 3</option>
-            <option>option 4</option>
-            <option>option 5</option>
-            </select>
-            </div>
-            </div>
-            </div> --}}
+
 
         {{-- Register button --}}
         <button type="submit" class="btn btn-block {{ config('adminlte.classes_auth_btn', 'btn-flat btn-primary') }}">

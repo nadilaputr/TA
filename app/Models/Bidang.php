@@ -12,4 +12,11 @@ class Bidang extends Model
     protected $fillable = [
         'namabidang'
     ];
+
+    public function user()
+    {
+        return $this->hasMany(User::class);
+    }
 }
+
+

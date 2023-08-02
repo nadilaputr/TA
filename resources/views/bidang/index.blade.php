@@ -6,6 +6,10 @@
     <h1>Bidang</h1>
 @stop
 
+@section('plugins.Datatables', true)
+@section('plugins.DatatablesPlugin', true)
+
+
 @section('content')
     @role('admin')
     <a class="btn btn-info" href="{{ route('bidang.create') }}">Tambah</a>

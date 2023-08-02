@@ -9,7 +9,7 @@
 @section('content')
     <h1>Edit Surat Masuk</h1>
 
-    <div class="card card-primary">
+    <div class="card card-info">
         <div class="card-header">
             <h3 class="card-title">Quick Example</h3>
         </div>
@@ -36,16 +36,11 @@
                     <input type="text" class="form-control" placeholder="Nomor Surat" name="nomor_surat"
                         value="{{ $surat->nomor_surat }}">
                 </div>
+
                 <div class="form-group">
                     <label>Tanggal Surat</label>
-                    <x-adminlte-input-date value="{{ $surat->tanggal_surat }}" name="tanggal_surat" :config="$config"
-                        placeholder="HH/BB/TTTT">
-                        <x-slot name="appendSlot">
-                            <div class="input-group-text">
-                                <i class="fas fa-calendar-alt"></i>
-                            </div>
-                        </x-slot>
-                    </x-adminlte-input-date>
+                    <input type="date" class="form-control" name="tanggal_surat" required
+                        value="{{ old('tanggal_surat') }}">
                 </div>
 
                 <div class="form-group">
@@ -56,13 +51,7 @@
 
                 <div class="form-group">
                     <label>File</label>
-                    <x-adminlte-input-file name="file" igroup-size="md" placeholder="Choose a file...">
-                        <x-slot name="prependSlot">
-                            <div class="input-group-text bg-lightblue">
-                                <i class="fas fa-upload"></i>
-                            </div>
-                        </x-slot>
-                    </x-adminlte-input-file>
+                    <input type="file" class="form-control" name="file" required value="{{ old('file') }}">
                 </div>
 
                 <div class="form-group">
@@ -81,8 +70,11 @@
             </div>
 
             <div class="card-footer">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-success">Submit</button>
             </div>
+            {{-- <div class="card-footer">
+                <button type="submit" class="btn btn-danger">Cancel</button>
+            </div> --}}
         </form>
     </div>
 

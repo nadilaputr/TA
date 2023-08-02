@@ -80,10 +80,10 @@ class SuratMasukController extends Controller
         $data = $request->all();
 
         $file = $request->file('file');
-        $fileName = 'profile-' . time() . '.' . $file->getClientOriginalExtension();
-        $path = $file->storeAs('files', $fileName);
+        $fileName = 'profile-' .  $file->getClientOriginalName();
+        $path = $file->storeAs('suratmasuk', $fileName);
 
-        $data['tanggal_surat'] = Carbon::createFromFormat('m/d/Y', $request->tanggal_surat)->format('Y-m-d');
+        
         $data['file'] = $path;
 
         SuratMasuk::create($data);

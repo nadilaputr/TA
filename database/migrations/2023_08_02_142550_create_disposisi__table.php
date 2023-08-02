@@ -17,14 +17,12 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('id_surat');
             $table->unsignedBigInteger('id_user');
-            $table->timestamp('tanggal_surat');
-            $table->string('sifat');
-            $table->string('dari');
-            $table->string('ringkasan_isi');
+            $table->timestamp('tanggal_disposisi')->useCurrent();
+            $table->string('tindakan_dari');
             $table->string('catatan');
             $table->string('diteruskan_kepada')->nullable();
-            $table->integer('status');
             $table->string('file');
+            $table->string('status');
             $table->foreign('id_surat')->references('id')->on('surat_masuk');
             $table->foreign('id_user')->references('id')->on('users');
             $table->timestamps();
