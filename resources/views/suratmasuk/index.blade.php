@@ -34,7 +34,7 @@
                 <td>{{ $row->perihal }}</td>
                 <td>{{ $row->status }}</td>
                 <td>{{ $row->catatan }}</td>
-                <td>{{ $row->tindakan == 0 ? 'Tidak Diteruskan' : 'Diteruskan' }}</td>
+                {{-- <td>{{ $row->tindakan == 0 ? 'Tidak Diteruskan' : 'Diteruskan' }}</td> --}}
                 <form action="{{ route('masuk.destroy', $row->id) }}" method="POST">
                     <td class="d-flex">
                         @csrf

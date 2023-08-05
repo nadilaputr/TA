@@ -36,7 +36,7 @@ class SuratMasukController extends Controller
             'Perihal',
             'Status',
             'Catatan',
-            'Tindakan',
+            // 'Tindakan',
             ['label' => 'Actions', 'no-export' => true, 'width' => 5, 'text-align' => 'center'],
         ];
 
