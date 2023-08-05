@@ -19,13 +19,19 @@
 
         {{-- bidang field --}}
         <div class="form-group">
-            <select class="form-control" name="bidang">
-                <option selected>Pilih Bidang</option>
+            <select class="form-control" name="bidang" required>
+                <option value="" selected>Pilih Bidang</option>
                 @foreach ($bidang as $row)
                     <option value="{{ $row->id }}">{{ $row->namabidang }}</option>
                 @endforeach
 
             </select>
+
+            @error('bidang')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
         </div>
 
         {{-- jabatan field --}}
@@ -84,8 +90,8 @@
 
         {{-- role field --}}
         <div class="form-group">
-            <select class="form-control" id="role" name="role">
-                <option selected>Pilih Role</option>
+            <select class="form-control" id="role" name="role" required>
+                <option value="" selected>Pilih Role</option>
                 @foreach ($roles as $role)
                     <option value="{{ $role }}">
                         {{ $role }}</option>

@@ -21,10 +21,11 @@ return new class extends Migration
             $table->timestamp('tanggal_masuk')->useCurrent();
             $table->string('lampiran');
             $table->string('perihal');
-            $table->integer('status')->nullable();
-            $table->integer('sifat');
+            $table->string('status');
+            $table->string('sifat');
             $table->string('file');
-            $table->string('tindakan')->nullable();
+            $table->string('catatan')->nullable();
+            $table->string('tindakan')->default(0);
             $table->timestamps();
         });
     }

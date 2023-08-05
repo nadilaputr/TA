@@ -3,13 +3,10 @@
     @endphp
 
 <x-adminlte-modal id="tambah_surat_masuk" title="Tambah Surat Masuk" theme="info" icon="fa fa-md fa-fw fa-info-circle " size='lg'
-disable-animations>
+disable-animations v-centered static-backdrop scrollable>
 
     <div class="card card-info">
         
-
-
-
         <form action="{{ route('masuk.store') }}" enctype="multipart/form-data" method="POST">
             @csrf
 
@@ -26,8 +23,44 @@ disable-animations>
                 </div>
 
                 <div class="form-group">
-                    <label>Alamat Surat</label>
-                    <input id="alamat_surat" type="text" name="alamat_surat" class="form-control" placeholder="Alamat Surat" required>
+                    <label>Asal Surat</label>
+                    <input id="alamat_surat" type="text" name="asal_surat" class="form-control" placeholder="Asal Surat" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Perihal</label>
+                    <input id="perihal" type="text" name="perihal" class="form-control" placeholder="Perihal" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Lampiran</label>
+                    <x-adminlte-select  id="lampiran" name="lampiran">
+                        <option selected>Pilih Lampiran</option>
+                        <option value="1">1 Lembar</option>
+                        <option value="2">2 Lembar</option>
+                        <option value="3">3 Lembar</option>
+                        <option value="4">4 Lembar</option>
+                        <option value="5">5 Lembar</option>
+                    </x-adminlte-select>
+                </div>
+
+                <div class="form-group">
+                    <label>Status</label>
+                    <x-adminlte-select  id="status" name="status">
+                        <option selected>Status</option>
+                        <option value="asli">Asli</option>
+                        <option value="tembusan">Tembusan</option>
+                    </x-adminlte-select>
+                </div>
+
+                <div class="form-group">
+                    <label>Sifat</label>
+                    <x-adminlte-select  id="sifat" name="sifat">
+                        <option selected>Sifat</option>
+                        <option value="biasa">Biasa</option>
+                        <option value="segera">Segera</option>
+                        <option value="sangat_segera">Sangat Segera</option>
+                    </x-adminlte-select>
                 </div>
 
                 <div class="form-group">
@@ -40,19 +73,7 @@ disable-animations>
                         </x-slot>
                     </x-adminlte-input-file>
                 </div>
-
-                <div class="form-group">
-                    <label>Perihal</label>
-                    <input id="perihal" type="text" name="perihal" class="form-control" placeholder="Perihal" required>
-                </div>
-
-                <div class="form-group">
-                    <label>Status</label>
-                    <x-adminlte-select  id="status" name="status">
-                        <option value="0">Belum Disposisi</option>
-                        <option value="1">Sudah Disposisi</option>
-                    </x-adminlte-select>
-                </div>
+            
             </div>
 
             <div class="card-footer">

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\SuratMasuk;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +23,23 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+
+        $heads = [
+            'No',
+            'Nomor Surat',
+            'Tanggal Surat',
+            'Asal Surat',
+            'Perihal',
+            'Status',
+            'Tindakan',
+            ['label' => 'Actions', 'no-export' => true, 'width' => 5]
+        ];
+
+        $suratMasuk = SuratMasuk::where('tindakan', 1)->get();
+
+        return view('home', [
+            "heads" => $heads,
+            "suratMasuk" => $suratMasuk 
+        ]);
     }
 }

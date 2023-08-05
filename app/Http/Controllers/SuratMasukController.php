@@ -28,21 +28,22 @@ class SuratMasukController extends Controller
     public function index()
     {
         $heads = [
-        'No', 
-        'Nomor Surat', 
-        'Tanggal Surat', 
-        'Alamat Surat',
-        'Tanggal Masuk', 
-        'Perihal', 
-        'Status', 
-        'File', 
-        ['label' => 'Actions', 'no-export' => true, 'width' => 5]];
-        
-        $suratmasuk = SuratMasuk::all();
-        
+            'No',
+            'Nomor Surat',
+            'Tanggal Surat',
+            'Asal Surat',
+            'Tanggal Masuk',
+            'Perihal',
+            'Status',
+            'Catatan',
+            'Tindakan',
+            ['label' => 'Actions', 'no-export' => true, 'width' => 5, 'text-align' => 'center'],
+        ];
+
+        $suratmasuk = SuratMasuk::where('tindakan', 0)->get();
         return view('suratmasuk.index', [
-            "suratmasuk" => $suratmasuk,
-            "heads" =>$heads,
+            "surat" => $suratmasuk,
+            "heads" => $heads,
         ]);
     }
 
@@ -67,10 +68,12 @@ class SuratMasukController extends Controller
         $validator = Validator::make($request->all(), [
             'nomor_surat' => 'required|unique:surat_masuk',
             'tanggal_surat' => 'required|date',
-            'alamat_surat' => 'required',
+            'asal_surat' => 'required',
             'perihal' => 'required',
-            'status' => 'required|integer',
-            'file' => 'required|mimes:jpg,jpeg,pdf'
+            'lampiran' => 'required',
+            'status' => 'required',
+            'sifat' => 'required',
+            'file' => 'required|mimes:jpg,jpeg,pdf',
         ]);
 
         if ($validator->fails()) {
@@ -80,17 +83,39 @@ class SuratMasukController extends Controller
         $data = $request->all();
 
         $file = $request->file('file');
-        $fileName = 'profile-' .  $file->getClientOriginalName();
-        $path = $file->storeAs('suratmasuk', $fileName);
+        $fileName = 'suratmasuk-' .  $file->getClientOriginalName();
+        $path = $file->storeAs('suratmasuk', $fileName, 'public');
 
-        
+
         $data['file'] = $path;
 
         SuratMasuk::create($data);
 
         return redirect()->route('masuk.index')->with('success', 'Surat Masuk berhasil ditambahkan');
     }
+    public function updateTindakan(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'tindakan' => 'required',
+        ]);
 
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        try {
+
+            SuratMasuk::where('id', $id)->update([
+                "tindakan" => $request->tindakan,
+                "catatan" => $request->catatan,
+            ]);
+
+
+            return redirect()->route('masuk.index')->with('success', 'Surat Masuk berhasil ditambahkan');
+        } catch (\Exception $e) {
+            return redirect()->back()->withInput()->with('eror', 'Terjadi kesalahan saat menyimpan Tindakan.');
+        }
+    }
     /**
      * Display the specified resource.
      *
@@ -112,7 +137,7 @@ class SuratMasukController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(int $id)
-    {   
+    {
         $config = ['format' => 'L'];
         $surat = SuratMasuk::findOrFail($id);
 
@@ -137,10 +162,14 @@ class SuratMasukController extends Controller
                 Rule::unique('surat_masuk')->ignore($id),
             ],
             'tanggal_surat' => 'required|date',
-            'alamat_surat' => 'required',
+            'asal_surat' => 'required',
             'perihal' => 'required',
-            'status' => 'required|integer',
-            'file' => 'nullable|mimes:jpg,jpeg,pdf'
+            'lampiran' => 'required',
+            'sifat' => 'required',
+            'status' => 'required',
+            'tindakan' => 'required',
+            'file' => 'nullable|mimes:jpg,jpeg,pdf',
+
         ]);
 
         if ($validator->fails()) {
@@ -151,8 +180,8 @@ class SuratMasukController extends Controller
 
         if ($request->hasFile('file')) {
             $file = $request->file('file');
-            $fileName = 'profile-' . time() . '.' . $file->getClientOriginalExtension();
-            $path = $file->storeAs('files', $fileName);
+            $fileName = 'files-' . time() . '.' . $file->getClientOriginalExtension();
+            $path = $file->storeAs('files', $fileName, 'public');
             $data['file'] = $path;
         }
 

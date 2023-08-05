@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SuratMasukController;
 use App\Http\Controllers\DataOperatorController;
+use App\Models\SuratMasuk;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,11 +25,12 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/disposisi', [App\Http\Controllers\DisposisiController::class, 'index']);
 
 Route::prefix('surat')->group(function () {
     Route::resource('masuk', SuratMasukController::class);
+    Route::put('masuk/{id}/tindakan', [SuratMasukController::class, 'updateTindakan'])->name('masuk.updateTindakan');
     Route::get('keluar', [App\Http\Controllers\SuratKeluarController::class, 'index']);
 });
 
