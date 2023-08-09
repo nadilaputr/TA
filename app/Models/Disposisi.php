@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SuratMasuk extends Model
+class Disposisi extends Model
 {
     use HasFactory;
 
-    protected $table = "surat_masuk";
+    protected $table = "disposisi";
 
     protected $fillable = [
         'nomor_surat',
@@ -20,7 +20,6 @@ class SuratMasuk extends Model
         'catatan',
         'lampiran',
         'status',
-        'jenis',
         'sifat',
         'tindakan',
         'file',

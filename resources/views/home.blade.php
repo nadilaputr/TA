@@ -68,7 +68,8 @@
                 <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
-
+        
+        
         <div class="container-fluid mt-5">
             <x-adminlte-datatable id="table7" :heads="$heads" head-theme="info" striped hoverable with-buttons>
 
@@ -79,8 +80,9 @@
                         <td>{{ $row->tanggal_surat }}</td>
                         <td>{{ $row->asal_surat }}</td>
                         <td>{{ $row->perihal }}</td>
+                        <td>{{ $row->tanggal_masuk }}</td>
+                        <td>{{ $row->tindakan  }}</td>
                         <td>{{ $row->status }}</td>
-                        <td>{{ $row->tindakan == 0 ? 'Tidak Diteruskan' : 'Diteruskan' }}</td>
                         <td>
                             <button type="button" data-toggle="modal" data-target="#edit" data-id="{{ $row->id }}"
                                 class="btn btn-xs btn-default text-primary mx-1 shadow btn-edit" title="Edit">
@@ -106,9 +108,9 @@
                 <div class="form-group">
                     <label>Tindakan</label>
                     <x-adminlte-select id="tindakan" class="form-control" name="tindakan">
-                        <option value="2" selected disabled>Pilih Tindakan</option>
-                        <option value="1">Ajukan ke Kepala Dinas</option>
-                        <option value="0">Koreksi Kembali</option>
+                        <option selected disabled>Pilih Tindakan</option>
+                        <option value="tindak-lanjut">Ajukan ke Kepala Dinas</option>
+                        <option value="tidak-teruskan">Koreksi Kembali</option>
                     </x-adminlte-select>
                 </div>
                 <div class="card-footer">
@@ -125,7 +127,7 @@
 
             let suratId
 
-            if ($("#tindakan").val() === "0") {
+            if ($("#tindakan").val() === "tidak-teruskan") {
                 $('#catatanContainer').show();
             } else {
                 $('#catatanContainer').hide();
@@ -134,7 +136,7 @@
             $("#tindakan").change(function() {
                 var selectedOption = $(this).val();
 
-                if (selectedOption === "0") {
+                if (selectedOption === "tidak-teruskan") {
                     $('#catatanContainer').show();
                 } else {
                     $('#catatanContainer').hide();

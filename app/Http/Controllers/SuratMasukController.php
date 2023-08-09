@@ -34,13 +34,13 @@ class SuratMasukController extends Controller
             'Asal Surat',
             'Tanggal Masuk',
             'Perihal',
-            'Status',
+            'Jenis Surat',
             'Catatan',
             // 'Tindakan',
             ['label' => 'Actions', 'no-export' => true, 'width' => 5, 'text-align' => 'center'],
         ];
 
-        $suratmasuk = SuratMasuk::where('tindakan', 0)->get();
+        $suratmasuk = SuratMasuk::where('tindakan', 'tidak-teruskan')->get();
         return view('suratmasuk.index', [
             "surat" => $suratmasuk,
             "heads" => $heads,
@@ -71,7 +71,7 @@ class SuratMasukController extends Controller
             'asal_surat' => 'required',
             'perihal' => 'required',
             'lampiran' => 'required',
-            'status' => 'required',
+            'jenis' => 'required',
             'sifat' => 'required',
             'file' => 'required|mimes:jpg,jpeg,pdf',
         ]);
@@ -93,6 +93,7 @@ class SuratMasukController extends Controller
 
         return redirect()->route('masuk.index')->with('success', 'Surat Masuk berhasil ditambahkan');
     }
+
     public function updateTindakan(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
@@ -103,13 +104,17 @@ class SuratMasukController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
+        $data = $request->except(['_token', '_method']);
+
+        if ($request->tindakan == 'tindak-lanjut') {
+            $data['status'] = $request->tindakan;
+        } else {
+            $data['status'] = 'dalam-proses';
+        }
+
         try {
 
-            SuratMasuk::where('id', $id)->update([
-                "tindakan" => $request->tindakan,
-                "catatan" => $request->catatan,
-            ]);
-
+            SuratMasuk::where('id', $id)->update($data);
 
             return redirect()->route('masuk.index')->with('success', 'Surat Masuk berhasil ditambahkan');
         } catch (\Exception $e) {

@@ -72,9 +72,9 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Status</label>
-                        <x-adminlte-select id="status" name="status" value="{{ $row->status }}">
-                            <option selected>{{ $row->status }}</option>
+                        <label>Jenis Surat</label>
+                        <x-adminlte-select id="jenis" name="jenis" value="{{ $row->jenis }}">
+                            <option selected>{{ $row->jenis }}</option>
                             <option  value="asli">Asli</option>
                             <option  value="tembusan">Tembusan</option>
                         </x-adminlte-select>

@@ -314,6 +314,7 @@ return [
             'text' => 'Surat Masuk',
             'url'  => 'surat/masuk',
             'icon' => 'fas fa-envelope',
+            'can' => 'view',
         ],
         [
             'text' => 'Surat Keluar',
@@ -338,12 +339,14 @@ return [
             'text' => 'Data Operator',
             'url'  => 'dataoperator',
             'icon' => 'fas fa-users-cog',
+            'can' => 'view',
         ],
 
         [
             'text' => 'Bidang',
             'url'  => 'bidang',
             'icon' => 'fas fa-fw fa-lock',
+            'can' => 'view',
         ],
         // [
         //     'text'    => 'multilevel',

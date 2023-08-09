@@ -32,9 +32,8 @@
                 <td>{{ $row->asal_surat }}</td>
                 <td>{{ $row->tanggal_masuk }}</td>
                 <td>{{ $row->perihal }}</td>
-                <td>{{ $row->status }}</td>
+                <td>{{ $row->jenis }}</td>
                 <td>{{ $row->catatan }}</td>
-                {{-- <td>{{ $row->tindakan == 0 ? 'Tidak Diteruskan' : 'Diteruskan' }}</td> --}}
                 <form action="{{ route('masuk.destroy', $row->id) }}" method="POST">
                     <td class="d-flex">
                         @csrf

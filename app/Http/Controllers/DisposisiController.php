@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Disposisi;
+use App\Models\SuratMasuk;
 use Illuminate\Http\Request;
 
 class DisposisiController extends Controller
@@ -13,9 +15,22 @@ class DisposisiController extends Controller
      */
     public function index()
     {
-        return view('disposisi');
-    }
+        $heads = [
+            'Tanggal Disposisi',
+            'Diteruskan Kepada',
+            'Perihal',
+            'Status',
+            'Catatan',
+            // 'Tindakan',
+            ['label' => 'Actions', 'no-export' => true, 'width' => 5, 'text-align' => 'center'],
+        ];
 
+        $disposisi = Disposisi::class();
+        return view('suratmasuk.index', [
+            "disposisi" => $disposisi,
+            "heads" => $heads,
+        ]);
+    }
     /**
      * Show the form for creating a new resource.
      *
