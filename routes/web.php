@@ -26,7 +26,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/disposisi', [App\Http\Controllers\DisposisiController::class, 'index']);
+Route::resource('/disposisi', App\Http\Controllers\DisposisiController::class);
 
 Route::prefix('surat')->group(function () {
     Route::resource('masuk', SuratMasukController::class);

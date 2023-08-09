@@ -21,7 +21,6 @@ return new class extends Migration
             $table->string('tindakan_dari');
             $table->string('catatan');
             $table->string('diteruskan_kepada')->nullable();
-            $table->string('file');
             $table->string('status');
             $table->foreign('id_surat')->references('id')->on('surat_masuk');
             $table->foreign('id_user')->references('id')->on('users');

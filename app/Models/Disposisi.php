@@ -12,18 +12,16 @@ class Disposisi extends Model
     protected $table = "disposisi";
 
     protected $fillable = [
-        'nomor_surat',
-        'tanggal_surat',
-        'asal_surat',
-        'tanggal_masuk',
-        'perihal',
         'catatan',
-        'lampiran',
+        'tindakan_dari',
+        'diteruskan_kepada',
         'status',
-        'sifat',
-        'tindakan',
-        'file',
     ];
+
+    public function surat_masuk()
+    {
+        return $this->hasOne(SuratMasuk::class);
+    }
 
     protected $guarded = [];
 }

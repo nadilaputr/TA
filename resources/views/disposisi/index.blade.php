@@ -2,9 +2,9 @@
 
 @section('title', 'Disposisi')
 
-{{-- @section('content_header')
-
-@stop --}}
+@section('plugins.Datatables', true)
+@section('plugins.DatatablesPlugin', true)
+@section('plugins.BsCustomFileInput', true)
 
 @section('content')
     <h1>Disposisi</h1>
@@ -13,16 +13,14 @@
     <div class="container-fluid mt-5">
         <x-adminlte-datatable id="table7" :heads="$heads" head-theme="info" striped hoverable with-buttons>
 
-            @foreach ($suratMasuk as $row)
+            @foreach ($disposisi as $row)
                 <tr>
                     <td>{{ $row->id }}</td>
-                    <td>{{ $row->nomor_surat }}</td>
-                    <td>{{ $row->tanggal_surat }}</td>
-                    <td>{{ $row->asal_surat }}</td>
+                    <td>{{ $row->tanggal_disposisi }}</td>
+                    <td>{{ $row->diteruskan_kepada }}</td>
                     <td>{{ $row->perihal }}</td>
-                    <td>{{ $row->status }}</td>
-                    <td>{{ $row->tindakan == 0 ? 'Tidak Diteruskan' : 'Diteruskan' }}</td>
-                    <td>
+                    <td>{{ $row->catatan }}</td>
+                    <td>{{ $row->status }}</td>                    <td>
                         <button type="button" data-toggle="modal" data-target="#edit" data-id="{{ $row->id }}"
                             class="btn btn-xs btn-default text-primary mx-1 shadow btn-edit" title="Edit">
                             <i class="fa fa-lg fa-fw fa-pen"></i>
