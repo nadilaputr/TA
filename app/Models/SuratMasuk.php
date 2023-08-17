@@ -26,5 +26,8 @@ class SuratMasuk extends Model
         'file',
     ];
 
-    protected $guarded = [];
+    public function disposisi()
+    {
+        return $this->hasOne(Disposisi::class);
+    }
 }

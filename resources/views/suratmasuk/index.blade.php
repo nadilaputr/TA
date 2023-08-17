@@ -14,7 +14,6 @@
     <a class="btn btn-info tambah-surat-masuk mb-3 btn-tambah btn-edit" href="{{ route('masuk.create') }}"data-toggle="modal"
         data-target="#tambah_surat_masuk">Tambah</a>
 
-
     @if ($message = Session::get('success'))
         <div class="alert alert-success">
             <p>{{ $message }}</p>
@@ -34,6 +33,7 @@
                 <td>{{ $row->perihal }}</td>
                 <td>{{ $row->jenis }}</td>
                 <td>{{ $row->catatan }}</td>
+                <td>{!! $tindakanSurat->toBadge($row->tindakan) !!}</td>
                 <form action="{{ route('masuk.destroy', $row->id) }}" method="POST">
                     <td class="d-flex">
                         @csrf
@@ -47,10 +47,10 @@
                             <i class="fa fa-lg fa-fw fa-pen"></i>
                         </button>
 
-                        <button type="button" data-toggle="modal" data-target="#modalPurple" data-id="{{ $row->id }}"
+                        {{-- <button type="button" data-toggle="modal" data-target="#modalPurple" data-id="{{ $row->id }}"
                             class="btn btn-xs btn-default btn-detail text-success mx-1 shadow" title="Detail">
                             <i class="fa fa-lg fa-fw fa-info-circle"></i>
-                        </button>
+                        </button> --}}
 
                         <a href="{{ Storage::url($row->file) }}" target="_blank"
                             class="btn btn-xs btn-default text-primary mx-1 shadow" title="Lihat File">
@@ -71,7 +71,7 @@
     {{-- End Tabel Surat Masuk --}}
 
     {{-- Modal Detail Surat Masuk --}}
-    <x-adminlte-modal id="modalPurple" title="Detail" theme="info" icon="fa fa-md fa-fw fa-info-circle " size='lg'
+    {{-- <x-adminlte-modal id="modalPurple" title="Detail" theme="info" icon="fa fa-md fa-fw fa-info-circle " size='lg'
         disable-animations v-centered static-backdrop scrollable>
         <table class="table">
             <tbody>
@@ -125,7 +125,7 @@
                 </tr>
             </tbody>
         </table>
-    </x-adminlte-modal>
+    </x-adminlte-modal> --}}
     {{-- End Modal Detail Surat Masuk --}}
 
     @include('suratmasuk.create')

@@ -17,7 +17,7 @@ class BidangSeeder extends Seeder
     {
         Bidang::create([
             "id" => 1,
-            'namabidang' => 'Industri',
+            'bidang' => 'Industri',
         ]);
     }
 }

@@ -126,4 +126,11 @@ class BidangController extends Controller
         Bidang::where('id', $id)->delete();
         return redirect()->route('bidang.index')->with('success', 'Data berhasil dihapus');
     }
+
+    public function all()
+    {
+        return response()->json([
+            'bidang' => Bidang::all(),
+        ]);
+    }
 }

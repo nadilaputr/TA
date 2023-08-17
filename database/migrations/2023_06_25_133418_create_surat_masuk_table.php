@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string('sifat');
             $table->string('file');
             $table->string('catatan')->nullable();
-            $table->string('tindakan')->default('tidak-teruskan');
+            $table->smallInteger('tindakan')->default('0');
             $table->timestamps();
         });
     }

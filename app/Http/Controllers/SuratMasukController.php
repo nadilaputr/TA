@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use TindakanSurat;
 
 class SuratMasukController extends Controller
 {
@@ -36,11 +37,11 @@ class SuratMasukController extends Controller
             'Perihal',
             'Jenis Surat',
             'Catatan',
-            // 'Tindakan',
+            'Tindakan',
             ['label' => 'Actions', 'no-export' => true, 'width' => 5, 'text-align' => 'center'],
         ];
 
-        $suratmasuk = SuratMasuk::where('tindakan', 'tidak-teruskan')->get();
+        $suratmasuk = SuratMasuk::whereIn('tindakan', [0, 1])->get();
         return view('suratmasuk.index', [
             "surat" => $suratmasuk,
             "heads" => $heads,
@@ -73,7 +74,7 @@ class SuratMasukController extends Controller
             'lampiran' => 'required',
             'jenis' => 'required',
             'sifat' => 'required',
-            'file' => 'required|mimes:jpg,jpeg,pdf',
+            'file' => 'required|mimes:jpg,jpeg,pdf,png',
         ]);
 
         if ($validator->fails()) {
@@ -96,6 +97,7 @@ class SuratMasukController extends Controller
 
     public function updateTindakan(Request $request, $id)
     {
+
         $validator = Validator::make($request->all(), [
             'tindakan' => 'required',
         ]);
@@ -106,19 +108,13 @@ class SuratMasukController extends Controller
 
         $data = $request->except(['_token', '_method']);
 
-        if ($request->tindakan == 'tindak-lanjut') {
-            $data['status'] = $request->tindakan;
-        } else {
-            $data['status'] = 'dalam-proses';
-        }
-
         try {
-
             SuratMasuk::where('id', $id)->update($data);
 
-            return redirect()->route('masuk.index')->with('success', 'Surat Masuk berhasil ditambahkan');
+            return redirect()->route('suratmasuk.index')->with('success', 'Surat Berhasil Diteruskan');
         } catch (\Exception $e) {
-            return redirect()->back()->withInput()->with('eror', 'Terjadi kesalahan saat menyimpan Tindakan.');
+            // Handle any exceptions that may occur during file upload or data storage
+            return redirect()->back()->withInput()->with('error', 'Terjadi kesalahan saat menyimpan TindakanSurat.');
         }
     }
     /**
@@ -171,8 +167,7 @@ class SuratMasukController extends Controller
             'perihal' => 'required',
             'lampiran' => 'required',
             'sifat' => 'required',
-            'status' => 'required',
-            'tindakan' => 'required',
+            'jenis' => 'required',
             'file' => 'nullable|mimes:jpg,jpeg,pdf',
 
         ]);

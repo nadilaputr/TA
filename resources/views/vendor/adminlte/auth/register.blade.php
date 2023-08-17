@@ -22,7 +22,7 @@
             <select class="form-control" name="bidang" required>
                 <option value="" selected>Pilih Bidang</option>
                 @foreach ($bidang as $row)
-                    <option value="{{ $row->id }}">{{ $row->namabidang }}</option>
+                    <option value="{{ $row->id }}">{{ $row->bidang }}</option>
                 @endforeach
 
             </select>

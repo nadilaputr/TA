@@ -17,16 +17,27 @@ class DisposisiController extends Controller
     public function index()
     {
         $heads = [
-            'Tanggal Disposisi',
-            'Diteruskan Kepada',
+            'No',
+            'No Surat',
+            'Asal Surat',
             'Perihal',
-            'Status',
             'Catatan',
+            'Bidang',
             // 'Tindakan',
             ['label' => 'Actions', 'no-export' => true, 'width' => 5, 'text-align' => 'center'],
         ];
 
-        $disposisi = Disposisi::all();
+        if (auth()->user()->hasRole('Kepala Dinas')) {
+            $disposisi = Disposisi::with(['surat_masuk', 'bidang'])->get();
+        } else {
+            $disposisi = Disposisi::with(['surat_masuk', 'bidang'])
+                ->whereHas('bidang', function ($query) {
+                    $bidang = auth()->user()->id_bidang;
+                    $query->where('id', $bidang);
+                })
+                ->get();
+        }
+
         return view('disposisi.index', [
             "disposisi" => $disposisi,
             "heads" => $heads,
@@ -52,30 +63,24 @@ class DisposisiController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'catatan' => 'required',
-            'tindakan_dari' => 'required',
-            'diteruskan_kepada' => 'required',
-            'status' => 'required',
+            'id_bidang' => 'required',
         ]);
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        $data = $request->except(['_token', '_method']);
+        $data = $request->all();
 
-        if ($request->tindakan == 'tindak-lanjut') {
-            $data['status'] = $request->tindakan;
-        } else {
-            $data['status'] = 'dalam-proses';
-        }
+        $data["id_user"] = auth()->user()->id;
 
         try {
+            $d = Disposisi::create($data);
 
-            SuratMasuk::where('id', $id)->update($data);
-
-            return redirect()->route('disposisi.index')->with('success', 'Surat Masuk berhasil ditambahkan');
+            return response()->json($d);
         } catch (\Exception $e) {
-            return redirect()->back()->withInput()->with('eror', 'Terjadi kesalahan saat menyimpan Tindakan.');
+            // Handle any exceptions that may occur during file upload or data storage
+            return redirect()->back()->withInput()->with('error', 'Terjadi kesalahan saat menyimpan surat masuk.');
         }
     }
 

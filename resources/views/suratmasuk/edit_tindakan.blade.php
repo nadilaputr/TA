@@ -26,8 +26,7 @@
                     <label>Tindakan</label>
                     <x-adminlte-select id="tindakan" class="form-control" name="tindakan">
                         <option selected>Pilih Tindakan</option>
-                        <option value="teruskan">Diteruskan</option>
-                        <option value="tidak-teruskan">Tidak Diteruskann</option>
+                        <option value="{{ TERUSKAN }}">Diteruskan</option>
                     </x-adminlte-select>
                 </div>
             

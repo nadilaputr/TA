@@ -27,6 +27,7 @@
             @else
                 <x-adminlte-button class="{{ $makeCloseButtonClass }}"
                     data-dismiss="modal" label="Close"/>
+                    {{-- <button type="submit" class="btn btn-success">Submit</button> --}}
             @endisset
         </div>
 
