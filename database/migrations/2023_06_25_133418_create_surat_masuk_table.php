@@ -22,7 +22,6 @@ return new class extends Migration
             $table->string('lampiran');
             $table->string('perihal');
             $table->string('jenis');
-            $table->string('status')->nullable();
             $table->string('sifat');
             $table->string('file');
             $table->string('catatan')->nullable();
