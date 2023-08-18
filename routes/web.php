@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SuratMasukController;
 use App\Http\Controllers\DataOperatorController;
 use App\Http\Controllers\DisposisiController;
-use App\Models\SuratMasuk;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,11 +25,11 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::middleware(['role:admin|sekretaris|Kepala Dinas'])->group(function () {
+Route::middleware(['role:admin|sekretaris|kepaladinas'])->group(function () {
     Route::put('suratmasuk/{id}/tindakan', [SuratMasukController::class, 'updateTindakan'])->name('suratmasuk.updateTindakan');
 });
 
-Route::middleware(['role:sekretaris|Kepala Dinas'])->group(function () {
+Route::middleware(['role:sekretaris|kepaladinas'])->group(function () {
     Route::get('suratmasuk/{id}', [SuratMasukController::class, 'show'])->name('suratmasuk.show');
 });
 
@@ -41,18 +40,8 @@ Route::middleware(['role:admin'])->group(function () {
 Route::get('bidang/all', [BidangController::class, 'all']);
 Route::resource('bidang', BidangController::class);
 
-
-
-
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('disposisi', DisposisiController::class);
-
-Route::prefix('surat')->group(function () {
-    Route::resource('masuk', SuratMasukController::class);
-    Route::put('masuk/{id}/tindakan', [SuratMasukController::class, 'updateTindakan'])->name('masuk.updateTindakan');
-    Route::get('keluar', [App\Http\Controllers\SuratKeluarController::class, 'index']);
-});
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::delete('post/{id}/delete', [PostController::class, 'delete'])->name('delete');
 
