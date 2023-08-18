@@ -197,7 +197,7 @@ return [
     'classes_topnav_nav' => 'navbar-expand',
     'classes_topnav_container' => 'container',
 
-    
+
 
     /*
     |--------------------------------------------------------------------------
@@ -308,11 +308,11 @@ return [
             'text' => 'Dashboard',
             'url'  => 'home',
 
-            'icon' => 'fas fa-inbox', 
+            'icon' => 'fas fa-inbox',
         ],
         [
             'text' => 'Surat Masuk',
-            'url'  => 'surat/masuk',
+            'url'  => 'suratmasuk',
             'icon' => 'fas fa-envelope',
             'can' => 'view',
         ],
