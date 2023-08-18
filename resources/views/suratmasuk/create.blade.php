@@ -1,130 +1,97 @@
-    @php
-        $config = ['format' => 'L'];
-    @endphp
+<x-adminlte-modal id="createModal" title="Tambah Surat Masuk" theme="info"
+                  icon="fa fa-md fa-fw fa-info-circle " size='lg' disable-animations v-centered static-backdrop
+                  scrollable>
 
-    <x-adminlte-modal id="tambah_surat_masuk" title="Tambah Surat Masuk" theme="info"
-        icon="fa fa-md fa-fw fa-info-circle " size='lg' disable-animations v-centered static-backdrop scrollable>
+    <div class="card card-info">
+        <form id="createForm" action="{{ route('suratmasuk.store') }}" enctype="multipart/form-data" method="POST">
+            @csrf
 
-        <div class="card card-info">
-
-            <form action="{{ route('masuk.store') }}" enctype="multipart/form-data" method="POST">
-                @csrf
-
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Nomor Surat</label>
-                                <input id="nomor_surat" type="text" class="form-control" placeholder="Nomor Surat"
-                                    name="nomor_surat" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Tanggal Surat</label>
-                                <input id="tanggal_surat" type="date" class="form-control" name="tanggal_surat"
-                                    required value="{{ old('tanggal_surat') }}">
-                            </div>
-
-                            <div class="form-group">
-                                <label>Asal Surat</label>
-                                <input id="alamat_surat" type="text" name="asal_surat" class="form-control"
-                                    placeholder="Asal Surat" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Perihal</label>
-                                <input id="perihal" type="text" name="perihal" class="form-control"
-                                    placeholder="Perihal" required>
-                            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="nomor_surat">Nomor Surat</label>
+                            <input id="nomor_surat" type="text" class="form-control" placeholder="Nomor Surat"
+                                   name="nomor_surat" required>
+                            <div class="invalid-feedback"></div>
                         </div>
 
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Lampiran</label>
-                                <x-adminlte-select id="lampiran" name="lampiran">
-                                    <option selected>Pilih Lampiran</option>
-                                    <option value="1">1 Lembar</option>
-                                    <option value="2">2 Lembar</option>
-                                    <option value="3">3 Lembar</option>
-                                    <option value="4">4 Lembar</option>
-                                    <option value="5">5 Lembar</option>
-                                </x-adminlte-select>
-                            </div>
+                        <div class="form-group">
+                            <label for="tanggal_surat">Tanggal Surat</label>
+                            <input id="tanggal_surat" type="date" class="form-control" name="tanggal_surat"
+                                   required value="{{ old('tanggal_surat') }}">
+                            <div class="invalid-feedback"></div>
+                        </div>
 
-                            <div class="form-group">
-                                <label>Jenis Surat</label>
-                                <x-adminlte-select id="jenis" name="jenis">
-                                    <option selected>Pilih Jenis Surat</option>
-                                    <option value="asli">Asli</option>
-                                    <option value="tembusan">Tembusan</option>
-                                </x-adminlte-select>
-                            </div>
+                        <div class="form-group">
+                            <label for="alamat_surat">Asal Surat</label>
+                            <input id="alamat_surat" type="text" name="asal_surat" class="form-control"
+                                   placeholder="Asal Surat" required>
+                            <div class="invalid-feedback"></div>
+                        </div>
 
-                            <div class="form-group">
-                                <label>Sifat</label>
-                                <x-adminlte-select id="sifat" name="sifat">
-                                    <option selected>Sifat</option>
-                                    <option value="biasa">Biasa</option>
-                                    <option value="segera">Segera</option>
-                                    <option value="sangat_segera">Sangat Segera</option>
-                                </x-adminlte-select>
-                            </div>
-
-                            <div class="form-group">
-                                <label>File</label>
-                                <x-adminlte-input-file id="file" name="file" igroup-size="md"
-                                    placeholder="Choose a file...">
-                                    <x-slot name="prependSlot">
-                                        <div class="input-group-text bg-lightblue">
-                                            <i class="fas fa-upload"></i>
-                                        </div>
-                                    </x-slot>
-                                </x-adminlte-input-file>
-                            </div>
+                        <div class="form-group">
+                            <label for="perihal">Perihal</label>
+                            <input id="perihal" type="text" name="perihal" class="form-control"
+                                   placeholder="Perihal" required>
+                            <div class="invalid-feedback"></div>
                         </div>
                     </div>
 
-                    {{-- <div class="card-footer">
-                        <button type="submit" class="btn btn-success">Submit</button>
-                    </div> --}}
-            </form>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Lampiran</label>
+                            <x-adminlte-select id="lampiran" name="lampiran" required>
+                                <option selected disabled>Pilih Lampiran</option>
+                                <option value="1">1 Lembar</option>
+                                <option value="2">2 Lembar</option>
+                                <option value="3">3 Lembar</option>
+                                <option value="4">4 Lembar</option>
+                                <option value="5">5 Lembar</option>
+                            </x-adminlte-select>
+                            <div class="invalid-feedback"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Jenis Surat</label>
+                            <x-adminlte-select id="jenis" name="jenis" required>
+                                <option selected disabled>Pilih Jenis Surat</option>
+                                <option value="asli">Asli</option>
+                                <option value="tembusan">Tembusan</option>
+                            </x-adminlte-select>
+                            <div class="invalid-feedback"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Sifat</label>
+                            <x-adminlte-select id="sifat" name="sifat" required>
+                                <option selected disabled>Sifat</option>
+                                <option value="biasa">Biasa</option>
+                                <option value="segera">Segera</option>
+                                <option value="sangat_segera">Sangat Segera</option>
+                            </x-adminlte-select>
+                            <div class="invalid-feedback"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>File</label>
+                            <x-adminlte-input-file id="file" name="file" igroup-size="md"
+                                                   placeholder="Choose a file..." required error-key="file">
+                                <x-slot name="prependSlot">
+                                    <div class="input-group-text bg-lightblue">
+                                        <i class="fas fa-upload"></i>
+                                    </div>
+                                </x-slot>
+                            </x-adminlte-input-file>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <x-slot name="footerSlot">
                 <x-adminlte-button class="btn-secondary" label="Close" data-dismiss="modal"/>
-                <button type="button" class="btn btn-success" id="submitBtn">Submit</button>
+                <button type="button" class="btn btn-success" id="createSubmitBtn">Submit</button>
             </x-slot>
-        </div>
-
-        </div>
-    </x-adminlte-modal>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const submitBtn = document.getElementById('submitBtn');
-            const submitForm = document.getElementById('submitForm');
-    
-            submitBtn.addEventListener('click', function () {
-                $.ajax({
-                    url: submitForm.action,
-                    type: submitForm.method,
-                    data: new FormData(submitForm),
-                    processData: false,
-                    contentType: false,
-                    success: function (response) {
-                        // Handle success response here
-                        // For example, you can close the modal or show a success message
-                        // ...
-                    },
-                    error: function (xhr, status, error) {
-                        // Handle error response here
-                        // ...
-                    }
-                });
-            });
-        });
-    </script>
-    
-    
-    
-    
-    
+        </form>
+    </div>
+</x-adminlte-modal>

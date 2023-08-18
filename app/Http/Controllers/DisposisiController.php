@@ -43,6 +43,7 @@ class DisposisiController extends Controller
             "heads" => $heads,
         ]);
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -53,12 +54,6 @@ class DisposisiController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -67,7 +62,7 @@ class DisposisiController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
+            return response()->json($validator->messages(), Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
         $data = $request->all();
@@ -75,19 +70,18 @@ class DisposisiController extends Controller
         $data["id_user"] = auth()->user()->id;
 
         try {
-            $d = Disposisi::create($data);
+            Disposisi::create($data);
 
-            return response()->json($d);
+            return response()->json(['message' => 'Disposisi berhasil dibuat'], 200);
         } catch (\Exception $e) {
-            // Handle any exceptions that may occur during file upload or data storage
-            return redirect()->back()->withInput()->with('error', 'Terjadi kesalahan saat menyimpan surat masuk.');
+            return response()->json(['error' => 'Terjadi kesalahan saat menyimpan disposisi.'], 500);
         }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -98,7 +92,7 @@ class DisposisiController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -109,8 +103,8 @@ class DisposisiController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -121,7 +115,7 @@ class DisposisiController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

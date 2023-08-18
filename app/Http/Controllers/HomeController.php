@@ -43,10 +43,10 @@ class HomeController extends Controller
             $suratMasuk = SuratMasuk::where('tindakan', TindakanSurat::TINDAK_LANJUT)->get();
         }
 
-        return view('home', [
+        return view('dashboard.home', [
             "heads" => $heads,
             "suratMasuk" => $suratMasuk
-        ]);      
+        ]);
 
     }
 

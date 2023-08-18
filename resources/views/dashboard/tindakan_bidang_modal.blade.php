@@ -30,42 +30,47 @@
                 <td>Jenis</td>
                 <td class="jenis"></td>
             </tr>
-            {{--                <tr>--}}
-            {{--                    <td>File</td>--}}
-            {{--                    <td class="d-flex">--}}
-            {{--                        <a type="application/pdf" href="{{ Storage::url($row->file) }}" target="_blank"--}}
-            {{--                           class="btn btn-xs btn-default text-primary mx-1 shadow" title="Lihat File">Download--}}
-            {{--                            <i class="fa fa-lg fa-fw fa-file"></i>--}}
-            {{--                        </a>--}}
-            {{--                        <button id="viewPdfButton" class="btn btn-xs btn-default text-primary mx-1 shadow"--}}
-            {{--                                title="Lihat File">Lihat PDF--}}
-            {{--                        </button>--}}
-            {{--                    </td>--}}
-            {{--                </tr>--}}
+            <tr>
+                <td>File</td>
+                <td class="d-flex">
+                    <a target="_blank"
+                       class="btn btn-xs btn-default text-primary mx-1 shadow downloadFile" title="Lihat File">Download
+                        <i class="fa fa-lg fa-fw fa-file"></i>
+                    </a>
+                    <button
+                        class="btn btn-xs btn-default text-primary mx-1 shadow pdfViewerBtn"
+                        title="Lihat File">Lihat PDF
+                    </button>
+                </td>
+            </tr>
         </table>
     </x-adminlte-card>
 
     <div class="card">
         <div class="card-body">
-            <div id="pdfContainer" style="display: none;">
-                <iframe id="pdfViewer" style="width: 100%; height: 500px;"></iframe>
+            <div class="pdfContainer">
+                <iframe class="pdfViewer" style="width: 100%; height: 500px;"></iframe>
             </div>
 
         </div>
     </div>
     <div class="card">
         <div class="card-body">
-            <div class="form-group" id="catatanBidangContainer">
-                <label>Catatan</label>
-                <x-adminlte-textarea name="catatanBidang" placeholder="Tambah catatan" id="catatanBidang"/>
-            </div>
+            <form id="tindakanBidangForm" method="POST">
+                @csrf
 
-            <div class="form-group">
-                <label>Bidang</label>
-                <select class="form-control bidang" name="bidang" id="bidang">
-                </select>
-            </div>
-            <button type="submit" class="btn btn-primary btn-submit-bidang update">Simpan</button>
+                <div class="form-group" id="catatanBidangContainer">
+                    <label>Catatan</label>
+                    <x-adminlte-textarea name="catatan" placeholder="Tambah catatan" id="catatanBidang" required/>
+                </div>
+
+                <div class="form-group">
+                    <label>Bidang</label>
+                    <select class="form-control bidang" name="id_bidang" id="bidang" required>
+                    </select>
+                </div>
+                <button type="button" class="btn btn-primary btn-submit-bidang update">Simpan</button>
+            </form>
         </div>
     </div>
 </x-adminlte-modal>
