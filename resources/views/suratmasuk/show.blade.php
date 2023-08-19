@@ -1,58 +1,89 @@
-
 {{-- Modal Detail Surat Masuk --}}
-{{-- <x-adminlte-modal id="modalPurple" title="Detail" theme="info" icon="fa fa-md fa-fw fa-info-circle " size='lg'
-    disable-animations v-centered static-backdrop scrollable>
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>No</th>
-                <td id="id"></td>
+<x-adminlte-modal id="modalPurple" title="Detail" theme="white" icon="fa fa-md fa-fw fa-info-circle " size='lg'
+    disable-animations v-centered scrollable>
+    <div class="row">
+        <div class="col-md-6">
+            <x-adminlte-card id="detailsurat" title="NOMOR AGENDA" theme="light">
+                <table class="table table-sm table-hover">
+                    <tr>
+                        <td>No</td>
+                        <td class="id"></td>
+                    </tr>
+                    <tr>
+                        <td>Sifat</td>
+                        <td class="sifat"></td>
+                    </tr>
+                    <tr>
+                        <td>Tanggal Diterima</td>
+                        <td class="tanggal_masuk"></td>
+                    </tr>
+                </table>
+            </x-adminlte-card>
+        </div>
+   
+
+     <div class="col-md-6">
+            <x-adminlte-card id="detailsurat" title="INFORMASI TAMBAHAN" theme="warning">
+                <table class="table table-sm table-hover">
+                     <tr>
+                <td style="width: 40%;">Catatan</td>
+                <td class="catatan"></td>
             </tr>
             <tr>
-                <th>Nomor Surat</th>
-                <td id="nomor_surat"></td>
+                <td style="width: 40%;">Tindakan</td>
+                <td class="tindakan"></td>
             </tr>
             <tr>
-                <th>Tanggal Surat</th>
-                <td id="tanggal_surat"></td>
+                <td style="width: 40%;">Jenis</td>
+                <td class="jenis"></td>
+            </tr>
+                </table>
+            </x-adminlte-card>
+        </div> 
+    </div>
+
+    <x-adminlte-card id="detailsurat" title="INFORMASI DETAIL SURAT" theme="lightblue">
+        <table class="table table-sm">
+            <tr>
+                <td>Nomor Surat</td>
+                <td class="nomor_surat"></td>
             </tr>
             <tr>
-                <th>Asal Surat</th>
-                <td id="asal_surat"></td>
+                <td>Asal Surat</td>
+                <td class="asal_surat"></td>
             </tr>
             <tr>
-                <th>Tanggal Masuk</th>
-                <td id="tanggal_masuk"></td>
+                <td>Perihal Surat</td>
+                <td class="perihal"></td>
             </tr>
             <tr>
-                <th>Perihal</th>
-                <td id="perihal"></td>
+                <td>Tanggal Surat</td>
+                <td class="tanggal_surat"></td>
             </tr>
             <tr>
-                <th>Lampiran</th>
-                <td id="lampiran"></td>
+                <td>Lampiran</td>
+                <td class="lampiran"></td>
             </tr>
             <tr>
-                <th>Sifat</th>
-                <td id="sifat"></td>
+                <td>File</td>
+                <td class="d-flex">
+                    <a target="_blank" class="btn btn-xs btn-default text-primary mx-1 shadow downloadFile"
+                        title="Lihat File">Download
+                        <i class="fa fa-lg fa-fw fa-file"></i>
+                    </a>
+                    <button class="btn btn-xs btn-default text-primary mx-1 shadow pdfViewerBtn"
+                        title="Lihat File">Lihat PDF
+                    </button>
+                </td>
             </tr>
-            <tr>
-                <th>Status</th>
-                <td id="status"></td>
-            </tr>
-            <tr>
-                <th>File</th>
-                <td id="file"></td>
-            </tr>
-            <tr>
-                <th>Tindakan</th>
-                <td id="tindakan"></td>
-            </tr>
-            <tr>
-                <th>Catatan</th>
-                <td id="catatan"></td>
-            </tr>
-        </tbody>
-    </table>
-</x-adminlte-modal> --}}
+        </table>
+    </x-adminlte-card>
+
+
+
+
+    <x-slot name="footerSlot">
+        <x-adminlte-button class="bg-danger text-white" label="Close" data-dismiss="modal" /> </x-slot>
+
+</x-adminlte-modal>
 {{-- End Modal Detail Surat Masuk --}}

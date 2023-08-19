@@ -1,6 +1,5 @@
-<x-adminlte-modal id="editModal" title="Edit Surat Masuk" theme="info"
-                  icon="fa fa-md fa-fw fa-info-circle " size='lg' disable-animations v-centered static-backdrop
-                  scrollable>
+<x-adminlte-modal id="editModal" title="EDIT SURAT MASUK" theme="white" icon="fas fa-file-signature" size='lg'
+    disable-animations v-centered scrollable>
 
     <div class="card card-info">
 
@@ -9,57 +8,82 @@
                 @csrf
                 @method('PUT')
 
+                <b>
+                    <p class="text-primary">INFORMASI UMUM</p>
+                </b>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="editNomorSurat">Nomor Surat</label>
                             <input id="editNomorSurat" type="text" class="form-control" placeholder="Nomor Surat"
-                                   name="nomor_surat">
-                            <div class="invalid-feedback"></div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="editTanggalSurat">Tanggal Surat</label>
-                            <input id="editTanggalSurat" type="date" class="form-control" name="tanggal_surat" required>
+                                name="nomor_surat">
                             <div class="invalid-feedback"></div>
                         </div>
 
                         <div class="form-group">
                             <label for="editAlamatSurat">Asal Surat</label>
-                            <input id="editAlamatSurat" type="text" name="asal_surat"
-                                   class="form-control" placeholder="Alamat Surat">
-                            <div class="invalid-feedback"></div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="editPerihal">Perihal</label>
-                            <input id="editPerihal" type="text" name="perihal"
-                                   class="form-control"
-                                   placeholder="Perihal" required>
+                            <input id="editAlamatSurat" type="text" name="asal_surat" class="form-control"
+                                placeholder="Alamat Surat">
                             <div class="invalid-feedback"></div>
                         </div>
                     </div>
 
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label>Lampiran</label>
-                            <x-adminlte-select id="editLampiran" name="lampiran">
-                                <option value="1">1 Lembar</option>
-                                <option value="2">2 Lembar</option>
-                                <option value="3">3 Lembar</option>
-                                <option value="4">4 Lembar</option>
-                                <option value="5">5 Lembar</option>
-                            </x-adminlte-select>
+                            <label for="editTanggalSurat">Tanggal Surat</label>
+                            <input id="editTanggalSurat" type="date" class="form-control" name="tanggal_surat"
+                                required>
+                            <div class="invalid-feedback"></div>
                         </div>
 
+                        <div class="form-group">
+                            <label for="editTanggalMasuk">Tanggal Masuk</label>
+                            <input id="editTanggalMasuk" type="datetime-local" class="form-control" name="tanggal_masuk" disabled
+                                value="{{ old('tanggal_masuk') }}">
+                            <div class="invalid-feedback"></div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="editPerihal">Perihal</label>
+                    <input id="editPerihal" type="text" name="perihal" class="form-control" placeholder="Perihal"
+                        required>
+                    <div class="invalid-feedback"></div>
+                </div>
+
+                <b>
+                    <p class="text-primary">INFORMASI TAMBAHAN</p>
+                </b>
+
+                <div class="row">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label>Jenis Surat</label>
                             <x-adminlte-select id="editJenis" name="jenis">
                                 <option value="asli">Asli</option>
                                 <option value="tembusan">Tembusan</option>
                             </x-adminlte-select>
+                            <div class="invalid-feedback"></div>
                         </div>
+                    </div>
 
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Lampiran</label>
+                                <x-adminlte-select id="editLampiran" name="lampiran">
+                                    <option value="1">1 Lembar</option>
+                                    <option value="2">2 Lembar</option>
+                                    <option value="3">3 Lembar</option>
+                                    <option value="4">4 Lembar</option>
+                                    <option value="5">5 Lembar</option>
+                                </x-adminlte-select>
+                                <div class="invalid-feedback"></div>
+                            </div>
+                        </div>
+                   
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label>Sifat</label>
                             <x-adminlte-select id="editSifat" name="sifat">
@@ -67,26 +91,32 @@
                                 <option value="segera">Segera</option>
                                 <option value="sangat_segera">Sangat Segera</option>
                             </x-adminlte-select>
-                        </div>
-                        <div class="form-group">
-                            <label>File</label>
-                            <x-adminlte-input-file id="editFile" name="file" igroup-size="md"
-                                                   placeholder="Choose a file...">
-                                <x-slot name="prependSlot">
-                                    <div class="input-group-text bg-lightblue">
-                                        <i class="fas fa-upload"></i>
-                                    </div>
-                                </x-slot>
-                            </x-adminlte-input-file>
+                            <div class="invalid-feedback"></div>
                         </div>
                     </div>
+                    </div>
 
+                    <b>
+                        <p class="text-primary">UPLOAD FILE</p>
+                    </b>
+                    <div class="form-group">
+                        <label>File</label>
+                        <x-adminlte-input-file id="editFile" name="file" igroup-size="md"
+                            placeholder="Choose a file...">
+                            <x-slot name="prependSlot">
+                                <div class="input-group-text bg-lightblue">
+                                    <i class="fas fa-upload"></i>
+                                </div>
+                            </x-slot>
+                        </x-adminlte-input-file>
+                        <small class="text-danger">*file jpg, jpeg, pdf, png.</small>
+                    </div>
                 </div>
-                <x-slot name="footerSlot">
-                    <x-adminlte-button class="btn-secondary" label="Close" data-dismiss="modal"/>
-                    <button type="button" class="btn btn-success" id="editSubmitBtn">Submit</button>
-                </x-slot>
+
+                    <x-slot name="footerSlot">
+                        <x-adminlte-button class="bg-danger text-white" label="Close" data-dismiss="modal" />
+                        <button type="button" class="btn btn-success" id="editSubmitBtn">Submit</button>
+                    </x-slot>
             </form>
-        </div>
     </div>
 </x-adminlte-modal>

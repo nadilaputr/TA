@@ -28,7 +28,7 @@ class HomeController extends Controller
     {
         $heads = [
             'No',
-            'Alamat surat',
+            'Asal Surat',
             'Perihal',
             'Tanggal Diterima',
             'Tindakan',
@@ -36,10 +36,15 @@ class HomeController extends Controller
         ];
 
         $suratMasuk = [];
+        if (Auth::user()->hasRole('admin')) {
+            $suratMasuk = SuratMasuk::where('tindakan', '<>', TindakanSurat::TIDAK_TERUSKAN)->get();
+        }
 
-        if (Auth::user()->hasAnyRole(['admin', 'sekretaris'])) {
+        if (Auth::user()->hasRole('sekretaris')) {
             $suratMasuk = SuratMasuk::where('tindakan', TindakanSurat::TERUSKAN)->get();
-        } elseif (Auth::user()->hasRole('kepaladinas')) {
+        }
+
+        if (Auth::user()->hasRole('kepaladinas')) {
             $suratMasuk = SuratMasuk::where('tindakan', TindakanSurat::TINDAK_LANJUT)->get();
         }
 

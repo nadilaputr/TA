@@ -27,12 +27,12 @@ class SuratMasukController extends Controller
         $heads = [
             'No',
             'Nomor Surat',
-            'Tanggal Surat',
+            'Tanggal Diterima',
+            // 'Tanggal Surat',
             'Asal Surat',
-            'Tanggal Masuk',
             'Perihal',
-            'Jenis Surat',
-            'Catatan',
+            // 'Jenis Surat',
+            // 'Catatan',
             'Tindakan',
             ['label' => 'Actions', 'no-export' => true, 'width' => 5, 'text-align' => 'center'],
         ];
@@ -104,7 +104,7 @@ class SuratMasukController extends Controller
 
             return response()->json(['message' => 'Surat Masuk berhasil diteruskan'], 200);
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Terjadi kesalahan saat menyimpan TindakanSurat.'], 500);
+            return response()->json(['error' => 'Terjadi kesalahan saat menyimpan TindakanSurat'], 500);
         }
     }
 

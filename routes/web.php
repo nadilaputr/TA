@@ -29,7 +29,7 @@ Route::middleware(['role:admin|sekretaris|kepaladinas'])->group(function () {
     Route::put('suratmasuk/{id}/tindakan', [SuratMasukController::class, 'updateTindakan'])->name('suratmasuk.updateTindakan');
 });
 
-Route::middleware(['role:sekretaris|kepaladinas'])->group(function () {
+Route::middleware(['role:admin|sekretaris|kepaladinas'])->group(function () {
     Route::get('suratmasuk/{id}', [SuratMasukController::class, 'show'])->name('suratmasuk.show');
 });
 
