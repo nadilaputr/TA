@@ -32,7 +32,7 @@ class PermissionSeeder extends Seeder
         // Permission::create(['name' => 'unpublish']);
 
         $adminRole = Role::create(['name' => 'admin']);
-        
+
         $sekretarisRole = Role::create(['name' => 'sekretaris']);
         // $sekretarisRole->givePermissionTo('view surat');
         // $sekretarisRole->givePermissionTo('edit disposisi');
@@ -45,7 +45,11 @@ class PermissionSeeder extends Seeder
         // $kepalaDinasRole->givePermissionTo('edit disposisi');
         // $kepalaDinasRole->givePermissionTo('publish');
 
-        $kepalaBidangRole = Role::create(['name' => 'kepalabidang']);
+        $kepalaBidangStatistikSosialRole = Role::create(['name' => 'Statistik Sosial']);
+        $kepalaBidangStatistikProduksiRole = Role::create(['name' => 'Statistik Produksi']);
+        $kepalaBidangStatistikDistribusiRole = Role::create(['name' => 'Statistik Distribusi']);
+        $kepalaBidangNeracaWilayahAnalisisStatistikRole = Role::create(['name' => 'Neraca Wilayah dan Analisis Statistik']);
+        $kepalaBidangIntegrasiPengolahanDanDesiminasiStatistikRole = Role::create(['name' => 'Integrasi Pengolahan dan Desiminasi Statistik']);
         // $kepalaBidangRole->givePermissionTo('view surat');
         // $kepalaBidangRole->givePermissionTo('edit disposisi');
 
@@ -56,7 +60,7 @@ class PermissionSeeder extends Seeder
             'password' => Hash::make('password'),
             'username' => 'admin',
             'id_bidang' => 1,
-            'jabatan' => 'contoh jabatan',
+            'jabatan' => 'Tata Usaha',
         ]);
         $user->assignRole($adminRole);
         
@@ -64,8 +68,8 @@ class PermissionSeeder extends Seeder
             'name' => 'Sekretaris',
             'password' => Hash::make('password'),
             'username' => 'sekretaris',
-            'id_bidang' => 1,
-            'jabatan' => 'contoh jabatan',
+            'id_bidang' => 2,
+            'jabatan' => 'Sekretaris',
         ]);
         $user->assignRole($sekretarisRole);
 
@@ -73,19 +77,55 @@ class PermissionSeeder extends Seeder
             'name' => 'Kepala Dinas',
             'password' => Hash::make('password'),
             'username' => 'kepaladinas',
-            'id_bidang' => 1,
-            'jabatan' => 'contoh jabatan',
+            'id_bidang' => 3,
+            'jabatan' => 'Kepala Dinas',
         ]);
         $user->assignRole($kepalaDinasRole);
 
         $user = User::factory()->create([
-            'name' => 'Kepala Bidang',
+            'name' => 'Statistik Sosial',
             'password' => Hash::make('password'),
-            'username' => 'kepalabidang',
-            'id_bidang' => 1,
-            'jabatan' => 'contoh jabatan',
+            'username' => 'statistiksosial',
+            'id_bidang' => 4,
+            'jabatan' => 'Kepala Bidang',
         ]);
-        $user->assignRole($kepalaBidangRole);
+        $user->assignRole($kepalaBidangStatistikSosialRole);
+        
+        $user = User::factory()->create([
+            'name' => 'Statistik Produksi',
+            'password' => Hash::make('password'),
+            'username' => 'statistikproduksi',
+            'id_bidang' => 5,
+            'jabatan' => 'Kepala Bidang',
+        ]);
+        $user->assignRole($kepalaBidangStatistikProduksiRole);
+
+        $user = User::factory()->create([
+            'name' => 'Statistik Distribusi',
+            'password' => Hash::make('password'),
+            'username' => 'statistikdistribusi.',
+            'id_bidang' => 6,
+            'jabatan' => 'Kepala Bidang',
+        ]);
+        $user->assignRole($kepalaBidangStatistikDistribusiRole);
+
+        $user = User::factory()->create([
+            'name' => 'Neraca Wilayah dan Analisis Statistik',
+            'password' => Hash::make('password'),
+            'username' => 'neraca',
+            'id_bidang' => 7,
+            'jabatan' => 'Kepala Bidang',
+        ]);
+        $user->assignRole($kepalaBidangNeracaWilayahAnalisisStatistikRole);
+
+        $user = User::factory()->create([
+            'name' => 'Integrasi Pengolahan dan Desiminasi Statistik',
+            'password' => Hash::make('password'),
+            'username' => 'integrasi',
+            'id_bidang' => 8,
+            'jabatan' => 'Kepala Bidang',
+        ]);
+        $user->assignRole($kepalaBidangIntegrasiPengolahanDanDesiminasiStatistikRole);
 
      }
 }

@@ -131,7 +131,6 @@
                     }
                 });
 
-                const suratId = $('.btn-ajukan').data('id');
                 const form = $('#ajukanForm');
                 const formData = new FormData(form[0]);
 
@@ -170,7 +169,6 @@
             });
 
             $('.btn-submit-bidang').on('click', function(event) {
-                const suratId = $('.btn-bidang').data('id');
                 const form = $('#tindakanBidangForm');
                 const formData = new FormData(form[0]);
 
@@ -224,7 +222,7 @@
             });
 
             $('.btn-ajukan').on('click', function() {
-                const suratId = $(this).data('id')
+                suratId = $(this).data('id')
 
                 $('.pdfContainer').hide();
 
@@ -252,7 +250,7 @@
             })
 
             $('.btn-bidang').on('click', function() {
-                const suratId = $(this).data('id')
+                suratId = $(this).data('id')
 
                 $('.pdfContainer').hide();
 

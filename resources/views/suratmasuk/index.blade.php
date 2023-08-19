@@ -186,8 +186,12 @@
                     }
                 });
             });
-
+            
             //Handle Edit Tindakan
+            $('.btn-edit-tindakan').click(function (e) {
+                suratId = $(this).data('id');
+            });
+            
             $('#editTindakanSubmitBtn').on('click', function(e) {
                 $.ajaxSetup({
                     headers: {
@@ -195,7 +199,6 @@
                     }
                 });
 
-                const suratId = $('.btn-edit-tindakan').data('id');
                 const form = $('#editTindakanForm');
                 const formData = new FormData(form[0]);
 
