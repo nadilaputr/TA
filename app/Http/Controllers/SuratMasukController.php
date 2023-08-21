@@ -169,6 +169,6 @@ class SuratMasukController extends Controller
     public function destroy(int $id)
     {
         SuratMasuk::where('id', $id)->delete();
-        return redirect()->route('suratmasuk.index')->with('success', 'Data berhasil dihapus');
+        // return redirect()->route('suratmasuk.index')->with('success', 'Data berhasil dihapus');
     }
 }

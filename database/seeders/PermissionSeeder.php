@@ -103,7 +103,7 @@ class PermissionSeeder extends Seeder
         $user = User::factory()->create([
             'name' => 'Statistik Distribusi',
             'password' => Hash::make('password'),
-            'username' => 'statistikdistribusi.',
+            'username' => 'statistikdistribusi',
             'id_bidang' => 6,
             'jabatan' => 'Kepala Bidang',
         ]);

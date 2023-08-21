@@ -8,14 +8,14 @@
 
 @section('content')
     @role('admin')
-        <x-adminlte-datatable id="table5" :heads="$heads">
+        <x-adminlte-datatable id="table5" :heads="$heads" striped hoverable>
             @foreach ($dataOperator as $row)
                 <tr>
                     <td>{{ $row->id }}</td>
                     <td>{{ $row->name }}</td>
                     <td>{{ $row->username }}</td>
                     <td>{{ $row->jabatan }}</td>
-                    <td>{{ $row->bidang->namabidang }}</td>
+                    <td>{{ $row->bidang->bidang }}</td>
                     <td>{{ strtoupper($row->getRoleNames()->first()) }}</td>
                     <td class="d-flex">
 
@@ -32,7 +32,7 @@
                             class="btn btn-xs btn-default text-primary mx-1 shadow" title="Ubah Role">
                             <i class="fa fa-lg fa-fw fa-user-shield"></i>
                         </a>
-                        <button type="button" data-toggle="modal" data-target="#deleteModal" data-id="{{ $row->id }}"
+                        <button type="button" data-toggle="modal" data-target="#deleteModalOperator" data-id="{{ $row->id }}"
                             class="btn btn-xs btn-default text-danger mx-1 shadow btn-delete" title="Delete">
                             <i class="fa fa-lg fa-fw fa-trash"></i>
                         </button>
@@ -52,12 +52,11 @@
         </x-adminlte-alert>
     @endrole
 
-    <x-adminlte-modal id="deleteModal" title="Hapus Akun" size="sm" theme="danger" icon="fas fa-trash" v-centered
-        static-backdrop scrollable>
+    <x-adminlte-modal id="deleteModalOperator" title="Hapus Akun" size="md" theme="white" icon="fa fa-sm fa-fw fa-trash" v-centered scrollable>
         <div>Anda yakin ingin menghapus operator ?</div>
         <x-slot name="footerSlot">
-            <x-adminlte-button class="mr-auto" theme="success" label="Batal" data-dismiss="modal" />
-            <x-adminlte-button theme="danger" label="Hapus" id="confirmDeleteBtn" />
+            <x-adminlte-button class="mr-auto" theme="danger" label="Batal" data-dismiss="modal" />
+            <x-adminlte-button theme="secondary" label="Hapus" id="confirmDeleteOperatorBtn" />
         </x-slot>
     </x-adminlte-modal>
 @stop
@@ -69,7 +68,7 @@
             let operatorIdToDelete;
 
             // When the delete button in the modal is clicked, send an AJAX request to delete the operator
-            $('#confirmDeleteBtn').on('click', function() {
+            $('#confirmDeleteOperatorBtn').on('click', function() {
 
                 if (operatorIdToDelete) {
                     $.ajax({
@@ -80,12 +79,12 @@
                             _token: '{{ csrf_token() }}',
                         },
                         success: function(response) {
-                            $('#deleteModal').modal('hide');
+                            $('#deleteModalOperator').modal('hide');
                             window.location.href = "{{ route('dataoperator.index') }}";
                         },
                         error: function(error) {
                             console.error('Error deleting operator:', error);
-                            $('#deleteModal').modal('hide');
+                            $('#deleteModalOperator').modal('hide');
                         }
                     });
                 }

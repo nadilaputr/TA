@@ -1,4 +1,4 @@
-<x-adminlte-modal id="editTindakanModal" title="Edit Surat Masuk" theme="info" icon="fa fa-md fa-fw fa-info-circle "
+<x-adminlte-modal id="editTindakanModal" title="EDIT TINDAKAN" theme="white" icon="fa fa-md fa-fw fa-info-circle "
     size='lg' disable-animations v-centered static-backdrop scrollable>
 
     <div class="card card-info">
@@ -16,7 +16,7 @@
                 <div class="invalid-feedback"></div>
             </form>
             <x-slot name="footerSlot">
-                <x-adminlte-button class="btn-secondary" label="Close" data-dismiss="modal" />
+                <x-adminlte-button class="bg-danger text-white" label="Close" data-dismiss="modal" />
                 <button type="button" class="btn btn-success" id="editTindakanSubmitBtn">Submit</button>
             </x-slot>
         </div>

@@ -12,12 +12,12 @@
 
 @section('content')
     @role('admin')
-    <a class="btn btn-info" href="{{ route('bidang.create') }}">Tambah</a>
+    <a class="btn btn-info mb-3" href="{{ route('bidang.create') }}">Tambah</a>
         <x-adminlte-datatable id="table5" :heads="$heads">
             @foreach ($bidang as $row)
                 <tr>
                     <td>{{ $row->id }}</td>
-                    <td>{{ $row->namabidang }}</td>
+                    <td>{{ $row->bidang }}</td>
                     <td class="d-flex">
 
                         <a href="{{ route('bidang.edit', $row->id) }}"

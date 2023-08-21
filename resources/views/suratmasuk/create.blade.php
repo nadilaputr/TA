@@ -1,4 +1,4 @@
-<x-adminlte-modal id="createModal" title="TAMBAH SURAT MASUK" theme="white" icon="fas fa-file-upload" size='lg'
+<x-adminlte-modal id="createModal" title="TAMBAH SURAT MASUK" theme="white" icon="fa fa-md fa-fw fa-file-upload" size='lg'
     disable-animations v-centered scrollable>
 
     <div class="card card-info">
@@ -8,7 +8,7 @@
 
             <div class="card-body">
                 <b>
-                    <p class="text-primary">INFORMASI UMUM</p>
+                    <p class="text-lightblue">INFORMASI UMUM</p>
                 </b>
 
                 <div class="row">
@@ -54,7 +54,7 @@
                 </div>
 
                 <b>
-                    <p class="text-primary">INFORMASI TAMBAHAN</p>
+                    <p class="text-lightblue">INFORMASI TAMBAHAN</p>
                 </b>
                 <div class="row">
                     <div class="col-md-4">
@@ -98,7 +98,7 @@
                 </div>
                 
                 <b>
-                    <p class="text-primary">UPLOAD FILE</p>
+                    <p class="text-lightblue">UPLOAD FILE</p>
                 </b>
                 <div class="form-group">
                     <label>File</label>

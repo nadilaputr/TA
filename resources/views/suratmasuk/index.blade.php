@@ -9,7 +9,7 @@
 @section('content')
     <h3 class="mt-3">Surat Masuk</h3>
 
-    <button class="btn btn-success btn-create mb-3" data-toggle="modal" data-target="#createModal">Tambah
+    <button class="btn btn-info btn-create mb-3" data-toggle="modal" data-target="#createModal">Tambah
     </button>
 
     @if ($message = Session::get('massage'))
@@ -33,9 +33,10 @@
                 <td>{!! $tindakanSurat->toBadge($row->tindakan) !!}</td>
                 <form action="{{ route('suratmasuk.destroy', $row->id) }}" method="POST">
                     <td class="d-flex">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-xs btn-default text-danger mx-1 shadow" title="Delete">
+                        {{-- @csrf --}}
+                        {{-- @method('DELETE') --}}
+                        <button type="button" data-toggle="modal" data-target="#deleteModalSuratMasuk" data-id="{{ $row->id }}"
+                            class="btn btn-xs btn-default text-danger mx-1 shadow btn-delete" title="Delete">
                             <i class="fa fa-lg fa-fw fa-trash"></i>
                         </button>
 
@@ -56,7 +57,7 @@
 
                         <button type="button" data-toggle="modal" data-target="#editTindakanModal"
                             data-id="{{ $row->id }}"
-                            class="btn btn-xs btn-default btn-edit-tindakan text-success mx-1 shadow" title="Edit">
+                            class="btn btn-xs btn-default btn-edit-tindakan text-success mx-1 shadow" title="Edit Tindakan">
                             <i class="fa fa-lg fa-fw fa-share-square"></i>
                         </button>
                     </td>
@@ -64,6 +65,14 @@
             </tr>
         @endforeach
     </x-adminlte-datatable>
+
+    <x-adminlte-modal id="deleteModalSuratMasuk" title="Hapus Surat Masuk" size="md" theme="white" icon="fa fa-sm fa-fw fa-trash" v-centered scrollable>
+        <div>Anda yakin ingin menghapus Surat Masuk ?</div>
+        <x-slot name="footerSlot">
+            <x-adminlte-button class="mr-auto" theme="danger" label="Batal" data-dismiss="modal" />
+            <x-adminlte-button theme="secondary" label="Hapus" id="confirmDeleteSuratMasukBtn" />
+        </x-slot>
+    </x-adminlte-modal>
 
     @include('suratmasuk.show')
     @include('suratmasuk.create')
@@ -74,6 +83,37 @@
 @section('js')
     <script>
         $(document).ready(function() {
+            let suratIdToDelete;
+
+            // When the delete button in the modal is clicked, send an AJAX request to delete the operator
+            $('#confirmDeleteSuratMasukBtn').on('click', function() {
+
+                if (suratIdToDelete) {
+                    $.ajax({
+                        type: 'POST',
+                        url: `/suratmasuk/${suratIdToDelete}`, // Replace with the actual delete route URL
+                        data: {
+                            _method: 'DELETE',
+                            _token: '{{ csrf_token() }}',
+                        },
+                        success: function(response) {
+                            $('#deleteModalSuratMasuk').modal('hide');
+                            window.location.href = "{{ route('suratmasuk.index') }}";
+                        },
+                        error: function(error) {
+                            console.error('Error deleting Surat Masuk:', error);
+                            $('#deleteModalSuratMasuk').modal('hide');
+                        }
+                    });
+                }
+            });
+
+             // When the delete button in the table is clicked, store the operator ID to be deleted
+             $('.btn-delete').on('click', function() {
+                suratIdToDelete = $(this).data('id');
+            });
+        
+
             //Handle Create Form Submit
             $('#createSubmitBtn').on('click', function(e) {
                 $.ajaxSetup({
@@ -236,7 +276,7 @@
                     }
                 });
             });
-        })
+        });
     </script>
 
     <script>
@@ -268,5 +308,8 @@
             });
 
         })
+
+        
+
     </script>
 @stop

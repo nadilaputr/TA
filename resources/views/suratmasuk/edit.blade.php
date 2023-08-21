@@ -1,4 +1,4 @@
-<x-adminlte-modal id="editModal" title="EDIT SURAT MASUK" theme="white" icon="fas fa-file-signature" size='lg'
+<x-adminlte-modal id="editModal" title="EDIT SURAT MASUK" theme="white" icon="fa fa-md fa-fw fa-pen" size='lg'
     disable-animations v-centered scrollable>
 
     <div class="card card-info">

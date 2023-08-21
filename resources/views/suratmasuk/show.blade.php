@@ -1,5 +1,5 @@
 {{-- Modal Detail Surat Masuk --}}
-<x-adminlte-modal id="modalPurple" title="Detail" theme="white" icon="fa fa-md fa-fw fa-info-circle " size='lg'
+<x-adminlte-modal id="modalPurple" title="DETAIL" theme="white" icon="fa fa-md fa-fw fa-info-circle " size='lg'
     disable-animations v-centered scrollable>
     <div class="row">
         <div class="col-md-6">
