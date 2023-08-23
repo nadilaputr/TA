@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\SuratKeluar;
 use Illuminate\Http\Request;
 
 class SuratKeluarController extends Controller
@@ -13,7 +14,20 @@ class SuratKeluarController extends Controller
      */
     public function index()
     {
-        return view('surat_keluar');
+        $heads = [
+            'No',
+            'Nomor Surat',
+            'Perihal',
+            'Alamat Tujuan',
+            'Status',
+            ['label' => 'Actions', 'no-export' => true, 'width' => 5, 'text-align' => 'center'],
+        ];
+
+        $suratkeluar = SuratKeluar::all();
+        return view('suratkeluar.index', [
+            "suratkeluar" => $suratkeluar,
+            "heads" => $heads,
+        ]);
     }
 
     /**

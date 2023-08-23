@@ -9,8 +9,7 @@
 @section('content')
     <h3 class="mt-3">Surat Masuk</h3>
 
-    <button class="btn btn-info btn-create mb-3" data-toggle="modal" data-target="#createModal">Tambah
-    </button>
+    <button class="btn btn-info btn-create mb-3" data-toggle="modal" data-target="#createModal">Tambah</button>
 
     @if ($message = Session::get('massage'))
         <div class="alert alert-success">
@@ -31,7 +30,7 @@
                 {{-- <td>{{ $row->jenis }}</td> --}}
                 {{-- <td>{{ $row->catatan }}</td> --}}
                 <td>{!! $tindakanSurat->toBadge($row->tindakan) !!}</td>
-                <form action="{{ route('suratmasuk.destroy', $row->id) }}" method="POST">
+                {{-- <form action="{{ route('suratmasuk.destroy', $row->id) }}" method="POST"> --}}
                     <td class="d-flex">
                         {{-- @csrf --}}
                         {{-- @method('DELETE') --}}
@@ -50,30 +49,19 @@
                             <i class="fa fa-lg fa-fw fa-info-circle"></i>
                         </button>
 
-                        <a href="{{ Storage::url($row->file) }}" target="_blank"
-                            class="btn btn-xs btn-default text-primary mx-1 shadow" title="Lihat File">
-                            <i class="fa fa-lg fa-fw fa-file"></i>
-                        </a>
-
                         <button type="button" data-toggle="modal" data-target="#editTindakanModal"
                             data-id="{{ $row->id }}"
                             class="btn btn-xs btn-default btn-edit-tindakan text-success mx-1 shadow" title="Edit Tindakan">
                             <i class="fa fa-lg fa-fw fa-share-square"></i>
                         </button>
                     </td>
-                </form>
+                {{-- </form> --}}
             </tr>
         @endforeach
     </x-adminlte-datatable>
 
-    <x-adminlte-modal id="deleteModalSuratMasuk" title="Hapus Surat Masuk" size="md" theme="white" icon="fa fa-sm fa-fw fa-trash" v-centered scrollable>
-        <div>Anda yakin ingin menghapus Surat Masuk ?</div>
-        <x-slot name="footerSlot">
-            <x-adminlte-button class="mr-auto" theme="danger" label="Batal" data-dismiss="modal" />
-            <x-adminlte-button theme="secondary" label="Hapus" id="confirmDeleteSuratMasukBtn" />
-        </x-slot>
-    </x-adminlte-modal>
-
+   
+    @include('suratmasuk.delete')
     @include('suratmasuk.show')
     @include('suratmasuk.create')
     @include('suratmasuk.edit')
@@ -83,15 +71,15 @@
 @section('js')
     <script>
         $(document).ready(function() {
-            let suratIdToDelete;
+            let suratId;
 
             // When the delete button in the modal is clicked, send an AJAX request to delete the operator
             $('#confirmDeleteSuratMasukBtn').on('click', function() {
 
-                if (suratIdToDelete) {
+                if (suratId) {
                     $.ajax({
                         type: 'POST',
-                        url: `/suratmasuk/${suratIdToDelete}`, // Replace with the actual delete route URL
+                        url: `/suratmasuk/${suratId}`, // Replace with the actual delete route URL
                         data: {
                             _method: 'DELETE',
                             _token: '{{ csrf_token() }}',
@@ -110,7 +98,7 @@
 
              // When the delete button in the table is clicked, store the operator ID to be deleted
              $('.btn-delete').on('click', function() {
-                suratIdToDelete = $(this).data('id');
+                suratId = $(this).data('id');
             });
         
 
@@ -159,7 +147,7 @@
 
             //Handle Edit Surat
             $('.btn-edit').click(function(e) {
-                const suratId = $(this).data('id');
+               suratId = $(this).data('id');
 
                 const url = '{{ route('suratmasuk.edit', ':suratId') }}'.replace(':suratId', suratId);
 
@@ -189,7 +177,6 @@
                     }
                 });
 
-                const suratId = $('.btn-edit').data('id');
                 const form = $('#editForm');
                 const formData = new FormData(form[0]);
 

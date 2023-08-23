@@ -318,7 +318,7 @@ return [
         ],
         [
             'text' => 'Surat Keluar',
-            'url'  => 'surat/keluar',
+            'url'  => 'suratkeluar',
             'icon' => 'fas fa-envelope-open-text',
         ],
         [

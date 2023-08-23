@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SuratMasukController;
 use App\Http\Controllers\DataOperatorController;
 use App\Http\Controllers\DisposisiController;
+use App\Http\Controllers\SuratKeluarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,3 +51,6 @@ Route::get('dataoperator/{id}/password', [DataOperatorController::class, 'editPa
 Route::get('dataoperator/{id}/role', [DataOperatorController::class, 'editRole'])->name('dataoperator.role');
 Route::patch('dataoperator/{id}/password', [DataOperatorController::class, 'updatePassword'])->name('dataoperator.updatePassword');
 Route::patch('dataoperator/{id}/role', [DataOperatorController::class, 'updateRole'])->name('dataoperator.updateRole');
+
+
+Route::resource('suratkeluar', SuratKeluarController::class);
