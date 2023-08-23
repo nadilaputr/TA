@@ -22,6 +22,11 @@ class Bidang extends Model
     {
         return $this->hasMany(Disposisi::class);
     }
+
+    public function surat_keluar()
+    {
+        return $this->hasMany(SuratKeluar::class);
+    }
 }
 
 

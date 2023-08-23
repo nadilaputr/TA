@@ -24,7 +24,7 @@ return new class extends Migration {
             $table->string('sifat');
             $table->string('file');
             $table->string('catatan')->default('-');
-            $table->smallInteger('tindakan')->default('0');
+            $table->smallInteger('tindakan')->default(0);
             $table->timestamps();
         });
     }
