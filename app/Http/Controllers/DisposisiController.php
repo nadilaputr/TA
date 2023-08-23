@@ -22,6 +22,7 @@ class DisposisiController extends Controller
             'Asal Surat',
             'Perihal',
             'Catatan',
+            'Tindakan',
             'Bidang',
             // 'Tindakan',
             ['label' => 'Actions', 'no-export' => true, 'width' => 5, 'text-align' => 'center'],

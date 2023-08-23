@@ -64,8 +64,8 @@ return [
     */
 
     'logo' => '<b>BPS Surat</b>',
-    'logo_img' => 'vendor/adminlte/dist/img/BPS.png',
-    'logo_img_class' => 'brand-image img-circle elevation-2',
+    'logo_img' => 'vendor/adminlte/dist/img/removebps.png',
+    'logo_img_class' => 'brand-image img-circle bg-white elevation-2',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
     'logo_img_alt' => 'Admin Logo',
@@ -86,7 +86,7 @@ return [
     'auth_logo' => [
         'enabled' => false,
         'img' => [
-            'path' => 'vendor/adminlte/dist/img/BPS.png',
+            'path' => 'vendor/adminlte/dist/img/removebps.png',
             'alt' => 'Auth Logo',
             'class' => '',
             'width' => 50,

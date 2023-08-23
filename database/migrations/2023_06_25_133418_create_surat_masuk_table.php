@@ -23,7 +23,7 @@ return new class extends Migration {
             $table->string('jenis');
             $table->string('sifat');
             $table->string('file');
-            $table->string('catatan')->default('-');
+            $table->string('catatan')->nullable();
             $table->smallInteger('tindakan')->default(0);
             $table->timestamps();
         });

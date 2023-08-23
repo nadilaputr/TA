@@ -25,11 +25,11 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::middleware(['role:admin|sekretaris|kepaladinas'])->group(function () {
+Route::middleware(['role:admin|sekretaris|kepaladinas|Statistik Sosial'])->group(function () {
     Route::put('suratmasuk/{id}/tindakan', [SuratMasukController::class, 'updateTindakan'])->name('suratmasuk.updateTindakan');
 });
 
-Route::middleware(['role:admin|sekretaris|kepaladinas'])->group(function () {
+Route::middleware(['role:admin|sekretaris|kepaladinas|Statistik Sosial'])->group(function () {
     Route::get('suratmasuk/{id}', [SuratMasukController::class, 'show'])->name('suratmasuk.show');
 });
 
