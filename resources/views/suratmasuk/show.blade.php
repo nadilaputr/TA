@@ -75,8 +75,14 @@
         </table>
     </x-adminlte-card>
 
+    <div class="card">
+        <div class="card-body">
+            <div class="pdfContainer">
+                <iframe class="pdfViewer" style="width: 100%; height: 500px;"></iframe>
+            </div>
 
-
+        </div>
+    </div>
 
     <x-slot name="footerSlot">
         <x-adminlte-button class="bg-danger text-white" label="Close" data-dismiss="modal" /> </x-slot>

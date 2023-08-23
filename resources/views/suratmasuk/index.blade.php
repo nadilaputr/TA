@@ -17,7 +17,7 @@
         </div>
     @endif
 
-    <x-adminlte-datatable id="table7" :heads="$heads"  striped hoverable with-buttons>
+    <x-adminlte-datatable id="table7" :heads="$heads" striped hoverable with-buttons>
 
         @foreach ($surat as $row)
             <tr>
@@ -31,22 +31,32 @@
                 {{-- <td>{{ $row->catatan }}</td> --}}
                 <td>{!! $tindakanSurat->toBadge($row->tindakan) !!}</td>
                 {{-- <form action="{{ route('suratmasuk.destroy', $row->id) }}" method="POST"> --}}
-                    <td class="d-flex">
-                        {{-- @csrf --}}
-                        {{-- @method('DELETE') --}}
-                        <button type="button" data-toggle="modal" data-target="#deleteModalSuratMasuk" data-id="{{ $row->id }}"
-                            class="btn btn-xs btn-default text-danger mx-1 shadow btn-delete" title="Delete">
-                            <i class="fa fa-lg fa-fw fa-trash"></i>
-                        </button>
-
-                        <button type="button" data-toggle="modal" data-target="#editModal" data-id="{{ $row->id }}"
-                            class="btn btn-xs btn-default text-primary mx-1 shadow btn-edit" title="Edit">
-                            <i class="fa fa-lg fa-fw fa-pen"></i>
-                        </button>
-
+                <td class="d-flex" style="justify-content: center">
+                    {{-- @csrf --}}
+                    {{-- @method('DELETE') --}}
+                    @if ($row->tindakan == SELESAI)
                         <button type="button" class="btn btn-xs btn-default text-success mx-1 shadow btn-detail"
                             title="Detail" data-toggle="modal" data-target="#modalPurple" data-id="{{ $row->id }}">
                             <i class="fa fa-lg fa-fw fa-info-circle"></i>
+                        </button>
+                        <button type="button" data-toggle="modal" data-target="#deleteModalSuratMasuk"
+                            data-id="{{ $row->id }}" class="btn btn-xs btn-default text-danger mx-1 shadow btn-delete"
+                            title="Delete">
+                            <i class="fa fa-lg fa-fw fa-trash"></i>
+                        </button>
+                    @else
+                        <button type="button" class="btn btn-xs btn-default text-success mx-1 shadow btn-detail"
+                            title="Detail" data-toggle="modal" data-target="#modalPurple" data-id="{{ $row->id }}">
+                            <i class="fa fa-lg fa-fw fa-info-circle"></i>
+                        </button>
+                        <button type="button" data-toggle="modal" data-target="#deleteModalSuratMasuk"
+                            data-id="{{ $row->id }}" class="btn btn-xs btn-default text-danger mx-1 shadow btn-delete"
+                            title="Delete">
+                            <i class="fa fa-lg fa-fw fa-trash"></i>
+                        </button>
+                        <button type="button" data-toggle="modal" data-target="#editModal" data-id="{{ $row->id }}"
+                            class="btn btn-xs btn-default text-primary mx-1 shadow btn-edit" title="Edit">
+                            <i class="fa fa-lg fa-fw fa-pen"></i>
                         </button>
 
                         <button type="button" data-toggle="modal" data-target="#editTindakanModal"
@@ -54,13 +64,14 @@
                             class="btn btn-xs btn-default btn-edit-tindakan text-success mx-1 shadow" title="Edit Tindakan">
                             <i class="fa fa-lg fa-fw fa-share-square"></i>
                         </button>
-                    </td>
+                    @endif
+                </td>
                 {{-- </form> --}}
             </tr>
         @endforeach
     </x-adminlte-datatable>
 
-   
+
     @include('suratmasuk.delete')
     @include('suratmasuk.show')
     @include('suratmasuk.create')
@@ -96,11 +107,11 @@
                 }
             });
 
-             // When the delete button in the table is clicked, store the operator ID to be deleted
-             $('.btn-delete').on('click', function() {
+            // When the delete button in the table is clicked, store the operator ID to be deleted
+            $('.btn-delete').on('click', function() {
                 suratId = $(this).data('id');
             });
-        
+
 
             //Handle Create Form Submit
             $('#createSubmitBtn').on('click', function(e) {
@@ -147,7 +158,7 @@
 
             //Handle Edit Surat
             $('.btn-edit').click(function(e) {
-               suratId = $(this).data('id');
+                suratId = $(this).data('id');
 
                 const url = '{{ route('suratmasuk.edit', ':suratId') }}'.replace(':suratId', suratId);
 
@@ -213,12 +224,12 @@
                     }
                 });
             });
-            
+
             //Handle Edit Tindakan
-            $('.btn-edit-tindakan').click(function (e) {
+            $('.btn-edit-tindakan').click(function(e) {
                 suratId = $(this).data('id');
             });
-            
+
             $('#editTindakanSubmitBtn').on('click', function(e) {
                 $.ajaxSetup({
                     headers: {
@@ -274,7 +285,20 @@
                 }
             });
 
+            const tindakanToString = (status) => {
+                switch (status) {
+                    case {{ TIDAK_TERUSKAN }}:
+                        return "Arsip";
+                    case {{ REVISI }}:
+                        return "Revisi";
+                    case {{ SELESAI }}:
+                        return "Arsip";
+                }
+            }
+
             $('.btn-detail').on('click', function(event) {
+
+                $('.pdfContainer').hide();
 
                 var id = $(this).data('id');
 
@@ -286,17 +310,22 @@
                     $('.tanggal_masuk').html(data.data.tanggal_masuk);
                     $('.perihal').html(data.data.perihal);
                     $('.sifat').html(data.data.sifat);
-                    $('.tindakan').html(data.data.tindakan);
+                    $('.tindakan').html(tindakanToString(data.data.tindakan));
                     $('.lampiran').html(data.data.lampiran);
-                    $('.file').html(data.data.file);
                     $('.jenis').html(data.data.jenis);
                     $('.catatan').html(data.data.catatan);
+                    $('.pdfViewerBtn').attr('data-url', '{{ Storage::url(':file') }}'
+                        .replace(':file', data.data.file))
                 })
             });
 
+            $('.pdfViewerBtn').click(function(e) {
+                const url = $(this).data('url');
+
+                $('.pdfViewer').attr('src', url);
+                $('.pdfContainer').show();
+            })
+
         })
-
-        
-
     </script>
 @stop
