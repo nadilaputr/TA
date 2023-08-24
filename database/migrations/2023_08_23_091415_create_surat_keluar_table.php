@@ -8,7 +8,7 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
-     *
+     
      * @return void
      */
     public function up()
@@ -21,8 +21,8 @@ return new class extends Migration
             $table->string('lampiran');
             $table->string('alamat_surat');
             $table->string('perihal');
+            $table->string('file');
             $table->date('tanggal_surat');
-            $table->smallInteger('status')->default(0);
             $table->integer('catatan');
             $table->foreign('id_bidang')->references('id')->on('bidang');
             $table->timestamps();

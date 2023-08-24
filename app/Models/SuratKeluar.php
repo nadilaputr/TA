@@ -22,6 +22,7 @@ class SuratKeluar extends Model
         'status',
         'catatan',
         'id_bidang',
+        'file'
     ];
 
     public function bidang()

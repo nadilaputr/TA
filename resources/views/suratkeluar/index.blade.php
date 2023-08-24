@@ -13,7 +13,7 @@
 @section('content')
     <h3 class="mt-3">Surat Keluar</h3>
 
-    <button class="btn btn-info btn-create mb-3" data-toggle="modal" data-target="#createModal">Tambah</button>
+    <button class="btn btn-info btn-create mb-3" data-toggle="modal" data-target="#createModalKeluar">Tambah</button>
 
     @if ($message = Session::get('massage'))
         <div class="alert alert-success">
@@ -29,6 +29,7 @@
             <td>{{ $row->nomor_surat }}</td>
             <td>{{ $row->sifat }}</td>
             <td>{{ $row->alamat_surat }}</td>
+            <td>{{ $row->tanggal_surat }}</td>
             {{-- <td>{!! $tindakanSurat->toBadge($row->tindakan) !!}</td> --}}
             <form action="{{ route('suratmasuk.destroy', $row->id) }}" method="POST">
                 <td class="d-flex">
@@ -64,5 +65,6 @@
         </tr>
     @endforeach
 </x-adminlte-datatable>
+@include('suratkeluar.create')
 
 @stop
