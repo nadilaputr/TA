@@ -38,6 +38,8 @@ Route::middleware(['role:admin'])->group(function () {
     Route::resource('suratmasuk', SuratMasukController::class);
 });
 
+Route::get('disposisi/print', [App\Http\Controllers\DisposisiController::class, 'print'])->name('disposisi.print');
+
 Route::get('bidang/all', [BidangController::class, 'all']);
 Route::resource('bidang', BidangController::class);
 

@@ -23,14 +23,16 @@
                     <td>{!! $row->bidang->bidang !!}</td>
                     <td class="d-flex">
                         @if ($row->surat_masuk->tindakan == SELESAI)
-                            <button type="button" data-toggle="modal" data-target="#cetakModal"
-                                data-id="{{ $row->surat_masuk->id }}"
-                                class="btn btn-xs btn-default text-primary mx-1 shadow btn-cetak-tindakan" title="Cetak Disposisi">
+                            <a href="{{ route('disposisi.print') }}"
+                                class="btn btn-xs btn-default text-primary mx-1 shadow btn-cetak-tindakan"
+                                title="Cetak Disposisi">
                                 <i class="fa fa-lg fa-fw fa-file"></i>
-                            </button>
+                            </a>
                         @else
-                            <button type="button" data-toggle="modal" data-target="#terimaModal" data-id="{{ $row->surat_masuk->id }}"
-                                class="btn btn-xs btn-default text-primary mx-1 shadow btn-terima-tindakan" title="Terima Disposisi">
+                            <button type="button" data-toggle="modal" data-target="#terimaModal"
+                                data-id="{{ $row->surat_masuk->id }}"
+                                class="btn btn-xs btn-default text-primary mx-1 shadow btn-terima-tindakan"
+                                title="Terima Disposisi">
                                 <i class="fa fa-lg fa-fw fa-pen"></i>
                             </button>
                         @endif

@@ -6,6 +6,7 @@ use App\Models\Disposisi;
 use App\Models\SuratMasuk;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Spatie\Browsershot\Browsershot;
 
 class DisposisiController extends Controller
 {
@@ -122,5 +123,14 @@ class DisposisiController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function print()
+    {
+        $suratMasuk = SuratMasuk::find(1);
+
+        return view('disposisi.print', [
+            "suratMasuk" => $suratMasuk
+        ]);
     }
 }
