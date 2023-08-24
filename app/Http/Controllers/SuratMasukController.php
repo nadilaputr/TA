@@ -44,11 +44,6 @@ class SuratMasukController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
     public function create()
     {
         return view('suratmasuk.create');
@@ -168,7 +163,14 @@ class SuratMasukController extends Controller
 
     public function destroy($id)
     {
-        SuratMasuk::where('id', $id)->delete();
-        // return redirect()->route('suratmasuk.index')->with('success', 'Data berhasil dihapus');
+
+        $suratMasuk = SuratMasuk::find($id);
+
+        if ($suratMasuk->disposisi) {
+            $suratMasuk->disposisi->delete();
+        }
+
+        $suratMasuk->delete();
+
     }
 }
