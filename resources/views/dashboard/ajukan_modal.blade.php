@@ -105,7 +105,7 @@
                     <x-adminlte-textarea name="catatan" placeholder="Tambah catatan" id="catatan" />
                 </div>
                 <x-slot name="footerSlot">
-                    <x-adminlte-button class="bg-danger text-white" label="Close" data-dismiss="modal" />
+                    <x-adminlte-button class="btn-secondary" label="Close" data-dismiss="modal" />
                     <button id="btn-ajukan-submit" type="button" class="btn btn-primary update">Simpan</button>
                 </x-slot>
             </form>

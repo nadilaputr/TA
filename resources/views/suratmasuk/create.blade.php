@@ -62,8 +62,8 @@
                             <label for="jenis">Jenis Surat</label>
                             <x-adminlte-select id="jenis" name="jenis" required>
                                 <option selected disabled>Pilih Jenis Surat</option>
-                                <option value="asli">Asli</option>
-                                <option value="tembusan">Tembusan</option>
+                                <option value="Asli">Asli</option>
+                                <option value="Tembusan">Tembusan</option>
                             </x-adminlte-select>
                             <div class="invalid-feedback"></div>
                         </div>
@@ -73,11 +73,11 @@
                             <label for="lampiran">Lampiran</label>
                             <x-adminlte-select id="lampiran" name="lampiran" required>
                                 <option selected disabled>Pilih Lampiran</option>
-                                <option value="1">1 Lembar</option>
-                                <option value="2">2 Lembar</option>
-                                <option value="3">3 Lembar</option>
-                                <option value="4">4 Lembar</option>
-                                <option value="5">5 Lembar</option>
+                                <option value="1 Lampiran">1 Lampiran</option>
+                                <option value="2 Lampiran">2 Lampiran</option>
+                                <option value="3 Lampiran">3 Lampiran</option>
+                                <option value="4 Lampiran">4 Lampiran</option>
+                                <option value="5 Lampiran">5 Lampiran</option>
                             </x-adminlte-select>
                             <div class="invalid-feedback"></div>
                         </div>
@@ -88,9 +88,9 @@
                             <label for="sifat">Sifat</label>
                             <x-adminlte-select id="sifat" name="sifat" required>
                                 <option selected disabled>Pilih Sifat</option>
-                                <option value="biasa">Biasa</option>
-                                <option value="segera">Segera</option>
-                                <option value="sangat_segera">Sangat Segera</option>
+                                <option value="Biasa">Biasa</option>
+                                <option value="Segera">Segera</option>
+                                <option value="Sangat Segera">Sangat Segera</option>
                             </x-adminlte-select>
                             <div class="invalid-feedback"></div>
                         </div>
@@ -115,7 +115,7 @@
             </div>
 
             <x-slot name="footerSlot">
-                <x-adminlte-button class="bg-danger text-white" label="Close" data-dismiss="modal" />
+                <x-adminlte-button class="btn-secondary" label="Close" data-dismiss="modal" />
                 <button type="button" class="btn btn-success" id="createSubmitBtn">Submit</button>
             </x-slot>
         </form>

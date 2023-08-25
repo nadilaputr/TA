@@ -12,7 +12,6 @@
     td {
         padding-left: 4px;
     }
-
 </style>
 
 <head>
@@ -70,41 +69,41 @@
                     <td style="width: 25%;"> {{ $disposisi->surat_masuk->id }}</td>
 
                     <td class="font-bold text-left" style=" width: 25%;">Tkt. Keamanan</td>
-                    <td style="width: 25%;"></td>
+                    <td style="width: 25%;">{{ $disposisi->surat_masuk->jenis }}</td>
                 </tr>
                 <tr>
                     <td class="font-bold text-left">Tgl. Penerimaan</td>
-                    <td style="width: 25%;"> {{$dateFormat->from($disposisi->tanggal_disposisi)  }}</td>
-
+                    <td style="width: 25%;"> {{ $dateFormat->from($disposisi->tanggal_disposisi) }}</td>
+ 
                     <td class="font-bold text-left" style=" width: 25%;">Tgl. Penyelesaian</td>
-                    <td style="width: 25%;"></td>
+                    <td style="width: 25%;">{{ $dateFormat->from($disposisi->tanggal_penyelesaian) }}</td>
                 </tr>
 
                 <tr>
                     <td colspan="2" class="font-bold text-left">Tanggal dari Nomor Surat</td>
-                    <td colspan="2">{{ $disposisi->surat_masuk->tanggal_surat }}</td>
+                    <td colspan="2">{{ $dateFormat->from($disposisi->surat_masuk->tanggal_surat) }}</td>
                 </tr>
                 <tr>
                     <td colspan="2" class="font-bold text-left">Dari</td>
-                    <td colspan="2">{{  $disposisi->surat_masuk->asal_surat  }}</td>
+                    <td colspan="2">{{ $disposisi->surat_masuk->asal_surat }}</td>
                 </tr>
                 <tr>
                     <td colspan="2" class="font-bold text-left">Ringkasan Isi</td>
                     <td colspan="2">{{ $disposisi->surat_masuk->perihal }}</td>
                 </tr>
                 <tr>
-                    <td colspan="2" class="font-bold text-left" >Lampiran</td>
+                    <td colspan="2" class="font-bold text-left">Lampiran</td>
                     <td colspan="2">{{ $disposisi->surat_masuk->lampiran }}</td>
                 </tr>
                 <tr>
-                    <th  class="font-bold" style=" vertical-align: top;">Diteruskan Kepada :</th>
+                    <th class="font-bold" style=" vertical-align: top;">Diteruskan Kepada :</th>
                     <th colspan="2"class="font-bold" style=" vertical-align: top;">Disposisi :</th>
                     <th class="font-bold" style=" vertical-align: top;">Paraf :</th>
                 </tr>
                 <tr>
-                    <td class="text-center" style="height: 100px; ">{{  $disposisi->bidang->bidang  }}</td>
+                    <td class="text-center" style="height: 100px; ">{{ $disposisi->bidang->bidang }}</td>
                     <td colspan="2" class="text-center" style="height: 100px;">{{ $disposisi->catatan }}</td>
-                    <td class="font-bold" style="height: 100px; vertical-align: top;"></td>
+                    <td class="text-center" style="height: 100px;"> {{ $paraf }}</td>
                 </tr>
             </table>
         </main>

@@ -70,8 +70,8 @@
                 </div>
 
                 <x-slot name="footerSlot">
-                    <x-adminlte-button class="bg-danger text-white" label="Close" data-dismiss="modal" />
-                    <button type="button" class="btn btn-primary btn-submit-bidang update">Simpan</button>
+                    <x-adminlte-button class="btn-secondary" label="Close" data-dismiss="modal" />
+                    <button type="button" class="btn btn-success btn-submit-bidang update">Simpan</button>
                 </x-slot>
             </form>
         </div>

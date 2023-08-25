@@ -25,7 +25,7 @@
                             <a href="{{ route('disposisi.print', $row->id) }}"
                                 class="btn btn-xs btn-default text-primary mx-1 shadow btn-cetak-tindakan"
                                 title="Cetak Disposisi">
-                                <i class="fa fa-lg fa-fw fa-file"></i>
+                                <i class="fa fa-lg fa-fw fa-print"></i>
                             </a>
                         @else
                             <button type="button" data-toggle="modal" data-target="#terimaModal"
@@ -67,6 +67,8 @@
                         $('.tanggal_masuk').html(data.data.tanggal_masuk);
                         $('.perihal').html(data.data.perihal);
                         $('.jenis').html(data.data.jenis);
+                        $('.catatan').html(data.data.catatan);
+                        $('.bidang').html(data.data.bidang);
                         $('.downloadFile').attr('href', '{{ Storage::url(':file') }}'.replace(
                             ':file', data.data.file))
                         $('.pdfViewerBtn').attr('data-url', '{{ Storage::url(':file') }}'

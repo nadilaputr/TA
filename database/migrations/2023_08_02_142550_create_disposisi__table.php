@@ -23,6 +23,7 @@ return new class extends Migration
             $table->foreign('id_surat')->references('id')->on('surat_masuk');
             $table->foreign('id_user')->references('id')->on('users');
             $table->foreign('id_bidang')->references('id')->on('bidang');
+            $table->timestamp('tanggal_penyelesaian')->useCurrent();
             $table->timestamps();
         });
     }
@@ -35,5 +36,9 @@ return new class extends Migration
     public function down()
     {
         Schema::dropIfExists('disposisi');
+
+        
     }
+
+    
 };

@@ -8,7 +8,7 @@
 
 @section('content')
     @if (Auth::check())
-        <h3 class="mt-3 mb-3">Selamat datang, {{ Auth::user()->name }}</h1>
+        <h3 class="mt-3">Selamat datang, {{ Auth::user()->name }}</h1>
     @endif
     
     <div class="row">
