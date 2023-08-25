@@ -23,7 +23,6 @@ return new class extends Migration
             $table->string('perihal');
             $table->string('file');
             $table->date('tanggal_surat');
-            $table->integer('catatan');
             $table->foreign('id_bidang')->references('id')->on('bidang');
             $table->timestamps();
         });

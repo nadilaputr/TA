@@ -39,7 +39,7 @@
 
                         <div class="form-group">
                             <label for="perihal">Perihal</label>
-                            <input id="perihal" type="date" class="form-control" name="perihal" disabled
+                            <input id="perihal" type="text" class="form-control" name="perihal" placeholder="Perihal Surat"
                                 value="{{ old('perihal') }}">
                             <div class="invalid-feedback"></div>
                         </div>
@@ -81,7 +81,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="bidang">Dari Bidang</label>
-                            <select class="form-control" name="bidang" required>
+                            <select class="form-control" name="id_bidang" required>
                                 <option value="" selected>Pilih Bidang</option>
                                 @foreach ($bidang as $row)
                                     <option value="{{ $row->id }}">{{ $row->bidang }}</option>

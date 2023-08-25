@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class SuratMasuk extends Model
 {
@@ -30,4 +31,5 @@ class SuratMasuk extends Model
     {
         return $this->hasOne(Disposisi::class, 'id_surat');
     }
+
 }

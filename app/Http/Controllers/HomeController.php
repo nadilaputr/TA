@@ -37,7 +37,8 @@ class HomeController extends Controller
 
         $suratMasuk = [];
         if (Auth::user()->hasRole('admin')) {
-            $suratMasuk = SuratMasuk::where('tindakan', '<>', TindakanSurat::TIDAK_TERUSKAN)->get();
+            $suratMasuk = SuratMasuk::where('tindakan', '<>', TindakanSurat::TIDAK_TERUSKAN)->where('tindakan', '<>', TindakanSurat::SELESAI)
+            ->get();
         }
 
         if (Auth::user()->hasRole('sekretaris')) {

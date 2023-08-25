@@ -68,3 +68,48 @@
 @include('suratkeluar.create')
 
 @stop
+@section('js')
+<script>
+    $('#createSubmitBtn').on('click', function(e) {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                const form = $('#createForm');
+                const formData = new FormData(form[0]);
+
+                $.ajax({
+                    url: form.attr('action'),
+                    type: form.attr('method'),
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        window.location.href = '{{ route('suratkeluar.index') }}';
+                    },
+                    error: function(xhr, status, error) {
+                        if (xhr.status === 422) {
+                            const errors = JSON.parse(xhr.responseText)
+
+                            // Clear previous error messages
+                            $('.invalid-feedback').empty();
+                            $('.is-invalid').removeClass('is-invalid');
+
+                            // Iterate through each error and display next to the input
+                            $.each(errors, function(field, messages) {
+                                const input = $('[name="' + field + '"]');
+                                const errorContainer = input.siblings(
+                                    '.invalid-feedback');
+                                errorContainer.text(messages[0]);
+                                input.addClass('is-invalid');
+                            });
+                        } else {
+                            alert('Terjadi kesalahan pada server!');
+                        }
+                    }
+                });
+            });
+</script>
+@stop

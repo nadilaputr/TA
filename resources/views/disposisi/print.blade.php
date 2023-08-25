@@ -61,16 +61,16 @@
                 </tr>
                 <tr>
                     <td class="font-bold text-left">Nomor Agenda</td>
-                    <td style="width: 25%;"></td>
+                    <td style="width: 25%;"> {{ $disposisi->surat_masuk->id }}</td>
 
                     <td class="font-bold text-left" style=" width: 25%;">Tkt. Keamanan</td>
                     <td style="width: 25%;"></td>
                 </tr>
                 <tr>
                     <td class="font-bold text-left">Tgl. Penerimaan</td>
-                    <td style="width: 25%;"></td>
+                    <td style="width: 25%;"> {{$dateFormat->from($disposisi->tanggal_disposisi)  }}</td>
 
-                    <td class="font-bold text-left" style=" width: 25%;">Tgl. Penerimaan</td>
+                    <td class="font-bold text-left" style=" width: 25%;">Tgl. Penyelesaian</td>
                     <td style="width: 25%;"></td>
                 </tr>
 

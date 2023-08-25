@@ -75,7 +75,7 @@ class SuratKeluarController extends Controller
             SuratKeluar::create($data);
             return response()->json(['message' => 'Surat Keluar berhasil ditambahkan'], 200);
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Gagal membuat Surat Keluar'], 500);
+            return response()->json(['error' => $e], 500);
         }
     }
 

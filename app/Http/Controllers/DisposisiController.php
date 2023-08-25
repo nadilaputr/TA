@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Disposisi;
 use App\Models\SuratMasuk;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Response;
 use Spatie\Browsershot\Browsershot;
+use Illuminate\Support\Facades\Validator;
 
 class DisposisiController extends Controller
 {
@@ -125,12 +126,16 @@ class DisposisiController extends Controller
         //
     }
 
-    public function print()
+    public function print($id)
     {
-        $suratMasuk = SuratMasuk::find(1);
+        $disposisi = Disposisi::with(['surat_masuk', 'bidang'])
+            ->whereHas('surat_masuk', function ($query) use ($id) {
+                $query->where('id', $id);
+            })
+            ->first();
 
         return view('disposisi.print', [
-            "suratMasuk" => $suratMasuk
+            "disposisi" => $disposisi
         ]);
     }
 }
