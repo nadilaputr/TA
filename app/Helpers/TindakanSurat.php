@@ -33,7 +33,7 @@ class TindakanSurat
             case self::DISPOSISI:
                 return "Disposisi";
             case self::SELESAI:
-                return "Arsip";
+                return "Selesai";
         }
     }
 

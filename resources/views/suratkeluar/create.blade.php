@@ -8,7 +8,7 @@
 
             <div class="card-body">
                 <b>
-                    <p class="text-lightblue">INFORMASI UMUM</p>
+                    <p class="text-lightblue">INFORMASI SURAT</p>
                 </b>
 
                 <div class="row">
@@ -46,20 +46,17 @@
                     </div>
                 </div>
 
-                <b>
-                    <p class="text-lightblue">INFORMASI TAMBAHAN</p>
-                </b>
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="lampiran">Lampiran</label>
                             <x-adminlte-select id="lampiran" name="lampiran" required>
                                 <option selected disabled>Pilih Lampiran</option>
-                                <option value="1">1 Lembar</option>
-                                <option value="2">2 Lembar</option>
-                                <option value="3">3 Lembar</option>
-                                <option value="4">4 Lembar</option>
-                                <option value="5">5 Lembar</option>
+                                <option value="1 Lampiran">1 Lampiran</option>
+                                <option value="2 Lampiran">2 Lampiran</option>
+                                <option value="3 Lampiran">3 Lampiran</option>
+                                <option value="4 Lampiran">4 Lampiran</option>
+                                <option value="5 Lampiran">5 Lampiran</option>
                             </x-adminlte-select>
                             <div class="invalid-feedback"></div>
                         </div>
@@ -70,9 +67,9 @@
                             <label for="sifat">Sifat</label>
                             <x-adminlte-select id="sifat" name="sifat" required>
                                 <option selected disabled>Pilih Sifat</option>
-                                <option value="biasa">Biasa</option>
-                                <option value="segera">Segera</option>
-                                <option value="sangat_segera">Sangat Segera</option>
+                                <option value="Biasa">Biasa</option>
+                                <option value="Segera">Segera</option>
+                                <option value="Sangat Segera">Sangat Segera</option>
                             </x-adminlte-select>
                             <div class="invalid-feedback"></div>
                         </div>
@@ -82,7 +79,7 @@
                         <div class="form-group">
                             <label for="bidang">Dari Bidang</label>
                             <select class="form-control" name="id_bidang" required>
-                                <option value="" selected>Pilih Bidang</option>
+                                <option selected disabled>Pilih Bidang</option>
                                 @foreach ($bidang as $row)
                                     <option value="{{ $row->id }}">{{ $row->bidang }}</option>
                                 @endforeach
@@ -110,7 +107,7 @@
             </div>
 
             <x-slot name="footerSlot">
-                <x-adminlte-button class="bg-danger text-white" label="Close" data-dismiss="modal" />
+                <x-adminlte-button class="btn-secondary" label="Close" data-dismiss="modal" />
                 <button type="button" class="btn btn-success" id="createSubmitBtn">Submit</button>
             </x-slot>
         </form>

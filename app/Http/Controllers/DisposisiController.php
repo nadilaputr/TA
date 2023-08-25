@@ -30,7 +30,7 @@ class DisposisiController extends Controller
             ['label' => 'Actions', 'no-export' => true, 'width' => 5, 'text-align' => 'center'],
         ];
 
-        if (auth()->user()->hasRole('Kepala Dinas')) {
+        if (auth()->user()->hasAnyRole(['kepaladinas', 'admin'])) {
             $disposisi = Disposisi::with(['surat_masuk', 'bidang'])->get();
         } else {
             $disposisi = Disposisi::with(['surat_masuk', 'bidang'])

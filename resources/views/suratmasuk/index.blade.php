@@ -6,6 +6,10 @@
 @section('plugins.DatatablesPlugin', true)
 @section('plugins.BsCustomFileInput', true)
 
+@php
+    $config['order'] = [];
+@endphp
+
 @section('content')
     <h3 class="mt-3">Surat Masuk</h3>
 
@@ -17,7 +21,7 @@
         </div>
     @endif
 
-    <x-adminlte-datatable id="table7" :heads="$heads" striped hoverable with-buttons>
+    <x-adminlte-datatable id="table7" :heads="$heads" :config="$config" striped hoverable with-buttons>
 
         @foreach ($surat as $row)
             <tr>

@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\SuratKeluar;
+use Carbon\Carbon;
 use App\Models\Bidang;
-use Illuminate\Support\Facades\Validator;
+use App\Models\SuratKeluar;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Validator;
 
 class SuratKeluarController extends Controller
 {
@@ -20,9 +22,12 @@ class SuratKeluarController extends Controller
         $heads = [
             'No',
             'Nomor Surat',
-            'Perihal',
+            'Dari Bidang',
+            'Sifat',
             'Alamat Tujuan',
-            'Status',
+            'Perihal',
+            'Tanggal Surat',
+            'Lampiran',
             ['label' => 'Actions', 'no-export' => true, 'width' => 5, 'text-align' => 'center'],
         ];
 
@@ -40,12 +45,7 @@ class SuratKeluarController extends Controller
         return view('suratkeluar.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -79,38 +79,64 @@ class SuratKeluarController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function show($id)
     {
-        //
+        $suratKeluar = SuratKeluar::findOrFail($id);
+        return response()->json([
+            'data' => $suratKeluar
+        ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function edit($id)
     {
-        //
+        $suratKeluar = SuratKeluar::findOrFail($id);
+
+        return response()->json([
+            'suratkeluar' => $suratKeluar,
+        ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'nomor_surat' => [
+                'required',
+                Rule::unique('surat_keluar')->ignore($id),
+            ],
+            'tanggal_surat' => 'required|date',
+            'alamat_surat' => 'required',
+            'perihal' => 'required',
+            'lampiran' => 'required',
+            'sifat' => 'required',
+            'id_bidang' => 'required',
+            'file' => 'nullable|mimes:jpg,jpeg,pdf,png',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->messages(), Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
+        $data = $request->except(['_token', '_method']);
+
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $fileName = 'updateSuratKeluar-' . time() . '.' . $file->getClientOriginalExtension();
+            $path = $file->storeAs('updateSuratKeluar', $fileName, 'public');
+            $data['file'] = $path;
+        }
+
+        $data['tanggal_surat'] = Carbon::createFromFormat('d-m-Y', Carbon::parse($request->tanggal_surat)->format('d-m-Y'));
+
+        try {
+            SuratKeluar::where('id', $id)->update($data);
+
+            return response()->json(['message' => 'Surat Keluar berhasil diubah'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Terjadi kesalahan saat mengubah Surat'], 500);
+        }
     }
 
     /**
@@ -121,6 +147,6 @@ class SuratKeluarController extends Controller
      */
     public function destroy($id)
     {
-        //
+        SuratKeluar::where('id', $id)->delete();
     }
 }
