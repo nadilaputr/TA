@@ -73,11 +73,11 @@
                 @foreach ($suratMasuk as $row)
                     <tr>
                         <td>{{ $row->id }}</td>
+                        <td>{{ $row->nomor_surat }}</td>
+                        <td>{{ $dateFormat->from($row->tanggal_masuk) }}</td>
                         <td>{{ $row->asal_surat }}</td>
                         <td>{{ $row->perihal }}</td>
-                        <td>{{ $row->tanggal_masuk }}</td>
-                        <td>{!! $tindakanSurat->toBadge($row->tindakan) !!}</td>
-                        <td>
+                        <td>{!! $tindakanSurat->toBadge($row->tindakan) !!}</td>                        <td>
                             @role('sekretaris')
                                 <button type="button" data-toggle="modal" data-target="#ajukanModal"
                                     data-id="{{ $row->id }}"

@@ -28,9 +28,10 @@ class HomeController extends Controller
     {
         $heads = [
             'No',
+            'Nomor Surat',
+            'Tanggal Diterima',
             'Asal Surat',
             'Perihal',
-            'Tanggal Diterima',
             'Tindakan',
             ['label' => 'Actions', 'no-export' => true, 'width' => 5, 'text-align' => 'center'],
         ];

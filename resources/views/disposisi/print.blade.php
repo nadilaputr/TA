@@ -6,7 +6,13 @@
     th,
     td {
         border: 2px solid black;
+
     }
+
+    td {
+        padding-left: 4px;
+    }
+
 </style>
 
 <head>
@@ -21,7 +27,7 @@
                 extend: {
                     spacing: {
                         'a4-width': '210mm',
-                        'a4-height': '120mm',
+                        'a4-height': '125mm',
                     },
                 },
             },
@@ -32,7 +38,7 @@
 </head>
 
 <body class="bg-gray-300">
-    <div class="font-serif py-4 px-10 bg-white mx-auto" style="width: 210mm; height: 120mm;">
+    <div class="font-serif py-4 px-10 bg-white mx-auto" style="width: 210mm; height: 125mm;">
         <header class="text-center flex justify-center">
             {{-- <div>
                 <img src="{{ asset('images/logo.png') }}" class="w-36" alt="Logo">
@@ -76,24 +82,29 @@
 
                 <tr>
                     <td colspan="2" class="font-bold text-left">Tanggal dari Nomor Surat</td>
-                    <td colspan="2"></td>
+                    <td colspan="2">{{ $disposisi->surat_masuk->tanggal_surat }}</td>
                 </tr>
                 <tr>
                     <td colspan="2" class="font-bold text-left">Dari</td>
-                    <td colspan="2"></td>
+                    <td colspan="2">{{  $disposisi->surat_masuk->asal_surat  }}</td>
                 </tr>
                 <tr>
                     <td colspan="2" class="font-bold text-left">Ringkasan Isi</td>
-                    <td colspan="2"></td>
+                    <td colspan="2">{{ $disposisi->surat_masuk->perihal }}</td>
                 </tr>
                 <tr>
-                    <td colspan="2" class="font-bold text-left" ">Lampiran</td>
-                    <td colspan="2"></td>
+                    <td colspan="2" class="font-bold text-left" >Lampiran</td>
+                    <td colspan="2">{{ $disposisi->surat_masuk->lampiran }}</td>
                 </tr>
                 <tr>
-                    <td  class="font-bold" style="height: 100px; vertical-align: top;">Disposisi :</td>
-                    <td colspan="2"class="font-bold" style="height: 100px; vertical-align: top;">Diteruskan Kepada :</td>
-                    <td class="font-bold" style="height: 100px; vertical-align: top;">Paraf :</td>
+                    <th  class="font-bold" style=" vertical-align: top;">Diteruskan Kepada :</th>
+                    <th colspan="2"class="font-bold" style=" vertical-align: top;">Disposisi :</th>
+                    <th class="font-bold" style=" vertical-align: top;">Paraf :</th>
+                </tr>
+                <tr>
+                    <td class="text-center" style="height: 100px; ">{{  $disposisi->bidang->bidang  }}</td>
+                    <td colspan="2" class="text-center" style="height: 100px;">{{ $disposisi->catatan }}</td>
+                    <td class="font-bold" style="height: 100px; vertical-align: top;"></td>
                 </tr>
             </table>
         </main>

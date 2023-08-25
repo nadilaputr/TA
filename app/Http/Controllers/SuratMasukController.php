@@ -171,6 +171,5 @@ class SuratMasukController extends Controller
         }
 
         $suratMasuk->delete();
-
     }
 }

@@ -21,7 +21,7 @@
                     <td>{!! $row->catatan !!}</td>
                     <td>{!! $tindakanSurat->toBadge($row->surat_masuk->tindakan) !!}</td>
                     <td>{!! $row->bidang->bidang !!}</td>
-                    <td class="d-flex">
+                    <td>
                         @if ($row->surat_masuk->tindakan == SELESAI)
                             <a href="{{ route('disposisi.print', $row->id) }}"
                                 class="btn btn-xs btn-default text-primary mx-1 shadow btn-cetak-tindakan"

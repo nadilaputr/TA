@@ -31,6 +31,10 @@
                 <td class="jenis"></td>
             </tr>
             <tr>
+                <td>Catatan</td>
+                <td class="catatan"></td>
+            </tr>
+            <tr>
                 <td>File</td>
                 <td class="d-flex">
                     <a target="_blank" class="btn btn-xs btn-default text-primary mx-1 shadow downloadFile"

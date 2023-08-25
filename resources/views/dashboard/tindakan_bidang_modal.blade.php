@@ -1,6 +1,6 @@
-<x-adminlte-modal id="bidangModal" title="Bidang" theme="navy" icon="fas fa-solid fa-file-medical"
-                  size='lg' v-centered scrollable>
-    <x-adminlte-card id="detailsurat" title="Detail Surat" theme="navy" icon="fas fa-lg fa-fan" collapsible>
+<x-adminlte-modal id="bidangModal" title="Bidang" theme="white" icon="fas fa-solid fa-file-medical" size='lg' v-centered
+    scrollable>
+    <x-adminlte-card id="detailsurat" title="Detail Surat" theme="lightblue" icon="fas fa-lg fa-fan">
         <table class="table table-sm">
             <tr>
                 <td>No</td>
@@ -33,13 +33,12 @@
             <tr>
                 <td>File</td>
                 <td class="d-flex">
-                    <a target="_blank"
+                    {{-- <a target="_blank"
                        class="btn btn-xs btn-default text-primary mx-1 shadow downloadFile" title="Lihat File">Download
                         <i class="fa fa-lg fa-fw fa-file"></i>
-                    </a>
-                    <button
-                        class="btn btn-xs btn-default text-primary mx-1 shadow pdfViewerBtn"
-                        title="Lihat File">Lihat PDF
+                    </a> --}}
+                    <button class="btn btn-xs btn-default text-primary mx-1 shadow pdfViewerBtn" title="Lihat File">Lihat
+                        PDF
                     </button>
                 </td>
             </tr>
@@ -59,15 +58,15 @@
             <form id="tindakanBidangForm" method="POST">
                 @csrf
 
-                <div class="form-group" id="catatanBidangContainer">
-                    <label>Catatan</label>
-                    <x-adminlte-textarea name="catatan" placeholder="Tambah catatan" id="catatanBidang" required/>
-                </div>
-
                 <div class="form-group">
                     <label>Bidang</label>
                     <select class="form-control bidang" name="id_bidang" id="bidang" required>
                     </select>
+                </div>
+
+                <div class="form-group" id="catatanBidangContainer">
+                    <label>Catatan</label>
+                    <x-adminlte-textarea name="catatan" placeholder="Tambah catatan" id="catatanBidang" required />
                 </div>
 
                 <x-slot name="footerSlot">
