@@ -16,7 +16,6 @@
                     <td>{{ $row->username }}</td>
                     <td>{{ $row->jabatan }}</td>
                     <td>{{ $row->bidang->bidang }}</td>
-                    <td>{{ strtoupper($row->getRoleNames()->first()) }}</td>
                     <td class="d-flex">
 
 

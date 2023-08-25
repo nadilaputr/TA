@@ -17,13 +17,34 @@
     <form action="{{ $register_url }}" method="post">
         @csrf
 
+        {{-- Name field --}}
+        <div class="input-group mb-3">
+            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
+                value="{{ old('name') }}" placeholder="{{ __('adminlte::adminlte.full_name') }}" autofocus>
+
+            <div class="input-group-append">
+                <div class="input-group-text">
+                    <span class="fas fa-user {{ config('adminlte.classes_auth_icon', '') }}"></span>
+                </div>
+            </div>
+
+            @error('name')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+        </div>
+
+
         {{-- bidang field --}}
         <div class="form-group">
             <select class="form-control" name="bidang" required>
                 <option value="" selected>Pilih Bidang</option>
                 @foreach ($bidang as $row)
-                    <option value="{{ $row->id }}">{{ $row->bidang }}</option>
-                @endforeach
+                <option value="{{ $row->id }}">
+                    {{ $row->bidang }}
+                </option>
+            @endforeach
 
             </select>
 
@@ -52,24 +73,7 @@
             @enderror
         </div>
 
-        {{-- Name field --}}
-        <div class="input-group mb-3">
-            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
-                value="{{ old('name') }}" placeholder="{{ __('adminlte::adminlte.full_name') }}" autofocus>
-
-            <div class="input-group-append">
-                <div class="input-group-text">
-                    <span class="fas fa-user {{ config('adminlte.classes_auth_icon', '') }}"></span>
-                </div>
-            </div>
-
-            @error('name')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-            @enderror
-        </div>
-
+        
         {{-- username field --}}
         <div class="input-group mb-3">
             <input type="username" name="username" class="form-control @error('username') is-invalid @enderror"

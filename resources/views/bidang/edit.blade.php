@@ -30,7 +30,7 @@
                 @method('PUT')
 
                 <div class="form-group">
-                    <label>Nama Bidang/label>
+                    <label>Nama Bidang</label>
                     <input type="text" class="form-control" name="namabidang" placeholder="Nama" required
                         value="{{ $bidang->namabidang }}">
                 </div>

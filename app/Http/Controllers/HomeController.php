@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Helpers\TindakanSurat;
 use Illuminate\Support\Facades\Auth;
 
+
 class HomeController extends Controller
 {
     /**
@@ -51,7 +52,7 @@ class HomeController extends Controller
         if (Auth::user()->hasRole('kepaladinas')) {
             $suratMasuk = SuratMasuk::where('tindakan', TindakanSurat::TINDAK_LANJUT)->get();
         }
-
+        
           $jumlahDisposisi = Disposisi::all();
           $jumlahSuratMasuk = SuratMasuk::all();
           $jumlahSuratKeluar = SuratKeluar::all();

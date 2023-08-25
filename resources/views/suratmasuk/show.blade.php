@@ -15,7 +15,7 @@
                     </tr>
                     <tr>
                         <td>Tanggal Diterima</td>
-                        <td class="tanggal_masuk"></td>
+                        <td>{{ $dateFormat->from($row->tanggal_masuk) }}</td>
                     </tr>
                 </table>
             </x-adminlte-card>
@@ -58,7 +58,7 @@
             </tr>
             <tr>
                 <td>Tanggal Surat</td>
-                <td class="tanggal_surat"></td>
+                <td>{{ $dateFormat->from($row->tanggal_surat) }}</td>
             </tr>
             <tr>
                 <td>Lampiran</td>
