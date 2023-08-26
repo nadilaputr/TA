@@ -101,7 +101,7 @@
                                     <i class="fa fa-lg fa-fw fa-pen"></i>
                                 </button>
                             @endrole
-                            @unlessrole('sekretaris|kepaladinas')
+                            @unlessrole('sekretaris|kepaladinas|admin')
                                 <button type="button" data-toggle="modal" data-target="#terimaModal"
                                     data-id="{{ $row->id }}"
                                     class="btn btn-xs btn-default text-primary mx-1 shadow btn-terima-tindakan"
