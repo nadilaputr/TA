@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Disposisi;
 use App\Models\SuratMasuk;
 use App\Models\SuratKeluar;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Helpers\TindakanSurat;
 use Illuminate\Support\Facades\Auth;
@@ -61,6 +62,7 @@ class HomeController extends Controller
         $jumlahDisposisi = Disposisi::all();
         $jumlahSuratMasuk = SuratMasuk::all();
         $jumlahSuratKeluar = SuratKeluar::all();
+        $jumlahUser = User::all();
 
         return view('dashboard.home', [
             "heads" => $heads,
@@ -68,6 +70,7 @@ class HomeController extends Controller
             "jumlahDisposisi" => count($jumlahDisposisi),
             "jumlahSuratMasuk" => count($jumlahSuratMasuk),
             "jumlahSuratKeluar" => count($jumlahSuratKeluar),
+            "jumlahUser" => count($jumlahUser)
         ]);
 
     }
