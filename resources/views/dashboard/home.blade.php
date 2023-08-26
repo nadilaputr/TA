@@ -6,6 +6,10 @@
 @section('plugins.DatatablesPlugin', true)
 @section('plugins.BsCustomFileInput', true)
 
+@php
+    $config['order'] = [];
+@endphp
+
 @section('content')
     @if (Auth::check())
         <h3 class="mt-3">Selamat datang, {{ Auth::user()->name }}</h1>
@@ -69,7 +73,8 @@
         </div>
 
         <div class="container-fluid mt-5">
-            <x-adminlte-datatable id="table7" :heads="$heads" head-theme="info" striped hoverable with-buttons>
+            <x-adminlte-datatable id="table7" :heads="$heads" :config="$config" head-theme="info" striped hoverable
+                with-buttons>
 
                 @foreach ($suratMasuk as $row)
                     <tr>
@@ -96,12 +101,14 @@
                                     <i class="fa fa-lg fa-fw fa-pen"></i>
                                 </button>
                             @endrole
-                            <button type="button" data-toggle="modal" data-target="#terimaModal"
-                                data-id="{{ $row->id }}"
-                                class="btn btn-xs btn-default text-primary mx-1 shadow btn-terima-tindakan"
-                                title="Terima Disposisi">
-                                <i class="fa fa-lg fa-fw fa-pen"></i>
-                            </button>
+                            @unlessrole('sekretaris|kepaladinas')
+                                <button type="button" data-toggle="modal" data-target="#terimaModal"
+                                    data-id="{{ $row->id }}"
+                                    class="btn btn-xs btn-default text-primary mx-1 shadow btn-terima-tindakan"
+                                    title="Terima Disposisi">
+                                    <i class="fa fa-lg fa-fw fa-pen"></i>
+                                </button>
+                            @endunlessrole
                         </td>
                     </tr>
                 @endforeach
@@ -136,9 +143,12 @@
             });
 
             $('.btn-terima-tindakan').on('click', function() {
-                suratId = $(this).data('id')
+                suratId = $(this).data('id');
+
                 $('.pdfContainer').hide();
+
                 const url = '{{ route('suratmasuk.show', ':suratId') }}'.replace(':suratId', suratId);
+
                 $.ajax({
                     type: 'GET',
                     url: url,
@@ -368,7 +378,7 @@
 
                         // Populate the select element with options
                         bidang.forEach(function(item) {
-                            if (item.id !== 2 && item.id !== 3) {
+                            if (item.id !== 1 && item.id !== 2 && item.id !== 3) {
                                 selectElement.append($('<option>', {
                                     value: item.id,
                                     text: item.bidang

@@ -43,21 +43,26 @@ class HomeController extends Controller
         $suratMasuk = [];
 
         if (Auth::user()->hasRole('admin')) {
-            $suratMasuk = SuratMasuk::where('tindakan', '<>', TindakanSurat::TIDAK_TERUSKAN)->where('tindakan', '<>', TindakanSurat::SELESAI)
+            $suratMasuk = SuratMasuk::where('tindakan', '<>', TindakanSurat::TIDAK_TERUSKAN)
+                ->where('tindakan', '<>', TindakanSurat::SELESAI)
+                ->orderBy('created_at', 'desc')
+                ->get();
+
+        } else if (Auth::user()->hasRole('sekretaris')) {
+            $suratMasuk = SuratMasuk::where('tindakan', TindakanSurat::TERUSKAN)
+                ->orderBy('created_at', 'desc')
+                ->get();
+        } else if (Auth::user()->hasRole('kepaladinas')) {
+            $suratMasuk = SuratMasuk::where('tindakan', TindakanSurat::TINDAK_LANJUT)
+                ->orderBy('created_at', 'desc')
+                ->get();
+        } else {
+            $suratMasuk = SuratMasuk::whereHas("disposisi", function ($query) {
+                $query->where('id_bidang', auth()->user()->id_bidang);
+            })->where('tindakan', TindakanSurat::DISPOSISI)
+                ->orderBy('created_at', 'desc')
                 ->get();
         }
-
-        if (Auth::user()->hasRole('sekretaris')) {
-            $suratMasuk = SuratMasuk::where('tindakan', TindakanSurat::TERUSKAN)->get();
-        }
-
-        if (Auth::user()->hasRole('kepaladinas')) {
-            $suratMasuk = SuratMasuk::where('tindakan', TindakanSurat::TINDAK_LANJUT)->get();
-        }
-
-        $suratMasuk = SuratMasuk::whereHas("disposisi", function ($query) {
-            $query->where('id_bidang', auth()->user()->id_bidang);
-        })->where('tindakan', TindakanSurat::DISPOSISI)->get();
 
         $jumlahDisposisi = Disposisi::all();
         $jumlahSuratMasuk = SuratMasuk::all();

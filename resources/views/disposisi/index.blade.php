@@ -6,12 +6,16 @@
 @section('plugins.DatatablesPlugin', true)
 @section('plugins.BsCustomFileInput', true)
 
+@php
+    $config['order'] = [];
+@endphp
+
 @section('content')
 
     <h1>Disposisi</h1>
 
     <div class="container-fluid mt-5">
-        <x-adminlte-datatable id="table5" :heads="$heads" striped hoverable with-buttons>
+        <x-adminlte-datatable id="table5" :heads="$heads" :config="$config" striped hoverable with-buttons>
             @foreach ($disposisi as $row)
                 <tr>
                     <td>{!! $row->id !!}</td>

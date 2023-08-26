@@ -13,11 +13,6 @@ use Illuminate\Support\Facades\Validator;
 
 class DisposisiController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $heads = [
@@ -36,13 +31,14 @@ class DisposisiController extends Controller
             $disposisi = Disposisi::with(['surat_masuk', 'bidang'])
                 ->whereHas('surat_masuk', function ($query) {
                     $query->where('tindakan', TindakanSurat::SELESAI);
-                })->get();
+                })->orderBy('created_at', 'desc')->get();
         } else {
             $disposisi = Disposisi::with(['surat_masuk', 'bidang'])
                 ->whereHas('bidang', function ($query) {
                     $bidang = auth()->user()->id_bidang;
                     $query->where('id', $bidang);
                 })
+                ->orderBy('created_at', 'desc')
                 ->get();
         }
 
