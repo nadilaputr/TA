@@ -9,7 +9,7 @@
                 @method('PUT')
 
                 <b>
-                    <p class="text-primary">INFORMASI UMUM</p>
+                    <p class="text-lightblue">INFORMASI UMUM</p>
                 </b>
                 <div class="row">
                     <div class="col-md-6">
@@ -54,22 +54,20 @@
                 </div>
 
                 <b>
-                    <p class="text-primary">INFORMASI TAMBAHAN</p>
+                    <p class="text-lightblue">INFORMASI TAMBAHAN</p>
                 </b>
 
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
-                            <label>Jenis Surat</label>
-                            <x-adminlte-select id="editJenis" name="jenis">
-                                <option value="Asli">Asli</option>
-                                <option value="Tembusan">Tembusan</option>
-                            </x-adminlte-select>
+                            <label for="editJenis">Jenis Surat</label>
+                            <input id="editJenis" type="text" name="jenis" class="form-control"
+                                placeholder="Jenis Surat">
                             <div class="invalid-feedback"></div>
                         </div>
                     </div>
 
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label>Lampiran</label>
                                 <x-adminlte-select id="editLampiran" name="lampiran">
@@ -84,7 +82,7 @@
                             </div>
                         </div>
                    
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label>Sifat</label>
                             <x-adminlte-select id="editSifat" name="sifat">
@@ -95,10 +93,22 @@
                             <div class="invalid-feedback"></div>
                         </div>
                     </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Tkt. Keamanan</label>
+                            <x-adminlte-select id="editTingkatKeamanan" name="tingkat_keamanan">
+                                <option value="Biasa">Biasa</option>
+                                <option value="Segera">Segera</option>
+                                <option value="Sangat Segera">Sangat Segera</option>
+                            </x-adminlte-select>
+                            <div class="invalid-feedback"></div>
+                        </div>
+                    </div>
                     </div>
 
                     <b>
-                        <p class="text-primary">UPLOAD FILE</p>
+                        <p class="text-lightblue">UPLOAD FILE</p>
                     </b>
                     <div class="form-group">
                         <label>File</label>

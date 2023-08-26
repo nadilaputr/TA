@@ -57,18 +57,15 @@
                     <p class="text-lightblue">INFORMASI TAMBAHAN</p>
                 </b>
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="jenis">Jenis Surat</label>
-                            <x-adminlte-select id="jenis" name="jenis" required>
-                                <option selected disabled>Pilih Jenis Surat</option>
-                                <option value="Asli">Asli</option>
-                                <option value="Tembusan">Tembusan</option>
-                            </x-adminlte-select>
+                            <input id="jenis" type="text" name="jenis" class="form-control"
+                                placeholder="Jenis Surat" required>
                             <div class="invalid-feedback"></div>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="lampiran">Lampiran</label>
                             <x-adminlte-select id="lampiran" name="lampiran" required>
@@ -83,7 +80,7 @@
                         </div>
                     </div>
                     
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="sifat">Sifat</label>
                             <x-adminlte-select id="sifat" name="sifat" required>
@@ -91,6 +88,18 @@
                                 <option value="Biasa">Biasa</option>
                                 <option value="Segera">Segera</option>
                                 <option value="Sangat Segera">Sangat Segera</option>
+                            </x-adminlte-select>
+                            <div class="invalid-feedback"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="tingkat_keamanan">Tkt. Keamanan</label>
+                            <x-adminlte-select id="tingkat_keamanan" name="tingkat_keamanan" required>
+                                <option selected disabled>Pilih Tingkat Keamanan</option>
+                                <option value="Biasa">Biasa</option>
+                                <option value="Rahasia">Rahasia</option>
+                                <option value="Sangat Rahasia">Sangat Rahasia</option>
                             </x-adminlte-select>
                             <div class="invalid-feedback"></div>
                         </div>
@@ -115,7 +124,7 @@
             </div>
 
             <x-slot name="footerSlot">
-                <x-adminlte-button class="btn-secondary" label="Close" data-dismiss="modal" />
+                <x-adminlte-button class="bg-danger text-white" label="Close" data-dismiss="modal" />
                 <button type="button" class="btn btn-success" id="createSubmitBtn">Submit</button>
             </x-slot>
         </form>

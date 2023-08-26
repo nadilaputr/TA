@@ -60,6 +60,7 @@ class SuratMasukController extends Controller
             'lampiran' => 'required',
             'jenis' => 'required',
             'sifat' => 'required',
+            'tingkat_keamanan' => 'required',
             'file' => 'required|mimes:jpg,jpeg,pdf,png',
         ]);
 
@@ -134,6 +135,7 @@ class SuratMasukController extends Controller
             'lampiran' => 'required',
             'sifat' => 'required',
             'jenis' => 'required',
+            'tingkat_keamanan' => 'required',
             'file' => 'nullable|mimes:jpg,jpeg,pdf',
 
         ]);

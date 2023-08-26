@@ -69,7 +69,7 @@
                     <td style="width: 25%;"> {{ $disposisi->surat_masuk->id }}</td>
 
                     <td class="font-bold text-left" style=" width: 25%;">Tkt. Keamanan</td>
-                    <td style="width: 25%;">{{ $disposisi->surat_masuk->jenis }}</td>
+                    <td style="width: 25%;">{{ $disposisi->surat_masuk->tingkat_keamanan }}</td>
                 </tr>
                 <tr>
                     <td class="font-bold text-left">Tgl. Penerimaan</td>

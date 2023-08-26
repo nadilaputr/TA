@@ -73,7 +73,7 @@
                             <div class="invalid-feedback"></div>
                         </div>
                     </div>
-4
+
                     <div class="col-md-4">
                         <div class="form-group">
                             <label>Dari Bidang</label>

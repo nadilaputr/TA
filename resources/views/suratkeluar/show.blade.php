@@ -1,4 +1,4 @@
-{{-- Modal Detail Surat Masuk --}}
+{{-- Modal Detail Surat Keluar --}}
 <x-adminlte-modal id="modalPurple" title="DETAIL" theme="white" icon="fa fa-md fa-fw fa-info-circle " size='lg'
     disable-animations v-centered scrollable>
 
@@ -7,7 +7,7 @@
             <x-adminlte-card id="detailsurat" title="INFORMASI TAMBAHAN" theme="light">
                 <table class="table table-sm table-hover">
                     <tr>
-                        <td>Tkt. Keamanan</td>
+                        <td>Dari Bidang</td>
                         <td class="tingkat_keamanan"></td>
                     </tr>
                     <tr>
@@ -15,31 +15,8 @@
                         <td class="sifat"></td>
                     </tr>
                     <tr>
-                        <td style="width: 40%;">Jenis</td>
-                        <td class="jenis"></td>
-                    </tr>
-                    <tr>
                         <td>Lampiran</td>
                         <td class="lampiran"></td>
-                    </tr>
-                </table>
-            </x-adminlte-card>
-        </div>
-
-        <div class="col-md-6">
-            <x-adminlte-card id="detailsurat" title="INFORMASI TINDAKAN" theme="warning">
-                <table class="table table-sm table-hover">
-                    <tr>
-                        <td style="width: 40%;">Catatan</td>
-                        <td class="catatan"></td>
-                    </tr>
-                    <tr>
-                        <td style="width: 40%;">Tindakan</td>
-                        <td class="tindakan"></td>
-                    </tr>
-                    <tr>
-                        <td>Tanggal Diterima</td>
-                        <td class="tanggal_masuk"></td>
                     </tr>
                 </table>
             </x-adminlte-card>
@@ -57,8 +34,8 @@
                 <td class="nomor_surat"></td>
             </tr>
             <tr>
-                <td>Asal Surat</td>
-                <td class="asal_surat"></td>
+                <td>Alamat Surat</td>
+                <td class="alamat_surat"></td>
             </tr>
             <tr>
                 <td>Perihal Surat</td>

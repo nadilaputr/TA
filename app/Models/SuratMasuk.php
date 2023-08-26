@@ -23,6 +23,7 @@ class SuratMasuk extends Model
         'status',
         'jenis',
         'sifat',
+        'tingkat_keamanan',
         'tindakan',
         'file',
     ];

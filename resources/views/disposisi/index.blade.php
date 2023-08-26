@@ -7,6 +7,7 @@
 @section('plugins.BsCustomFileInput', true)
 
 @section('content')
+
     <h1>Disposisi</h1>
 
     <div class="container-fluid mt-5">
@@ -23,7 +24,7 @@
                     <td>
                         @if ($row->surat_masuk->tindakan == SELESAI)
                             <a href="{{ route('disposisi.print', $row->id) }}"
-                                class="btn btn-xs btn-default text-primary mx-1 shadow btn-cetak-tindakan"
+                                class="btn btn-xs btn-default text-secondary mx-1 shadow btn-cetak-tindakan"
                                 title="Cetak Disposisi">
                                 <i class="fa fa-lg fa-fw fa-print"></i>
                             </a>

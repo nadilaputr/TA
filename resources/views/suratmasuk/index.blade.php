@@ -53,6 +53,15 @@
                             <i class="fa fa-lg fa-fw fa-trash"></i>
                         </button>
                     @else
+                        <button type="button" data-toggle="modal" data-target="#editModal" data-id="{{ $row->id }}"
+                            class="btn btn-xs btn-default text-primary mx-1 shadow btn-edit" title="Edit">
+                            <i class="fa fa-lg fa-fw fa-pen"></i>
+                        </button>
+                        <button type="button" data-toggle="modal" data-target="#editTindakanModal"
+                            data-id="{{ $row->id }}"
+                            class="btn btn-xs btn-default btn-edit-tindakan text-success mx-1 shadow" title="Edit Tindakan">
+                            <i class="fa fa-lg fa-fw fa-share-square"></i>
+                        </button>
                         <button type="button" class="btn btn-xs btn-default text-success mx-1 shadow btn-detail"
                             title="Detail" data-toggle="modal" data-target="#modalPurple" data-id="{{ $row->id }}">
                             <i class="fa fa-lg fa-fw fa-info-circle"></i>
@@ -61,16 +70,6 @@
                             data-id="{{ $row->id }}" class="btn btn-xs btn-default text-danger mx-1 shadow btn-delete"
                             title="Delete">
                             <i class="fa fa-lg fa-fw fa-trash"></i>
-                        </button>
-                        <button type="button" data-toggle="modal" data-target="#editModal" data-id="{{ $row->id }}"
-                            class="btn btn-xs btn-default text-primary mx-1 shadow btn-edit" title="Edit">
-                            <i class="fa fa-lg fa-fw fa-pen"></i>
-                        </button>
-
-                        <button type="button" data-toggle="modal" data-target="#editTindakanModal"
-                            data-id="{{ $row->id }}"
-                            class="btn btn-xs btn-default btn-edit-tindakan text-success mx-1 shadow" title="Edit Tindakan">
-                            <i class="fa fa-lg fa-fw fa-share-square"></i>
                         </button>
                     @endif
                 </td>
@@ -322,6 +321,7 @@
                     $('.lampiran').html(data.data.lampiran);
                     $('.jenis').html(data.data.jenis);
                     $('.catatan').html(data.data.catatan);
+                    $('.tingkat_keamanan').html(data.data.tingkat_keamanan);
                     $('.pdfViewerBtn').attr('data-url', '{{ Storage::url(':file') }}'
                         .replace(':file', data.data.file))
                 })

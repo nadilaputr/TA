@@ -12,8 +12,9 @@
 
 @section('content')
     <h3 class="mt-3">Surat Keluar</h3>
-
-    <button class="btn btn-info btn-create mb-3" data-toggle="modal" data-target="#createModalKeluar">Tambah</button>
+    @role('admin')
+        <button class="btn btn-info btn-create mb-3" data-toggle="modal" data-target="#createModalKeluar">Tambah</button>
+    @endrole
 
     @if ($message = Session::get('massage'))
         <div class="alert alert-success">
@@ -35,35 +36,36 @@
                 <td>{{ $row->lampiran }}</td>
 
                 {{-- <td>{!! $tindakanSurat->toBadge($row->tindakan) !!}</td> --}}
-                <form action="{{ route('suratmasuk.destroy', $row->id) }}" method="POST">
-                    <td class="d-flex">
-                        {{-- @csrf --}}
-                        {{-- @method('DELETE') --}}
+                <td class="d-flex">
+                    {{-- @csrf --}}
+                    {{-- @method('DELETE') --}}
 
-                        <button type="button" data-toggle="modal" data-target="#editModal" data-id="{{ $row->id }}"
-                            class="btn btn-xs btn-default text-primary mx-1 shadow btn-edit" title="Edit">
-                            <i class="fa fa-lg fa-fw fa-pen"></i>
-                        </button>
-
-                        <a href="{{ Storage::url($row->file) }}" target="_blank"
-                            class="btn btn-xs btn-default text-secondary mx-1 shadow" title="Lihat File">
-                            <i class="fa fa-lg fa-fw fas fa-print"></i>
-                        </a>
-
-                        <button type="button" data-toggle="modal" data-target="#deleteModalSuratKeluar"
-                            data-id="{{ $row->id }}" class="btn btn-xs btn-default text-danger mx-1 shadow btn-delete"
-                            title="Delete">
-                            <i class="fa fa-lg fa-fw fa-trash"></i>
-                        </button>
-
-                    </td>
-                </form>
+                    <button type="button" class="btn btn-xs btn-default text-success mx-1 shadow btn-detail" title="Detail"
+                        data-toggle="modal" data-target="#modalPurple" data-id="{{ $row->id }}">
+                        <i class="fa fa-lg fa-fw fa-info-circle"></i>
+                    </button>
+                    <a href="{{ Storage::url($row->file) }}" target="_blank"
+                        class="btn btn-xs btn-default text-secondary mx-1 shadow" title="Lihat File">
+                        <i class="fa fa-lg fa-fw fas fa-print"></i>
+                    </a>
+                    @role('admin')
+                    <button type="button" data-toggle="modal" data-target="#editModal" data-id="{{ $row->id }}"
+                        class="btn btn-xs btn-default text-primary mx-1 shadow btn-edit" title="Edit">
+                        <i class="fa fa-lg fa-fw fa-pen"></i>
+                    </button>
+                    <button type="button" data-toggle="modal" data-target="#deleteModalSuratKeluar"
+                        data-id="{{ $row->id }}" class="btn btn-xs btn-default text-danger mx-1 shadow btn-delete"
+                        title="Delete">
+                        <i class="fa fa-lg fa-fw fa-trash"></i>
+                    </button>
+                    @endrole
             </tr>
         @endforeach
     </x-adminlte-datatable>
     @include('suratkeluar.create')
     @include('suratkeluar.delete')
     @include('suratkeluar.edit')
+    @include('suratkeluar.show')
 
 
 @stop
@@ -145,7 +147,8 @@
             $('.btn-edit').click(function(e) {
                 suratkeluarId = $(this).data('id');
 
-                const url = '{{ route('suratkeluar.edit', ':suratkeluarId') }}'.replace(':suratkeluarId', suratkeluarId);
+                const url = '{{ route('suratkeluar.edit', ':suratkeluarId') }}'.replace(':suratkeluarId',
+                    suratkeluarId);
 
                 $.ajax({
                     url: url,
@@ -175,7 +178,8 @@
                 const form = $('#editForm');
                 const formData = new FormData(form[0]);
 
-                const url = '{{ route('suratkeluar.update', ':suratkeluarId') }}'.replace(':suratkeluarId', suratkeluarId);
+                const url = '{{ route('suratkeluar.update', ':suratkeluarId') }}'.replace(':suratkeluarId',
+                    suratkeluarId);
 
                 $.ajax({
                     url: url,
@@ -207,6 +211,25 @@
                         }
                     }
                 });
+            });
+
+            $('.btn-detail').on('click', function(event) {
+
+                $('.pdfContainer').hide();
+
+                var id = $(this).data('id');
+
+                $.get(`suratkeluar/${id}`, function(data) {
+                    $('.id').html(data.data.id);
+                    $('.nomor_surat').html(data.data.nomor_surat);
+                    $('.tanggal_surat').html(data.data.tanggal_surat);
+                    $('.alamat_surat').html(data.data.alamat_surat);
+                    $('.perihal').html(data.data.perihal);
+                    $('.sifat').html(data.data.sifat);
+                    $('.lampiran').html(data.data.lampiran);
+                    $('.pdfViewerBtn').attr('data-url', '{{ Storage::url(':file') }}'
+                        .replace(':file', data.data.file))
+                })
             });
 
         });

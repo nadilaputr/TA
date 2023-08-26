@@ -32,7 +32,7 @@ class DisposisiController extends Controller
             ['label' => 'Actions', 'no-export' => true, 'width' => 5, 'text-align' => 'center'],
         ];
 
-        if (auth()->user()->hasAnyRole(['kepaladinas', 'admin'])) {
+        if (auth()->user()->hasAnyRole(['kepaladinas', 'admin', 'sekretaris'])) {
             $disposisi = Disposisi::with(['surat_masuk', 'bidang'])
                 ->whereHas('surat_masuk', function ($query) {
                     $query->where('tindakan', TindakanSurat::SELESAI);
@@ -150,31 +150,31 @@ class DisposisiController extends Controller
 
         return view('disposisi.print', [
             "disposisi" => $disposisi,
-            "paraf" => $paraf, 
+            "paraf" => $paraf,
         ]);
     }
 
     public function selesaiDisposisi($id)
-{
-    // Cari disposisi berdasarkan $id
-    $disposisi = Disposisi::find($id);
+    {
+        // Cari disposisi berdasarkan $id
+        $disposisi = Disposisi::find($id);
 
-    if (!$disposisi) {
-        return abort(404); // Tindakan jika disposisi tidak ditemukan
+        if (!$disposisi) {
+            return abort(404); // Tindakan jika disposisi tidak ditemukan
+        }
+
+        // Tandai disposisi sebagai selesai
+        $disposisi->status = TindakanSurat::SELESAI;
+
+        // Atur tanggal penyelesaian ke waktu saat ini
+        $disposisi->tanggal_penyelesaian = Carbon::now();
+
+        // Simpan perubahan
+        $disposisi->save();
+
+        // Lanjutkan dengan tindakan lain yang sesuai
+        // ...
+
+        return redirect()->back()->with('success', 'Disposisi telah ditandai sebagai selesai.');
     }
-
-    // Tandai disposisi sebagai selesai
-    $disposisi->status = TindakanSurat::SELESAI;
-
-    // Atur tanggal penyelesaian ke waktu saat ini
-    $disposisi->tanggal_penyelesaian = Carbon::now();
-
-    // Simpan perubahan
-    $disposisi->save();
-
-    // Lanjutkan dengan tindakan lain yang sesuai
-    // ...
-
-    return redirect()->back()->with('success', 'Disposisi telah ditandai sebagai selesai.');
-}
 }

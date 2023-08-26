@@ -243,6 +243,7 @@
                         $('.perihal').html(data.data.perihal);
                         $('.jenis').html(data.data.jenis);
                         $('.sifat').html(data.data.sifat);
+                        $('.tingkat_keamanan').html(data.data.tingkat_keamanan);
                         $('.downloadFile').attr('href', '{{ Storage::url(':file') }}'.replace(
                             ':file', data.data.file))
                         $('.pdfViewerBtn').attr('data-url', '{{ Storage::url(':file') }}'
@@ -266,8 +267,11 @@
                         $('.nomor_surat').html(data.data.nomor_surat);
                         $('.tanggal_surat').html(data.data.tanggal_surat);
                         $('.asal_surat').html(data.data.asal_surat);
-                        $('.tanggal_masuk').html(data.data.tanggal_masuk);
+                        $('.tingkat_keamanan').html(data.data.tingkat_keamanan);
+                        $('.sifat').html(data.data.sifat);
+                        $('.lampiran').html(data.data.lampiran);
                         $('.perihal').html(data.data.perihal);
+                        $('.tanggal_masuk').html(data.data.tanggal_masuk);
                         $('.jenis').html(data.data.jenis);
                         $('.downloadFile').attr('href', '{{ Storage::url(':file') }}'.replace(
                             ':file', data.data.file))
