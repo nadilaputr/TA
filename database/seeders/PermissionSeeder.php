@@ -60,7 +60,7 @@ class PermissionSeeder extends Seeder
             'password' => Hash::make('password'),
             'username' => 'admin',
             'id_bidang' => 1,
-            'jabatan' => 'Tata Usaha',
+            'jabatan' => 'Staff',
         ]);
         $user->assignRole($adminRole);
         

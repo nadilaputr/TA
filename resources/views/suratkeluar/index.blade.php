@@ -40,10 +40,10 @@
                     {{-- @csrf --}}
                     {{-- @method('DELETE') --}}
 
-                    <button type="button" class="btn btn-xs btn-default text-success mx-1 shadow btn-detail" title="Detail"
+                    {{-- <button type="button" class="btn btn-xs btn-default text-success mx-1 shadow btn-detail" title="Detail"
                         data-toggle="modal" data-target="#modalPurple" data-id="{{ $row->id }}">
                         <i class="fa fa-lg fa-fw fa-info-circle"></i>
-                    </button>
+                    </button> --}}
                     <a href="{{ Storage::url($row->file) }}" target="_blank"
                         class="btn btn-xs btn-default text-secondary mx-1 shadow" title="Lihat File">
                         <i class="fa fa-lg fa-fw fas fa-print"></i>
@@ -65,7 +65,7 @@
     @include('suratkeluar.create')
     @include('suratkeluar.delete')
     @include('suratkeluar.edit')
-    @include('suratkeluar.show')
+    {{-- @include('suratkeluar.show') --}}
 
 
 @stop
@@ -213,24 +213,24 @@
                 });
             });
 
-            $('.btn-detail').on('click', function(event) {
+            // $('.btn-detail').on('click', function(event) {
 
-                $('.pdfContainer').hide();
+            //     $('.pdfContainer').hide();
 
-                var id = $(this).data('id');
+            //     var id = $(this).data('id');
 
-                $.get(`suratkeluar/${id}`, function(data) {
-                    $('.id').html(data.data.id);
-                    $('.nomor_surat').html(data.data.nomor_surat);
-                    $('.tanggal_surat').html(data.data.tanggal_surat);
-                    $('.alamat_surat').html(data.data.alamat_surat);
-                    $('.perihal').html(data.data.perihal);
-                    $('.sifat').html(data.data.sifat);
-                    $('.lampiran').html(data.data.lampiran);
-                    $('.pdfViewerBtn').attr('data-url', '{{ Storage::url(':file') }}'
-                        .replace(':file', data.data.file))
-                })
-            });
+            //     $.get(`suratkeluar/${id}`, function(data) {
+            //         $('.id').html(data.data.id);
+            //         $('.nomor_surat').html(data.data.nomor_surat);
+            //         $('.tanggal_surat').html(data.data.tanggal_surat);
+            //         $('.alamat_surat').html(data.data.alamat_surat);
+            //         $('.perihal').html(data.data.perihal);
+            //         $('.sifat').html(data.data.sifat);
+            //         $('.lampiran').html(data.data.lampiran);
+            //         $('.pdfViewerBtn').attr('data-url', '{{ Storage::url(':file') }}'
+            //             .replace(':file', data.data.file))
+            //     })
+            // });
 
         });
     </script>

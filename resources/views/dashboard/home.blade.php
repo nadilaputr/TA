@@ -63,7 +63,7 @@
             <div class="small-box bg-danger">
                 <div class="inner">
                     <h3>{{ $jumlahUser }}</h3>
-                    <p>Unique Visitors</p>
+                    <p>Data Operator</p>
                 </div>
                 <div class="icon">
                     <i class="ion ion-pie-graph"></i>
