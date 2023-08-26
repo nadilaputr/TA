@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\TindakanSurat;
+use App\Models\Disposisi;
 use App\Models\SuratMasuk;
+use App\Models\SuratKeluar;
 use Illuminate\Http\Request;
+use App\Helpers\TindakanSurat;
 use Illuminate\Support\Facades\Auth;
+
 
 class HomeController extends Controller
 {
@@ -28,16 +31,18 @@ class HomeController extends Controller
     {
         $heads = [
             'No',
+            'Nomor Surat',
+            'Tanggal Diterima',
             'Asal Surat',
             'Perihal',
-            'Tanggal Diterima',
             'Tindakan',
             ['label' => 'Actions', 'no-export' => true, 'width' => 5, 'text-align' => 'center'],
         ];
 
         $suratMasuk = [];
         if (Auth::user()->hasRole('admin')) {
-            $suratMasuk = SuratMasuk::where('tindakan', '<>', TindakanSurat::TIDAK_TERUSKAN)->get();
+            $suratMasuk = SuratMasuk::where('tindakan', '<>', TindakanSurat::TIDAK_TERUSKAN)->where('tindakan', '<>', TindakanSurat::SELESAI)
+            ->get();
         }
 
         if (Auth::user()->hasRole('sekretaris')) {
@@ -47,12 +52,19 @@ class HomeController extends Controller
         if (Auth::user()->hasRole('kepaladinas')) {
             $suratMasuk = SuratMasuk::where('tindakan', TindakanSurat::TINDAK_LANJUT)->get();
         }
+        
+          $jumlahDisposisi = Disposisi::all();
+          $jumlahSuratMasuk = SuratMasuk::all();
+          $jumlahSuratKeluar = SuratKeluar::all();
 
         return view('dashboard.home', [
             "heads" => $heads,
-            "suratMasuk" => $suratMasuk
+            "suratMasuk" => $suratMasuk,
+            "jumlahDisposisi" => count($jumlahDisposisi),
+            "jumlahSuratMasuk" => count($jumlahSuratMasuk),
+            "jumlahSuratKeluar" => count($jumlahSuratKeluar),
         ]);
-
+  
     }
 
     public function show($id)

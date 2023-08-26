@@ -6,6 +6,10 @@
 @section('plugins.DatatablesPlugin', true)
 @section('plugins.BsCustomFileInput', true)
 
+@php
+    $config['order'] = [];
+@endphp
+
 @section('content')
     <h3 class="mt-3">Surat Masuk</h3>
 
@@ -17,13 +21,13 @@
         </div>
     @endif
 
-    <x-adminlte-datatable id="table7" :heads="$heads" striped hoverable with-buttons>
+    <x-adminlte-datatable id="table7" :heads="$heads" :config="$config" striped hoverable with-buttons>
 
         @foreach ($surat as $row)
             <tr>
                 <td>{{ $row->id }}</td>
                 <td>{{ $row->nomor_surat }}</td>
-                <td>{{ $row->tanggal_masuk }}</td>
+                <td>{{ $dateFormat->from($row->tanggal_masuk) }}</td>
                 {{-- <td>{{ $row->tanggal_surat }}</td> --}}
                 <td>{{ $row->asal_surat }}</td>
                 <td>{{ $row->perihal }}</td>
@@ -39,12 +43,25 @@
                             title="Detail" data-toggle="modal" data-target="#modalPurple" data-id="{{ $row->id }}">
                             <i class="fa fa-lg fa-fw fa-info-circle"></i>
                         </button>
+                        {{-- <a href="{{ route('disposisi.print', $row->id) }}" target="_blank"
+                            class="btn btn-xs btn-default text-primary mx-1 shadow downloadFile" title="Cetak Disposisi">
+                            <i class="fa fa-lg fa-fw fa-print"></i>
+                        </a> --}}
                         <button type="button" data-toggle="modal" data-target="#deleteModalSuratMasuk"
                             data-id="{{ $row->id }}" class="btn btn-xs btn-default text-danger mx-1 shadow btn-delete"
                             title="Delete">
                             <i class="fa fa-lg fa-fw fa-trash"></i>
                         </button>
                     @else
+                        <button type="button" data-toggle="modal" data-target="#editModal" data-id="{{ $row->id }}"
+                            class="btn btn-xs btn-default text-primary mx-1 shadow btn-edit" title="Edit">
+                            <i class="fa fa-lg fa-fw fa-pen"></i>
+                        </button>
+                        <button type="button" data-toggle="modal" data-target="#editTindakanModal"
+                            data-id="{{ $row->id }}"
+                            class="btn btn-xs btn-default btn-edit-tindakan text-success mx-1 shadow" title="Edit Tindakan">
+                            <i class="fa fa-lg fa-fw fa-share-square"></i>
+                        </button>
                         <button type="button" class="btn btn-xs btn-default text-success mx-1 shadow btn-detail"
                             title="Detail" data-toggle="modal" data-target="#modalPurple" data-id="{{ $row->id }}">
                             <i class="fa fa-lg fa-fw fa-info-circle"></i>
@@ -53,16 +70,6 @@
                             data-id="{{ $row->id }}" class="btn btn-xs btn-default text-danger mx-1 shadow btn-delete"
                             title="Delete">
                             <i class="fa fa-lg fa-fw fa-trash"></i>
-                        </button>
-                        <button type="button" data-toggle="modal" data-target="#editModal" data-id="{{ $row->id }}"
-                            class="btn btn-xs btn-default text-primary mx-1 shadow btn-edit" title="Edit">
-                            <i class="fa fa-lg fa-fw fa-pen"></i>
-                        </button>
-
-                        <button type="button" data-toggle="modal" data-target="#editTindakanModal"
-                            data-id="{{ $row->id }}"
-                            class="btn btn-xs btn-default btn-edit-tindakan text-success mx-1 shadow" title="Edit Tindakan">
-                            <i class="fa fa-lg fa-fw fa-share-square"></i>
                         </button>
                     @endif
                 </td>
@@ -314,6 +321,7 @@
                     $('.lampiran').html(data.data.lampiran);
                     $('.jenis').html(data.data.jenis);
                     $('.catatan').html(data.data.catatan);
+                    $('.tingkat_keamanan').html(data.data.tingkat_keamanan);
                     $('.pdfViewerBtn').attr('data-url', '{{ Storage::url(':file') }}'
                         .replace(':file', data.data.file))
                 })

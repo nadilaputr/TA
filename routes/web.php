@@ -26,19 +26,15 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::middleware(['role:admin|sekretaris|kepaladinas|Statistik Sosial'])->group(function () {
-    Route::put('suratmasuk/{id}/tindakan', [SuratMasukController::class, 'updateTindakan'])->name('suratmasuk.updateTindakan');
-});
+Route::put('suratmasuk/{id}/tindakan', [SuratMasukController::class, 'updateTindakan'])->name('suratmasuk.updateTindakan');
 
-Route::middleware(['role:admin|sekretaris|kepaladinas|Statistik Sosial'])->group(function () {
     Route::get('suratmasuk/{id}', [SuratMasukController::class, 'show'])->name('suratmasuk.show');
-});
 
 Route::middleware(['role:admin'])->group(function () {
     Route::resource('suratmasuk', SuratMasukController::class);
 });
 
-Route::get('disposisi/print', [App\Http\Controllers\DisposisiController::class, 'print'])->name('disposisi.print');
+Route::get('disposisi/{id}/print', [App\Http\Controllers\DisposisiController::class, 'print'])->name('disposisi.print');
 
 Route::get('bidang/all', [BidangController::class, 'all']);
 Route::resource('bidang', BidangController::class);

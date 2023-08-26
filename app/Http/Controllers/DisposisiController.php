@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Disposisi;
 use App\Models\SuratMasuk;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Response;
+use App\Helpers\TindakanSurat;
 use Spatie\Browsershot\Browsershot;
+use Illuminate\Support\Facades\Validator;
 
 class DisposisiController extends Controller
 {
@@ -29,8 +32,11 @@ class DisposisiController extends Controller
             ['label' => 'Actions', 'no-export' => true, 'width' => 5, 'text-align' => 'center'],
         ];
 
-        if (auth()->user()->hasRole('Kepala Dinas')) {
-            $disposisi = Disposisi::with(['surat_masuk', 'bidang'])->get();
+        if (auth()->user()->hasAnyRole(['kepaladinas', 'admin', 'sekretaris'])) {
+            $disposisi = Disposisi::with(['surat_masuk', 'bidang'])
+                ->whereHas('surat_masuk', function ($query) {
+                    $query->where('tindakan', TindakanSurat::SELESAI);
+                })->get();
         } else {
             $disposisi = Disposisi::with(['surat_masuk', 'bidang'])
                 ->whereHas('bidang', function ($query) {
@@ -125,12 +131,50 @@ class DisposisiController extends Controller
         //
     }
 
-    public function print()
+    public function print($id)
     {
-        $suratMasuk = SuratMasuk::find(1);
+
+        $disposisi = Disposisi::with(['surat_masuk', 'bidang'])
+            ->whereHas('surat_masuk', function ($query) use ($id) {
+                $query->where('id', $id);
+            })
+            ->first();
+
+        // Memeriksa apakah tindakan surat sudah selesai (SELESAI)
+        if ($disposisi->surat_masuk->tindakan == TindakanSurat::SELESAI) {
+            // Jika tindakan sudah selesai, tambahkan data paraf
+            $paraf = 'Sudah diparaf'; // Gantilah dengan data paraf yang sesuai
+        } else {
+            $paraf = ''; // Jika tindakan belum selesai, biarkan kosong
+        }
 
         return view('disposisi.print', [
-            "suratMasuk" => $suratMasuk
+            "disposisi" => $disposisi,
+            "paraf" => $paraf,
         ]);
+    }
+
+    public function selesaiDisposisi($id)
+    {
+        // Cari disposisi berdasarkan $id
+        $disposisi = Disposisi::find($id);
+
+        if (!$disposisi) {
+            return abort(404); // Tindakan jika disposisi tidak ditemukan
+        }
+
+        // Tandai disposisi sebagai selesai
+        $disposisi->status = TindakanSurat::SELESAI;
+
+        // Atur tanggal penyelesaian ke waktu saat ini
+        $disposisi->tanggal_penyelesaian = Carbon::now();
+
+        // Simpan perubahan
+        $disposisi->save();
+
+        // Lanjutkan dengan tindakan lain yang sesuai
+        // ...
+
+        return redirect()->back()->with('success', 'Disposisi telah ditandai sebagai selesai.');
     }
 }

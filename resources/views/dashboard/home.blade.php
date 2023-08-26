@@ -7,16 +7,17 @@
 @section('plugins.BsCustomFileInput', true)
 
 @section('content')
-    <h3 class="mt-3">Dashboard</h3>
-    <p>Selamat datang, Admin</p>
-
+    @if (Auth::check())
+        <h3 class="mt-3">Selamat datang, {{ Auth::user()->name }}</h1>
+    @endif
+    
     <div class="row">
         <div class="col-lg-3 col-6">
 
             <div class="small-box bg-info">
                 <div class="inner">
-                    <h3>150</h3>
-                    <p>New Orders</p>
+                    <h3>{{ $jumlahSuratMasuk }}</h3>
+                    <p>Surat Masuk</p>
                 </div>
                 <div class="icon">
                     <i class="ion ion-bag"></i>
@@ -29,8 +30,8 @@
 
             <div class="small-box bg-success">
                 <div class="inner">
-                    <h3>53<sup style="font-size: 20px">%</sup></h3>
-                    <p>Bounce Rate</p>
+                    <h3>{{ $jumlahSuratKeluar }}</sup></h3>
+                    <p>Surat Keluar</p>
                 </div>
                 <div class="icon">
                     <i class="ion ion-stats-bars"></i>
@@ -43,8 +44,8 @@
 
             <div class="small-box bg-warning">
                 <div class="inner">
-                    <h3>44</h3>
-                    <p>User Registrations</p>
+                    <h3>{{ $jumlahDisposisi }}</h3>
+                    <p>Disposisi Surat</p>
                 </div>
                 <div class="icon">
                     <i class="ion ion-person-add"></i>
@@ -73,9 +74,10 @@
                 @foreach ($suratMasuk as $row)
                     <tr>
                         <td>{{ $row->id }}</td>
+                        <td>{{ $row->nomor_surat }}</td>
+                        <td>{{ $dateFormat->from($row->tanggal_masuk) }}</td>
                         <td>{{ $row->asal_surat }}</td>
                         <td>{{ $row->perihal }}</td>
-                        <td>{{ $row->tanggal_masuk }}</td>
                         <td>{!! $tindakanSurat->toBadge($row->tindakan) !!}</td>
                         <td>
                             @role('sekretaris')
@@ -241,6 +243,7 @@
                         $('.perihal').html(data.data.perihal);
                         $('.jenis').html(data.data.jenis);
                         $('.sifat').html(data.data.sifat);
+                        $('.tingkat_keamanan').html(data.data.tingkat_keamanan);
                         $('.downloadFile').attr('href', '{{ Storage::url(':file') }}'.replace(
                             ':file', data.data.file))
                         $('.pdfViewerBtn').attr('data-url', '{{ Storage::url(':file') }}'
@@ -264,8 +267,11 @@
                         $('.nomor_surat').html(data.data.nomor_surat);
                         $('.tanggal_surat').html(data.data.tanggal_surat);
                         $('.asal_surat').html(data.data.asal_surat);
-                        $('.tanggal_masuk').html(data.data.tanggal_masuk);
+                        $('.tingkat_keamanan').html(data.data.tingkat_keamanan);
+                        $('.sifat').html(data.data.sifat);
+                        $('.lampiran').html(data.data.lampiran);
                         $('.perihal').html(data.data.perihal);
+                        $('.tanggal_masuk').html(data.data.tanggal_masuk);
                         $('.jenis').html(data.data.jenis);
                         $('.downloadFile').attr('href', '{{ Storage::url(':file') }}'.replace(
                             ':file', data.data.file))

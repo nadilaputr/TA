@@ -327,13 +327,16 @@ return [
             'icon' => 'fas fa-reply-all',
         ],
 
-        ['header' => 'PENGATURAN'],
-
         [
-            'text' => 'Profile',
-            'url'  => 'profil',
-            'icon' => 'fas fa-fw fa-user',
+            'header' => 'PENGATURAN',
+            'can' => 'view',
         ],
+
+        // [
+        //     'text' => 'Profile',
+        //     'url'  => 'profil',
+        //     'icon' => 'fas fa-fw fa-user',
+        // ],
 
         [
             'text' => 'Data Operator',

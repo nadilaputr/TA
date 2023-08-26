@@ -1,14 +1,14 @@
-<x-adminlte-modal id="createModal" title="TAMBAH SURAT MASUK" theme="white" icon="fa fa-md fa-fw fa-file-upload" size='lg'
+<x-adminlte-modal id="createModalKeluar" title="ARSIP SURAT KELUAR" theme="white" icon="fa fa-md fa-fw fa-file-upload" size='lg'
     disable-animations v-centered scrollable>
 
     <div class="card card-info">
 
-        <form id="createForm" action="{{ route('suratmasuk.store') }}" enctype="multipart/form-data" method="POST">
+        <form id="createForm" action="{{ route('suratkeluar.store') }}" enctype="multipart/form-data" method="POST">
             @csrf
 
             <div class="card-body">
                 <b>
-                    <p class="text-lightblue">INFORMASI UMUM</p>
+                    <p class="text-lightblue">INFORMASI SURAT</p>
                 </b>
 
                 <div class="row">
@@ -21,9 +21,9 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="alamat_surat">Asal Surat</label>
-                            <input id="alamat_surat" type="text" name="asal_surat" class="form-control"
-                                placeholder="Asal Surat" required>
+                            <label for="alamat_surat">Alamat Surat</label>
+                            <input id="alamat_surat" type="text" name="alamat_surat" class="form-control"
+                                placeholder="Alamat Surat" required>
                             <div class="invalid-feedback"></div>
                         </div>
                     </div>
@@ -38,34 +38,16 @@
                    
 
                         <div class="form-group">
-                            <label for="tanggal_masuk">Tanggal Masuk</label>
-                            <input id="tanggal_masuk" type="date" class="form-control" name="tanggal_masuk" disabled
-                                value="{{ old('tanggal_masuk') }}">
+                            <label for="perihal">Perihal</label>
+                            <input id="perihal" type="text" class="form-control" name="perihal" placeholder="Perihal Surat"
+                                value="{{ old('perihal') }}">
                             <div class="invalid-feedback"></div>
                         </div>
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="perihal">Perihal</label>
-                    <input id="perihal" type="text" name="perihal" class="form-control" placeholder="Perihal"
-                        required>
-                    <div class="invalid-feedback"></div>
-                </div>
-
-                <b>
-                    <p class="text-lightblue">INFORMASI TAMBAHAN</p>
-                </b>
                 <div class="row">
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label for="jenis">Jenis Surat</label>
-                            <input id="jenis" type="text" name="jenis" class="form-control"
-                                placeholder="Jenis Surat" required>
-                            <div class="invalid-feedback"></div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="lampiran">Lampiran</label>
                             <x-adminlte-select id="lampiran" name="lampiran" required>
@@ -80,7 +62,7 @@
                         </div>
                     </div>
                     
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="sifat">Sifat</label>
                             <x-adminlte-select id="sifat" name="sifat" required>
@@ -92,15 +74,16 @@
                             <div class="invalid-feedback"></div>
                         </div>
                     </div>
-                    <div class="col-md-3">
+
+                    <div class="col-md-4">
                         <div class="form-group">
-                            <label for="tingkat_keamanan">Tkt. Keamanan</label>
-                            <x-adminlte-select id="tingkat_keamanan" name="tingkat_keamanan" required>
-                                <option selected disabled>Pilih Tingkat Keamanan</option>
-                                <option value="Biasa">Biasa</option>
-                                <option value="Rahasia">Rahasia</option>
-                                <option value="Sangat Rahasia">Sangat Rahasia</option>
-                            </x-adminlte-select>
+                            <label for="bidang">Dari Bidang</label>
+                            <select class="form-control" name="id_bidang" required>
+                                <option selected disabled>Pilih Bidang</option>
+                                @foreach ($bidang as $row)
+                                    <option value="{{ $row->id }}">{{ $row->bidang }}</option>
+                                @endforeach
+                            </select>
                             <div class="invalid-feedback"></div>
                         </div>
                     </div>

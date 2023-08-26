@@ -9,7 +9,7 @@
                 @method('PUT')
 
                 <b>
-                    <p class="text-primary">INFORMASI UMUM</p>
+                    <p class="text-lightblue">INFORMASI UMUM</p>
                 </b>
                 <div class="row">
                     <div class="col-md-6">
@@ -37,7 +37,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="editTanggalMasuk">Tanggal Masuk</label>
+                            <label for="editTanggalMasuk">Tanggal Diterima</label>
                             <input id="editTanggalMasuk" type="datetime-local" class="form-control" name="tanggal_masuk" disabled
                                 value="{{ old('tanggal_masuk') }}">
                             <div class="invalid-feedback"></div>
@@ -54,42 +54,53 @@
                 </div>
 
                 <b>
-                    <p class="text-primary">INFORMASI TAMBAHAN</p>
+                    <p class="text-lightblue">INFORMASI TAMBAHAN</p>
                 </b>
 
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
-                            <label>Jenis Surat</label>
-                            <x-adminlte-select id="editJenis" name="jenis">
-                                <option value="asli">Asli</option>
-                                <option value="tembusan">Tembusan</option>
-                            </x-adminlte-select>
+                            <label for="editJenis">Jenis Surat</label>
+                            <input id="editJenis" type="text" name="jenis" class="form-control"
+                                placeholder="Jenis Surat">
                             <div class="invalid-feedback"></div>
                         </div>
                     </div>
 
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label>Lampiran</label>
                                 <x-adminlte-select id="editLampiran" name="lampiran">
-                                    <option value="1">1 Lembar</option>
-                                    <option value="2">2 Lembar</option>
-                                    <option value="3">3 Lembar</option>
-                                    <option value="4">4 Lembar</option>
-                                    <option value="5">5 Lembar</option>
+                                    <option selected disabled>Pilih Lampiran</option>
+                                    <option value="1 Lampiran">1 Lampiran</option>
+                                    <option value="2 Lampiran">2 Lampiran</option>
+                                    <option value="3 Lampiran">3 Lampiran</option>
+                                    <option value="4 Lampiran">4 Lampiran</option>
+                                    <option value="5 Lampiran">5 Lampiran</option>
                                 </x-adminlte-select>
                                 <div class="invalid-feedback"></div>
                             </div>
                         </div>
                    
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label>Sifat</label>
                             <x-adminlte-select id="editSifat" name="sifat">
-                                <option value="biasa">Biasa</option>
-                                <option value="segera">Segera</option>
-                                <option value="sangat_segera">Sangat Segera</option>
+                                <option value="Biasa">Biasa</option>
+                                <option value="Segera">Segera</option>
+                                <option value="Sangat Segera">Sangat Segera</option>
+                            </x-adminlte-select>
+                            <div class="invalid-feedback"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Tkt. Keamanan</label>
+                            <x-adminlte-select id="editTingkatKeamanan" name="tingkat_keamanan">
+                                <option value="Biasa">Biasa</option>
+                                <option value="Segera">Segera</option>
+                                <option value="Sangat Segera">Sangat Segera</option>
                             </x-adminlte-select>
                             <div class="invalid-feedback"></div>
                         </div>
@@ -97,7 +108,7 @@
                     </div>
 
                     <b>
-                        <p class="text-primary">UPLOAD FILE</p>
+                        <p class="text-lightblue">UPLOAD FILE</p>
                     </b>
                     <div class="form-group">
                         <label>File</label>

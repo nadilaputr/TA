@@ -37,7 +37,8 @@ class SuratMasukController extends Controller
             ['label' => 'Actions', 'no-export' => true, 'width' => 5, 'text-align' => 'center'],
         ];
 
-        $suratmasuk = SuratMasuk::whereIn('tindakan', [0, 1, 5])->get();
+        $suratmasuk = SuratMasuk::whereIn('tindakan', [0, 1, 5])->orderBy('created_at', 'desc')->get();
+
         return view('suratmasuk.index', [
             "surat" => $suratmasuk,
             "heads" => $heads,
@@ -59,6 +60,7 @@ class SuratMasukController extends Controller
             'lampiran' => 'required',
             'jenis' => 'required',
             'sifat' => 'required',
+            'tingkat_keamanan' => 'required',
             'file' => 'required|mimes:jpg,jpeg,pdf,png',
         ]);
 
@@ -133,6 +135,7 @@ class SuratMasukController extends Controller
             'lampiran' => 'required',
             'sifat' => 'required',
             'jenis' => 'required',
+            'tingkat_keamanan' => 'required',
             'file' => 'nullable|mimes:jpg,jpeg,pdf',
 
         ]);
@@ -145,8 +148,8 @@ class SuratMasukController extends Controller
 
         if ($request->hasFile('file')) {
             $file = $request->file('file');
-            $fileName = 'files-' . time() . '.' . $file->getClientOriginalExtension();
-            $path = $file->storeAs('files', $fileName, 'public');
+            $fileName = 'updateSuratMasuk-' . time() . '.' . $file->getClientOriginalExtension();
+            $path = $file->storeAs('updateSuratMasuk', $fileName, 'public');
             $data['file'] = $path;
         }
 
@@ -171,6 +174,5 @@ class SuratMasukController extends Controller
         }
 
         $suratMasuk->delete();
-
     }
 }

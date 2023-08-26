@@ -15,8 +15,10 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
-        "alpinejs": "^3.12.3",
         "moment": "^2.29.4",
-        "sweetalert2": "^11.7.23"
+        "sweetalert2": "^11.7.23",
+        "bootstrap-fileinput": "^5.5.52",
+        "icheck-bootstrap": "^3.0.1",
+        "overlayscrollbars": "^2.2.1"
     }
 }

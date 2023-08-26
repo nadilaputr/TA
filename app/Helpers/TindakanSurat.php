@@ -33,7 +33,7 @@ class TindakanSurat
             case self::DISPOSISI:
                 return "Disposisi";
             case self::SELESAI:
-                return "Arsip";
+                return "Selesai";
         }
     }
 
@@ -41,7 +41,7 @@ class TindakanSurat
     {
         switch ($status) {
             case self::TIDAK_TERUSKAN:
-                return "success";
+                return "danger";
             case self::REVISI:
                 return "warning";
             case self::TERUSKAN:

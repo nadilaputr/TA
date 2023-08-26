@@ -1,15 +1,14 @@
 import 'bootstrap';
 
-import 'overlayscrollbars';
-// import '../../vendor/almasaeed2010/adminlte/dist/js/adminlte';
+// import 'overlayscrollbars';
+import '../../vendor/almasaeed2010/adminlte/dist/js/adminlte';
 
-import Alpine from 'alpinejs'
+// import Alpine from 'alpinejs'
 
-window.Alpine = Alpine
+// window.Alpine = Alpine
 
-Alpine.start()
+// Alpine.start()
 
-console.log('starting boostrap...')
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the

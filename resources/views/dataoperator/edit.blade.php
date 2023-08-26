@@ -44,9 +44,13 @@
                     <input type="text" class="form-control" name="jabatan" required value="{{ $edit->jabatan }}">
                 </div>
                 <div class="form-group">
-                    <label>Bidang</label>
-                    <input type="text" class="form-control" name="bidang" placeholder="Bidang" required
-                        value="{{ $edit->bidang }}">
+                    <label>Role</label>
+                    <select class="form-control" id="bidang" name="id_bidang">
+                        @foreach ($bidang as $row)
+                            <option value="{{ $row->id }}" {{ $row->id == $edit->id_bidang? 'selected' : '' }}>
+                                {{ $row->bidang }}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <button type="submit" class="btn btn-primary">Simpan</button>
             </form>
