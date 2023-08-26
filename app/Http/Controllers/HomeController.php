@@ -40,9 +40,10 @@ class HomeController extends Controller
         ];
 
         $suratMasuk = [];
+
         if (Auth::user()->hasRole('admin')) {
             $suratMasuk = SuratMasuk::where('tindakan', '<>', TindakanSurat::TIDAK_TERUSKAN)->where('tindakan', '<>', TindakanSurat::SELESAI)
-            ->get();
+                ->get();
         }
 
         if (Auth::user()->hasRole('sekretaris')) {
@@ -52,10 +53,14 @@ class HomeController extends Controller
         if (Auth::user()->hasRole('kepaladinas')) {
             $suratMasuk = SuratMasuk::where('tindakan', TindakanSurat::TINDAK_LANJUT)->get();
         }
-        
-          $jumlahDisposisi = Disposisi::all();
-          $jumlahSuratMasuk = SuratMasuk::all();
-          $jumlahSuratKeluar = SuratKeluar::all();
+
+        $suratMasuk = SuratMasuk::whereHas("disposisi", function ($query) {
+            $query->where('id_bidang', auth()->user()->id_bidang);
+        })->where('tindakan', TindakanSurat::DISPOSISI)->get();
+
+        $jumlahDisposisi = Disposisi::all();
+        $jumlahSuratMasuk = SuratMasuk::all();
+        $jumlahSuratKeluar = SuratKeluar::all();
 
         return view('dashboard.home', [
             "heads" => $heads,
@@ -64,7 +69,7 @@ class HomeController extends Controller
             "jumlahSuratMasuk" => count($jumlahSuratMasuk),
             "jumlahSuratKeluar" => count($jumlahSuratKeluar),
         ]);
-  
+
     }
 
     public function show($id)
