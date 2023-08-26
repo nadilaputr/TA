@@ -320,7 +320,7 @@
                     $('.tindakan').html(tindakanToString(data.data.tindakan));
                     $('.lampiran').html(data.data.lampiran);
                     $('.jenis').html(data.data.jenis);
-                    $('.catatan').html(data.data.catatan);
+                    $('.catatan').html(data.data.disposisi.catatan);
                     $('.tingkat_keamanan').html(data.data.tingkat_keamanan);
                     $('.pdfViewerBtn').attr('data-url', '{{ Storage::url(':file') }}'
                         .replace(':file', data.data.file))
