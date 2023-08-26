@@ -80,7 +80,7 @@ class SuratMasukController extends Controller
             SuratMasuk::create($data);
             return response()->json(['message' => 'Surat Masuk berhasil ditambahkan'], 200);
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Gagal membuat Surat Masuk'], 500);
+            return response()->json(['error' => 'Gagal membuat Surat Masuk', $e], 500);
         }
     }
 

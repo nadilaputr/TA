@@ -10,7 +10,7 @@
     @if (Auth::check())
         <h3 class="mt-3">Selamat datang, {{ Auth::user()->name }}</h1>
     @endif
-    
+
     <div class="row">
         <div class="col-lg-3 col-6">
 
@@ -291,10 +291,12 @@
 
                         // Populate the select element with options
                         bidang.forEach(function(item) {
-                            selectElement.append($('<option>', {
-                                value: item.id,
-                                text: item.bidang
-                            }));
+                            if (item.id !== 2 && item.id !== 3) {
+                                selectElement.append($('<option>', {
+                                    value: item.id,
+                                    text: item.bidang
+                                }));
+                            }
                         });
                     },
                 });
