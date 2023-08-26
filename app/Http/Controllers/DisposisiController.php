@@ -33,15 +33,19 @@ class DisposisiController extends Controller
                     $query->where('tindakan', TindakanSurat::SELESAI);
                 })->orderBy('created_at', 'desc')->get();
         } else {
+            $bidang = auth()->user()->id_bidang;
             $disposisi = Disposisi::with(['surat_masuk', 'bidang'])
-                ->whereHas('bidang', function ($query) {
-                    $bidang = auth()->user()->id_bidang;
+                ->whereHas('bidang', function ($query) use ($bidang) {
                     $query->where('id', $bidang);
+                })
+                ->whereHas('surat_masuk', function ($query) {
+                    $query->where('tindakan', TindakanSurat::SELESAI);
                 })
                 ->orderBy('created_at', 'desc')
                 ->get();
         }
 
+      
         return view('disposisi.index', [
             "disposisi" => $disposisi,
             "heads" => $heads,
