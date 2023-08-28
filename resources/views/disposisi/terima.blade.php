@@ -1,4 +1,4 @@
-<x-adminlte-modal id="terimaModal" title="Ajukan" theme="white" icon="fas fa-solid fa-file-medical" size='lg' v-centered
+<x-adminlte-modal id="terimaModal" title="Terima Disposisi" theme="white" icon="fas fa-solid fa-file-medical" size='lg' v-centered
     scrollable>
     <x-adminlte-card id="detailsurat" title="Detail Surat" theme="lightblue" icon="fas fa-lg fa-fan" collapsible>
         <table class="table table-sm">
