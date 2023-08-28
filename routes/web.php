@@ -24,11 +24,15 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
+Route::get('/offline', function () {
+    return view('offline');
+});
+
 Auth::routes();
 
 Route::put('suratmasuk/{id}/tindakan', [SuratMasukController::class, 'updateTindakan'])->name('suratmasuk.updateTindakan');
 
-    Route::get('suratmasuk/{id}', [SuratMasukController::class, 'show'])->name('suratmasuk.show');
+Route::get('suratmasuk/{id}', [SuratMasukController::class, 'show'])->name('suratmasuk.show');
 
 Route::middleware(['role:admin'])->group(function () {
     Route::resource('suratmasuk', SuratMasukController::class);

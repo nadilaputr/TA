@@ -1,10 +1,10 @@
 <?php
 
 return [
-    'name' => 'LaravelPWA',
+    'name' => 'Pasti BPS Prov Kalbar',
     'manifest' => [
-        'name' => env('APP_NAME', 'Surat'),
-        'short_name' => 'PWA',
+        'name' => env('APP_NAME', 'Pasti BPS Prov Kalbar'),
+        'short_name' => 'BPS',
         'start_url' => '/',
         'background_color' => '#ffffff',
         'theme_color' => '#000000',

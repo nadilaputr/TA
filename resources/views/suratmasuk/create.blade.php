@@ -1,5 +1,5 @@
-<x-adminlte-modal id="createModal" title="TAMBAH SURAT MASUK" theme="white" icon="fa fa-md fa-fw fa-file-upload" size='lg'
-    disable-animations v-centered scrollable>
+<x-adminlte-modal id="createModal" title="TAMBAH SURAT MASUK" theme="white" icon="fa fa-md fa-fw fa-file-upload"
+    size='lg' disable-animations v-centered scrollable>
 
     <div class="card card-info">
 
@@ -20,6 +20,9 @@
                             <div class="invalid-feedback"></div>
                         </div>
 
+                        <input id="myFileInput" type="file" accept="image/*;capture=camera">
+
+
                         <div class="form-group">
                             <label for="alamat_surat">Asal Surat</label>
                             <input id="alamat_surat" type="text" name="asal_surat" class="form-control"
@@ -35,7 +38,7 @@
                                 value="{{ old('tanggal_surat') }}">
                             <div class="invalid-feedback"></div>
                         </div>
-                   
+
 
                         <div class="form-group">
                             <label for="tanggal_masuk">Tanggal Masuk</label>
@@ -79,7 +82,7 @@
                             <div class="invalid-feedback"></div>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="sifat">Sifat</label>
@@ -105,7 +108,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <b>
                     <p class="text-lightblue">UPLOAD FILE</p>
                 </b>
