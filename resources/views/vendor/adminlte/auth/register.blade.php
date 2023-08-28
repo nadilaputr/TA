@@ -24,7 +24,7 @@
 
             <div class="input-group-append">
                 <div class="input-group-text">
-                    <span class="fas fa-user {{ config('adminlte.classes_auth_icon', '') }}"></span>
+                    {{-- <span class="fas fa-user {{ config('adminlte.classes_auth_icon', '') }}"></span> --}}
                 </div>
             </div>
 
@@ -36,24 +36,6 @@
         </div>
 
 
-        {{-- bidang field --}}
-        <div class="form-group">
-            <select class="form-control" name="bidang" required>
-                <option value="" selected>Pilih Bidang</option>
-                @foreach ($bidang as $row)
-                <option value="{{ $row->id }}">
-                    {{ $row->bidang }}
-                </option>
-            @endforeach
-
-            </select>
-
-            @error('bidang')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-            @enderror
-        </div>
 
         {{-- jabatan field --}}
         <div class="input-group mb-3">
@@ -62,7 +44,7 @@
 
             <div class="input-group-append">
                 <div class="input-group-text">
-                    <span class="fas fa-envelope {{ config('adminlte.classes_auth_icon', '') }}"></span>
+                    {{-- <span class="fas fa-envelope {{ config('adminlte.classes_auth_icon', '') }}"></span> --}}
                 </div>
             </div>
 
@@ -81,7 +63,7 @@
 
             <div class="input-group-append">
                 <div class="input-group-text">
-                    <span class="fas fa-envelope {{ config('adminlte.classes_auth_icon', '') }}"></span>
+                    {{-- <span class="fas fa-envelope {{ config('adminlte.classes_auth_icon', '') }}"></span> --}}
                 </div>
             </div>
 
@@ -103,6 +85,25 @@
             </select>
         </div>
 
+            {{-- bidang field --}}
+            <div class="form-group">
+                <select class="form-control" name="bidang" required>
+                    <option value="" selected>Pilih Bidang</option>
+                    @foreach ($bidang as $row)
+                    <option value="{{ $row->id }}">
+                        {{ $row->bidang }}
+                    </option>
+                @endforeach
+    
+                </select>
+    
+                @error('bidang')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+
         {{-- Password field --}}
         <div class="input-group mb-3">
             <input type="password" name="password" class="form-control @error('password') is-invalid @enderror"
@@ -110,7 +111,7 @@
 
             <div class="input-group-append">
                 <div class="input-group-text">
-                    <span class="fas fa-lock {{ config('adminlte.classes_auth_icon', '') }}"></span>
+                    {{-- <span class="fas fa-lock {{ config('adminlte.classes_auth_icon', '') }}"></span> --}}
                 </div>
             </div>
 
@@ -129,7 +130,7 @@
 
             <div class="input-group-append">
                 <div class="input-group-text">
-                    <span class="fas fa-lock {{ config('adminlte.classes_auth_icon', '') }}"></span>
+                    {{-- <span class="fas fa-lock {{ config('adminlte.classes_auth_icon', '') }}"></span> --}}
                 </div>
             </div>
 
