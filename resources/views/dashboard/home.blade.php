@@ -160,7 +160,8 @@
                         $('.tanggal_masuk').html(data.data.tanggal_masuk);
                         $('.perihal').html(data.data.perihal);
                         $('.jenis').html(data.data.jenis);
-                        $('.catatan').html(data.data.catatan);
+                        $('.catatan').html(data.data.disposisi != null ? data.data.disposisi
+                            .catatan : "-");
                         $('.bidang').html(data.data.bidang);
                         $('.downloadFile').attr('href', '{{ asset(':file') }}'.replace(
                             ':file', data.data.file))
