@@ -63,7 +63,7 @@ return [
     |
     */
 
-    'logo' => '<b>BPS Surat</b>',
+    'logo' => '<b>PASTI</b>',
     'logo_img' => 'vendor/adminlte/dist/img/removebps.png',
     'logo_img_class' => 'brand-image img-circle bg-white elevation-2',
     'logo_img_xl' => null,

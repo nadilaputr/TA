@@ -1,4 +1,4 @@
-<x-adminlte-modal id="terimaModal" title="Ajukan" theme="white" icon="fas fa-solid fa-file-medical" size='lg' v-centered
+<x-adminlte-modal id="terimaModal" title="Terima Disposisi" theme="white" icon="fas fa-solid fa-file-medical" size='lg' v-centered
     scrollable>
     <x-adminlte-card id="detailsurat" title="Detail Surat" theme="lightblue" icon="fas fa-lg fa-fan" collapsible>
         <table class="table table-sm">
@@ -34,17 +34,14 @@
                 <td>Catatan</td>
                 <td class="catatan"></td>
             </tr>
-            <tr>
-                <td>Bidang</td>
-                <td class="bidang"></td>
-            </tr>
+
             <tr>
                 <td>File</td>
                 <td class="d-flex">
-                    <a target="_blank" class="btn btn-xs btn-default text-primary mx-1 shadow downloadFile"
+                    {{-- <a target="_blank" class="btn btn-xs btn-default text-primary mx-1 shadow downloadFile"
                         title="Lihat File">Download
                         <i class="fa fa-lg fa-fw fa-file"></i>
-                    </a>
+                    </a> --}}
                     <button class="btn btn-xs btn-default text-primary mx-1 shadow pdfViewerBtn"
                         title="Lihat File">Lihat PDF
                     </button>
