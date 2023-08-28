@@ -34,10 +34,7 @@
                 <td>Catatan</td>
                 <td class="catatan"></td>
             </tr>
-            <tr>
-                <td>Bidang</td>
-                <td class="bidang"></td>
-            </tr>
+
             <tr>
                 <td>File</td>
                 <td class="d-flex">
