@@ -41,7 +41,7 @@ class TindakanSurat
     {
         switch ($status) {
             case self::TIDAK_TERUSKAN:
-                return "danger";
+                return "success";
             case self::REVISI:
                 return "warning";
             case self::TERUSKAN:

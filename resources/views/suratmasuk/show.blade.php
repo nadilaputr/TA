@@ -34,8 +34,12 @@
                         <td class="catatan"></td>
                     </tr>
                     <tr>
+                        <td style="width: 40%;">Catatan Kadis</td>
+                        <td class="catatanKadis"></td>
+                    </tr>
+                    <tr>
                         <td style="width: 40%;">Tindakan</td>
-                        <td class="tindakan"></td>
+                        <td class="badge tindakan"></td>
                     </tr>
                     <tr>
                         <td>Tanggal Diterima</td>
@@ -71,7 +75,8 @@
             <tr>
                 <td>File</td>
                 <td>
-                    <button class="btn btn-xs btn-default text-primary mx-1 shadow pdfViewerBtn" title="Lihat File">Lihat PDF</button>
+                    <button class="btn btn-xs btn-default text-primary mx-1 shadow pdfViewerBtn"
+                        title="Lihat File">Lihat PDF</button>
                 </td>
             </tr>
         </table>
@@ -86,7 +91,7 @@
         </div>
     </div>
 
-    
+
 
 
     <x-slot name="footerSlot">

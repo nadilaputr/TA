@@ -162,9 +162,9 @@
                         $('.jenis').html(data.data.jenis);
                         $('.catatan').html(data.data.catatan);
                         $('.bidang').html(data.data.bidang);
-                        $('.downloadFile').attr('href', '{{ Storage::url(':file') }}'.replace(
+                        $('.downloadFile').attr('href', '{{ asset(':file') }}'.replace(
                             ':file', data.data.file))
-                        $('.pdfViewerBtn').attr('data-url', '{{ Storage::url(':file') }}'
+                        $('.pdfViewerBtn').attr('data-url', '{{ asset(':file') }}'
                             .replace(':file', data.data.file))
                     },
                 });
@@ -331,9 +331,9 @@
                         $('.jenis').html(data.data.jenis);
                         $('.sifat').html(data.data.sifat);
                         $('.tingkat_keamanan').html(data.data.tingkat_keamanan);
-                        $('.downloadFile').attr('href', '{{ Storage::url(':file') }}'.replace(
+                        $('.downloadFile').attr('href', '{{ asset(':file') }}'.replace(
                             ':file', data.data.file))
-                        $('.pdfViewerBtn').attr('data-url', '{{ Storage::url(':file') }}'
+                        $('.pdfViewerBtn').attr('data-url', '{{ asset(':file') }}'
                             .replace(':file', data.data.file))
                     },
                 });
@@ -360,9 +360,9 @@
                         $('.perihal').html(data.data.perihal);
                         $('.tanggal_masuk').html(data.data.tanggal_masuk);
                         $('.jenis').html(data.data.jenis);
-                        $('.downloadFile').attr('href', '{{ Storage::url(':file') }}'.replace(
+                        $('.downloadFile').attr('href', '{{ asset(':file') }}'.replace(
                             ':file', data.data.file))
-                        $('.pdfViewerBtn').attr('data-url', '{{ Storage::url(':file') }}'
+                        $('.pdfViewerBtn').attr('data-url', '{{ asset(':file') }}'
                             .replace(':file', data.data.file))
                     },
                 });

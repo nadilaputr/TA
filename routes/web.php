@@ -21,10 +21,6 @@ use App\Http\Controllers\SuratKeluarController;
 |
 */
 
-Route::get('/storagelink', function () {
-    Artisan::call('storage:link');
-});
-
 Route::get('/', function () {
     return view('auth.login');
 });
@@ -58,6 +54,5 @@ Route::get('dataoperator/{id}/password', [DataOperatorController::class, 'editPa
 Route::get('dataoperator/{id}/role', [DataOperatorController::class, 'editRole'])->name('dataoperator.role');
 Route::patch('dataoperator/{id}/password', [DataOperatorController::class, 'updatePassword'])->name('dataoperator.updatePassword');
 Route::patch('dataoperator/{id}/role', [DataOperatorController::class, 'updateRole'])->name('dataoperator.updateRole');
-
 
 Route::resource('suratkeluar', SuratKeluarController::class);

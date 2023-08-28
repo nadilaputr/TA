@@ -91,6 +91,29 @@
         $(document).ready(function() {
             let suratId;
 
+            const tindakanToString = (status) => {
+                console.log(status);
+                switch (status) {
+                    case {{ TIDAK_TERUSKAN }}:
+                        return "Arsip";
+                    case {{ REVISI }}:
+                        return "Revisi";
+                    case {{ SELESAI }}:
+                        return "Arsip";
+                }
+            }
+
+            const tindakanToBadge = (status) => {
+                switch (status) {
+                    case {{ TIDAK_TERUSKAN }}:
+                        return "success";
+                    case {{ REVISI }}:
+                        return "warning";
+                    case {{ SELESAI }}:
+                        return "success";
+                }
+            }
+
             // When the delete button in the modal is clicked, send an AJAX request to delete the operator
             $('#confirmDeleteSuratMasukBtn').on('click', function() {
 
@@ -281,35 +304,14 @@
                     }
                 });
             });
-        });
-    </script>
-
-    <script>
-        $(document).ready(function() {
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-
-            const tindakanToString = (status) => {
-                switch (status) {
-                    case {{ TIDAK_TERUSKAN }}:
-                        return "Arsip";
-                    case {{ REVISI }}:
-                        return "Revisi";
-                    case {{ SELESAI }}:
-                        return "Arsip";
-                }
-            }
 
             $('.btn-detail').on('click', function(event) {
 
                 $('.pdfContainer').hide();
 
-                var id = $(this).data('id');
+                suratId = $(this).data('id');
 
-                $.get(`suratmasuk/${id}`, function(data) {
+                $.get(`suratmasuk/${suratId}`, function(data) {
                     $('.id').html(data.data.id);
                     $('.nomor_surat').html(data.data.nomor_surat);
                     $('.tanggal_surat').html(data.data.tanggal_surat);
@@ -317,11 +319,14 @@
                     $('.tanggal_masuk').html(data.data.tanggal_masuk);
                     $('.perihal').html(data.data.perihal);
                     $('.sifat').html(data.data.sifat);
-                    $('.tindakan').html(tindakanToString(data.data.tindakan));
+                    $('.tindakan').text(tindakanToString(data.data.tindakan));
+                    $('.tindakan').addClass(`badge-${tindakanToBadge(data.data.tindakan)}`)
                     $('.lampiran').html(data.data.lampiran);
                     $('.jenis').html(data.data.jenis);
-                    $('.catatan').html(data.data.disposisi != null ? data.data.disposisi.catatan :
+                    $('.catatanKadis').html(data.data.disposisi != null ? data.data.disposisi
+                        .catatan :
                         "-");
+                    $('.catatan').html(data.data.catatan ?? "-");
                     $('.tingkat_keamanan').html(data.data.tingkat_keamanan);
                     $('.pdfViewerBtn').attr('data-url', '{{ asset(':file') }}'
                         .replace(':file', data.data.file))
@@ -334,7 +339,6 @@
                 $('.pdfViewer').attr('src', url);
                 $('.pdfContainer').show();
             })
-
-        })
+        });
     </script>
 @stop
