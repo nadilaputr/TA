@@ -45,7 +45,7 @@ class SuratKeluarController extends Controller
         return view('suratkeluar.create');
     }
 
-    
+
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -67,9 +67,10 @@ class SuratKeluarController extends Controller
 
         $file = $request->file('file');
         $fileName = 'suratkeluar-' . $file->getClientOriginalName();
-        $path = $file->storeAs('suratkeluar', $fileName, 'public');
+        $filePath = public_path('surat-keluar'); // Path to the public folder
+        $file->move($filePath, $fileName); // Move the file to the public folder
 
-        $data['file'] = $path;
+        $data['file'] = 'surat-masuk/' . $fileName; // Save relative path
 
         try {
             SuratKeluar::create($data);
@@ -79,7 +80,7 @@ class SuratKeluarController extends Controller
         }
     }
 
-    
+
     public function show($id)
     {
         $suratKeluar = SuratKeluar::findOrFail($id);
@@ -88,7 +89,7 @@ class SuratKeluarController extends Controller
         ]);
     }
 
-    
+
     public function edit($id)
     {
         $suratKeluar = SuratKeluar::findOrFail($id);
@@ -98,7 +99,7 @@ class SuratKeluarController extends Controller
         ]);
     }
 
-    
+
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [

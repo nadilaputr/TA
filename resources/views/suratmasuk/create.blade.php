@@ -20,9 +20,6 @@
                             <div class="invalid-feedback"></div>
                         </div>
 
-                        <input id="myFileInput" type="file" accept="image/*;capture=camera">
-
-
                         <div class="form-group">
                             <label for="alamat_surat">Asal Surat</label>
                             <input id="alamat_surat" type="text" name="asal_surat" class="form-control"

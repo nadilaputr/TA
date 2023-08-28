@@ -72,9 +72,10 @@ class SuratMasukController extends Controller
 
         $file = $request->file('file');
         $fileName = 'suratmasuk-' . $file->getClientOriginalName();
-        $path = $file->storeAs('suratmasuk', $fileName, 'public');
+        $filePath = public_path('surat-masuk'); // Path to the public folder
+        $file->move($filePath, $fileName); // Move the file to the public folder
 
-        $data['file'] = $path;
+        $data['file'] = 'surat-masuk/' . $fileName; // Save relative path
 
         try {
             SuratMasuk::create($data);
@@ -83,6 +84,7 @@ class SuratMasukController extends Controller
             return response()->json(['error' => 'Gagal membuat Surat Masuk', $e], 500);
         }
     }
+
 
     public function updateTindakan(Request $request, $id)
     {

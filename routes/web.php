@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BidangController;
 use App\Http\Controllers\PostController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SuratMasukController;
@@ -19,6 +20,10 @@ use App\Http\Controllers\SuratKeluarController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/storagelink', function () {
+    Artisan::call('storage:link');
+});
 
 Route::get('/', function () {
     return view('auth.login');

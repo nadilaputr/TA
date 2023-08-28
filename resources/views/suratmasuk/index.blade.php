@@ -320,9 +320,10 @@
                     $('.tindakan').html(tindakanToString(data.data.tindakan));
                     $('.lampiran').html(data.data.lampiran);
                     $('.jenis').html(data.data.jenis);
-                    $('.catatan').html(data.data.disposisi.catatan);
+                    $('.catatan').html(data.data.disposisi != null ? data.data.disposisi.catatan :
+                        "-");
                     $('.tingkat_keamanan').html(data.data.tingkat_keamanan);
-                    $('.pdfViewerBtn').attr('data-url', '{{ Storage::url(':file') }}'
+                    $('.pdfViewerBtn').attr('data-url', '{{ asset(':file') }}'
                         .replace(':file', data.data.file))
                 })
             });
