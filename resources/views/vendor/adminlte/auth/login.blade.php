@@ -18,7 +18,7 @@
     @php($password_reset_url = $password_reset_url ? url($password_reset_url) : '')
 @endif
 
-@section('auth_header', __('adminlte::adminlte.login_message'))
+@section('auth_header', __('Pengelolaan Surat Badan Pusat Statiktik'))
 
 @section('auth_body')
     <form action="{{ $login_url }}" method="post">
@@ -35,7 +35,7 @@
                 </div>
             </div>
 
-            @error('email')
+            @error('password')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
@@ -62,7 +62,7 @@
 
         {{-- Login field --}}
         <div class="row">
-            <div class="col-7">
+            {{-- <div class="col-7">
                 <div class="icheck-primary" title="{{ __('adminlte::adminlte.remember_me_hint') }}">
                     <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
@@ -70,15 +70,15 @@
                         {{ __('adminlte::adminlte.remember_me') }}
                     </label>
                 </div>
-            </div>
+            </div> --}}
 
-            <div class="col-5">
+            {{-- <div class="col-5"> --}}
                 <button type=submit
                     class="btn btn-block {{ config('adminlte.classes_auth_btn', 'btn-flat btn-primary') }}">
                     <span class="fas fa-sign-in-alt"></span>
-                    {{ __('adminlte::adminlte.sign_in') }}
+                    {{ __('MASUK') }}
                 </button>
-            </div>
+            {{-- </div> --}}
         </div>
 
     </form>
@@ -86,19 +86,19 @@
 
 @section('auth_footer')
     {{-- Password reset link --}}
-    @if ($password_reset_url)
+    {{-- @if ($password_reset_url)
         <p class="my-0">
             <a href="{{ $password_reset_url }}">
                 {{ __('adminlte::adminlte.i_forgot_my_password') }}
             </a>
         </p>
-    @endif
+    @endif --}}
 
     {{-- Register link --}}
     @if ($register_url)
-        <p class="my-0">
+        <p class="my-0 text-center">
             <a href="{{ $register_url }}">
-                {{ __('adminlte::adminlte.register_a_new_membership') }}
+                {{ __('Register untuk mendaftar akun') }}
             </a>
         </p>
     @endif
