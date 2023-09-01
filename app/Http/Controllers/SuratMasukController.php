@@ -8,7 +8,9 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
-use TindakanSurat;
+use App\Helpers\TindakanSurat;
+// use TindakanSurat;
+use Illuminate\Support\Facades\Auth;
 
 class SuratMasukController extends Controller
 {
@@ -33,11 +35,34 @@ class SuratMasukController extends Controller
             'Perihal',
             // 'Jenis Surat',
             // 'Catatan',
-            'Tindakan',
+            'Status',
             ['label' => 'Actions', 'no-export' => true, 'width' => 5, 'text-align' => 'center'],
+            
         ];
 
-        $suratmasuk = SuratMasuk::whereIn('tindakan', [0, 1, 5])->orderBy('created_at', 'desc')->get();
+        $suratmasuk = [];
+
+        if (Auth::user()->hasRole('admin')) {
+            $suratmasuk = SuratMasuk::where('tindakan', '<>', TindakanSurat::MENUNGGU_INSTRUKSI_KEPALA)
+            ->where('tindakan', '<>', TindakanSurat::DISPOSISI)
+            ->where('tindakan', '<>', TindakanSurat::TINDAK_LANJUT)
+            ->orderBy('created_at', 'desc')
+            ->get();
+        }
+
+        if (Auth::user()->hasRole('sekretaris')) {
+            $suratmasuk = SuratMasuk::where('tindakan', TindakanSurat::DITERIMA)
+            ->orderBy('created_at', 'desc')
+            ->get();
+        }
+
+        if (Auth::user()->hasRole('kepaladinas')) {
+            $suratmasuk = SuratMasuk::where('tindakan', TindakanSurat::ARSIP)
+            ->orderBy('created_at', 'desc')
+            ->get();
+        }
+
+        // $suratmasuk = SuratMasuk::whereIn('tindakan', [0, 1, 5])->orderBy('created_at', 'desc')->get();
 
         return view('suratmasuk.index', [
             "surat" => $suratmasuk,

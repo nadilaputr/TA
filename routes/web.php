@@ -35,7 +35,7 @@ Route::put('suratmasuk/{id}/tindakan', [SuratMasukController::class, 'updateTind
 
 Route::get('suratmasuk/{id}', [SuratMasukController::class, 'show'])->name('suratmasuk.show');
 
-Route::middleware(['role:admin'])->group(function () {
+Route::middleware(['role:admin|sekretaris|kepaladinas'])->group(function () {
     Route::resource('suratmasuk', SuratMasukController::class);
 });
 

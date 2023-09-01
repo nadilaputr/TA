@@ -13,7 +13,9 @@
 @section('content')
     <h3 class="mt-3">Surat Masuk</h3>
 
+    @unlessrole('sekretaris')
     <button class="btn btn-info btn-create mb-3" data-toggle="modal" data-target="#createModal">Tambah</button>
+    @endunlessrole
 
     @if ($message = Session::get('massage'))
         <div class="alert alert-success">
@@ -35,10 +37,21 @@
                 {{-- <td>{{ $row->catatan }}</td> --}}
                 <td>{!! $tindakanSurat->toBadge($row->tindakan) !!}</td>
                 {{-- <form action="{{ route('suratmasuk.destroy', $row->id) }}" method="POST"> --}}
-                <td class="d-flex" style="justify-content: center">
-                    {{-- @csrf --}}
-                    {{-- @method('DELETE') --}}
-                    @if ($row->tindakan == SELESAI)
+                    <td class="d-flex" style="justify-content: center">
+                        {{-- @csrf --}}
+                        {{-- @method('DELETE') --}}
+
+                        @role('sekretaris')
+                        <button type="button" data-toggle="modal" data-target="#ajukanModal"
+                            data-id="{{ $row->id }}"
+                            class="btn btn-xs btn-default text-primary mx-1 shadow btn-ajukan font-weight-bold"
+                            title="Edit">
+                            <span>Ajukan</span>
+                            <i class="fa fa-lg fa-fw fa-pen"></i>
+                        </button>
+                    @endrole
+                        @unlessrole('sekretaris')
+                    @if ($row->tindakan == ARSIP)
                         <button type="button" class="btn btn-xs btn-default text-success mx-1 shadow btn-detail"
                             title="Detail" data-toggle="modal" data-target="#modalPurple" data-id="{{ $row->id }}">
                             <i class="fa fa-lg fa-fw fa-info-circle"></i>
@@ -72,13 +85,14 @@
                             <i class="fa fa-lg fa-fw fa-trash"></i>
                         </button>
                     @endif
+                    @endunlessrole
                 </td>
                 {{-- </form> --}}
             </tr>
         @endforeach
     </x-adminlte-datatable>
 
-
+    @include('dashboard.ajukan_modal')
     @include('suratmasuk.delete')
     @include('suratmasuk.show')
     @include('suratmasuk.create')
@@ -91,25 +105,41 @@
         $(document).ready(function() {
             let suratId;
 
+            if ($("#tindakan").val() === "1") {
+                $('#catatanContainer').show();
+            } else {
+                $('#catatanContainer').hide();
+            }
+
+            $("#tindakan").change(function() {
+                var selectedOption = $(this).val();
+
+                if (selectedOption === "1") {
+                    $('#catatanContainer').show();
+                } else {
+                    $('#catatanContainer').hide();
+                }
+            });
+
             const tindakanToString = (status) => {
                 console.log(status);
                 switch (status) {
-                    case {{ TIDAK_TERUSKAN }}:
+                    case {{ DITERIMA }}:
                         return "Arsip";
                     case {{ REVISI }}:
                         return "Revisi";
-                    case {{ SELESAI }}:
+                    case {{ ARSIP }}:
                         return "Arsip";
                 }
             }
 
             const tindakanToBadge = (status) => {
                 switch (status) {
-                    case {{ TIDAK_TERUSKAN }}:
+                    case {{ DITERIMA }}:
                         return "success";
                     case {{ REVISI }}:
                         return "warning";
-                    case {{ SELESAI }}:
+                    case {{ ARSIP }}:
                         return "success";
                 }
             }
@@ -332,6 +362,79 @@
                         .replace(':file', data.data.file))
                 })
             });
+
+            $('#btn-ajukan-submit').on('click', function(e) {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                const form = $('#ajukanForm');
+                const formData = new FormData(form[0]);
+
+                const url = '{{ route('suratmasuk.updateTindakan', ':suratId') }}'.replace(':suratId',
+                    suratId);
+                $.ajax({
+                    url: url,
+                    type: form.attr('method'),
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        window.location.href = '{{ route('suratmasuk.index') }}';
+                    },
+                    error: function(xhr, status, error) {
+                        if (xhr.status === 422) {
+                            const errors = JSON.parse(xhr.responseText)
+
+                            // Clear previous error messages
+                            $('.invalid-feedback').empty();
+                            $('.is-invalid').removeClass('is-invalid');
+
+                            // Iterate through each error and display next to the input
+                            $.each(errors, function(field, messages) {
+                                const input = $('[name="' + field + '"]');
+                                const errorContainer = input.siblings(
+                                    '.invalid-feedback');
+                                errorContainer.text(messages[0]);
+                                input.addClass('is-invalid');
+                            });
+                        } else {
+                            alert('Terjadi kesalahan pada server!');
+                        }
+                    }
+                });
+            });
+
+            $('.btn-ajukan').on('click', function() {
+                suratId = $(this).data('id')
+
+                $('.pdfContainer').hide();
+
+                const url = '{{ route('suratmasuk.show', ':suratId') }}'.replace(':suratId', suratId);
+
+                $.ajax({
+                    type: 'GET',
+                    url: url,
+                    success: function(data) {
+                        $('.id').html(data.data.id);
+                        $('.nomor_surat').html(data.data.nomor_surat);
+                        $('.tanggal_surat').html(data.data.tanggal_surat);
+                        $('.asal_surat').html(data.data.asal_surat);
+                        $('.lampiran').html(data.data.lampiran);
+                        $('.tanggal_masuk').html(data.data.tanggal_masuk);
+                        $('.perihal').html(data.data.perihal);
+                        $('.jenis').html(data.data.jenis);
+                        $('.sifat').html(data.data.sifat);
+                        $('.tingkat_keamanan').html(data.data.tingkat_keamanan);
+                        $('.downloadFile').attr('href', '{{ asset(':file') }}'.replace(
+                            ':file', data.data.file))
+                        $('.pdfViewerBtn').attr('data-url', '{{ asset(':file') }}'
+                            .replace(':file', data.data.file))
+                    },
+                });
+            })
 
             $('.pdfViewerBtn').click(function(e) {
                 const url = $(this).data('url');

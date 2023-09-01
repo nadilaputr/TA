@@ -39,7 +39,7 @@
                     </tr>
                     <tr>
                         <td style="width: 40%;">Tindakan</td>
-                        <td class="badge tindakan"></td>
+                        <td><span class="badge tindakan"></span></td>
                     </tr>
                     <tr>
                         <td>Tanggal Diterima</td>

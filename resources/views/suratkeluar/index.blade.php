@@ -10,6 +10,7 @@
 
 @stop
 
+
 @section('content')
     <h3 class="mt-3">Surat Keluar</h3>
     @role('admin')

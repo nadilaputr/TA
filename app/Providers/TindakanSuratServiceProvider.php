@@ -14,12 +14,12 @@ class TindakanSuratServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        define('TIDAK_TERUSKAN', TindakanSurat::TIDAK_TERUSKAN);
+        define('DITERIMA', TindakanSurat::DITERIMA);
         define('REVISI', TindakanSurat::REVISI);
-        define('TERUSKAN', TindakanSurat::TERUSKAN);
-        define('TINDAK_LANJUT', TindakanSurat::TINDAK_LANJUT);
+        define('MENUNGGU_INSTRUKSI_KEPALA', TindakanSurat::MENUNGGU_INSTRUKSI_KEPALA);
         define('DISPOSISI', TindakanSurat::DISPOSISI);
-        define('SELESAI', TindakanSurat::SELESAI);
+        define('TINDAK_LANJUT', TindakanSurat::TINDAK_LANJUT);
+        define('ARSIP', TindakanSurat::ARSIP);
 
         view()->composer('*', function ($view) {
             $view->with('tindakanSurat', new TindakanSurat());

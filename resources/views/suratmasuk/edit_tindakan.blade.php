@@ -10,7 +10,7 @@
                     <label>Tindakan</label>
                     <x-adminlte-select id="tindakan" class="form-control" name="tindakan" error-key="tindakan">
                         <option selected disabled>Pilih Tindakan</option>
-                        <option value="{{ TERUSKAN }}">Diteruskan</option>
+                        <option value="{{ DITERIMA }}">Diteruskan</option>
                     </x-adminlte-select>
                 </div>
                 <div class="invalid-feedback"></div>

@@ -85,7 +85,7 @@
                         <td>{{ $row->perihal }}</td>
                         <td>{!! $tindakanSurat->toBadge($row->tindakan) !!}</td>
                         <td>
-                            @role('sekretaris')
+                            {{-- @role('sekretaris')
                                 <button type="button" data-toggle="modal" data-target="#ajukanModal"
                                     data-id="{{ $row->id }}"
                                     class="btn btn-xs btn-default text-primary mx-1 shadow btn-ajukan font-weight-bold"
@@ -93,11 +93,18 @@
                                     <span>Ajukan</span>
                                     <i class="fa fa-lg fa-fw fa-pen"></i>
                                 </button>
-                            @endrole
-                            @role('kepaladinas')
+                            @endrole --}}
+                            {{-- @role('kepaladinas')
                                 <button type="button" data-toggle="modal" data-target="#bidangModal"
                                     data-id="{{ $row->id }}"
                                     class="btn btn-xs btn-default text-primary mx-1 shadow btn-bidang" title="Edit">
+                                    <i class="fa fa-lg fa-fw fa-pen"></i>
+                                </button>
+                            @endrole --}}
+                            @role('kepaladinas')
+                                <button type="button" data-toggle="modal" data-target="#disposisiKepalaModal"
+                                    data-id="{{ $row->id }}"
+                                    class="btn btn-xs btn-default text-primary mx-1 shadow btn-disposisi" title="Edit">
                                     <i class="fa fa-lg fa-fw fa-pen"></i>
                                 </button>
                             @endrole
@@ -115,7 +122,8 @@
             </x-adminlte-datatable>
         </div>
     </div>
-    @include('dashboard.ajukan_modal')
+    {{-- @include('dashboard.ajukan_modal') --}}
+    @include('dashboard.disposisi_kepala_modal')
     @include('dashboard.tindakan_bidang_modal')
     @include('disposisi.terima')
 @stop
@@ -126,21 +134,21 @@
 
             let suratId;
 
-            if ($("#tindakan").val() === "1") {
-                $('#catatanContainer').show();
-            } else {
-                $('#catatanContainer').hide();
-            }
+            // if ($("#tindakan").val() === "1") {
+            //     $('#catatanContainer').show();
+            // } else {
+            //     $('#catatanContainer').hide();
+            // }
 
-            $("#tindakan").change(function() {
-                var selectedOption = $(this).val();
+            // $("#tindakan").change(function() {
+            //     var selectedOption = $(this).val();
 
-                if (selectedOption === "1") {
-                    $('#catatanContainer').show();
-                } else {
-                    $('#catatanContainer').hide();
-                }
-            });
+            //     if (selectedOption === "1") {
+            //         $('#catatanContainer').show();
+            //     } else {
+            //         $('#catatanContainer').hide();
+            //     }
+            // });
 
             $('.btn-terima-tindakan').on('click', function() {
                 suratId = $(this).data('id');
@@ -214,14 +222,14 @@
                 });
             });
 
-            $('#btn-ajukan-submit').on('click', function(e) {
+            $('#btn-disposisi-submit').on('click', function(e) {
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
                 });
 
-                const form = $('#ajukanForm');
+                const form = $('#disposisiKepalaForm');
                 const formData = new FormData(form[0]);
 
                 const url = '{{ route('suratmasuk.updateTindakan', ':suratId') }}'.replace(':suratId',
@@ -258,60 +266,61 @@
                 });
             });
 
-            $('.btn-submit-bidang').on('click', function(event) {
-                const form = $('#tindakanBidangForm');
-                const formData = new FormData(form[0]);
+            // $('.btn-submit-bidang').on('click', function(event) {
+            //     const form = $('#tindakanBidangForm');
+            //     const formData = new FormData(form[0]);
 
-                formData.append('id_surat', suratId);
+            //     formData.append('id_surat', suratId);
 
-                $.ajax({
-                    url: '{{ route('disposisi.store') }}',
-                    type: form.attr('method'),
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    success: function(response) {
-                        if (suratId) {
-                            $.ajax({
-                                type: 'POST',
-                                url: `suratmasuk/${suratId}/tindakan`,
-                                data: {
-                                    _method: 'PUT',
-                                    _token: '{{ csrf_token() }}',
-                                    tindakan: 4,
-                                },
-                                success: function(response) {
-                                    window.location.href =
-                                        "{{ route('disposisi.index') }}";
-                                },
-                            });
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        if (xhr.status === 422) {
-                            const errors = JSON.parse(xhr.responseText)
+            //     $.ajax({
+            //         url: '{{ route('disposisi.store') }}',
+            //         type: form.attr('method'),
+            //         data: formData,
+            //         processData: false,
+            //         contentType: false,
+            //         success: function(response) {
+            //             if (suratId) {
+            //                 $.ajax({
+            //                     type: 'POST',
+            //                     url: `suratmasuk/${suratId}/tindakan`,
+            //                     data: {
+            //                         _method: 'PUT',
+            //                         _token: '{{ csrf_token() }}',
+            //                         tindakan: 4,
+            //                     },
+            //                     success: function(response) {
+            //                         window.location.href =
+            //                             "{{ route('disposisi.index') }}";
+            //                     },
+            //                 });
+            //             }
+            //         },
+            //         error: function(xhr, status, error) {
+            //             if (xhr.status === 422) {
+            //                 const errors = JSON.parse(xhr.responseText)
 
-                            // Clear previous error messages
-                            $('.invalid-feedback').empty();
-                            $('.is-invalid').removeClass('is-invalid');
+            //                 // Clear previous error messages
+            //                 $('.invalid-feedback').empty();
+            //                 $('.is-invalid').removeClass('is-invalid');
 
-                            // Iterate through each error and display next to the input
-                            $.each(errors, function(field, messages) {
-                                const input = $('[name="' + field + '"]');
-                                const errorContainer = input.siblings(
-                                    '.invalid-feedback');
-                                errorContainer.text(messages[0]);
-                                input.addClass('is-invalid');
-                            });
-                        } else {
-                            console.log(error)
-                            alert('Terjadi kesalahan pada server!');
-                        }
-                    }
-                });
-            });
+            //                 // Iterate through each error and display next to the input
+            //                 $.each(errors, function(field, messages) {
+            //                     const input = $('[name="' + field + '"]');
+            //                     const errorContainer = input.siblings(
+            //                         '.invalid-feedback');
+            //                     errorContainer.text(messages[0]);
+            //                     input.addClass('is-invalid');
+            //                 });
+            //             } else {
+            //                 console.log(error)
+            //                 alert('Terjadi kesalahan pada server!');
+            //             }
+            //         }
+            //     });
+            // });
 
-            $('.btn-ajukan').on('click', function() {
+
+            $('.btn-disposisi').on('click', function() {
                 suratId = $(this).data('id')
 
                 $('.pdfContainer').hide();
@@ -340,55 +349,55 @@
                 });
             })
 
-            $('.btn-bidang').on('click', function() {
-                suratId = $(this).data('id')
+            // $('.btn-bidang').on('click', function() {
+            //     suratId = $(this).data('id')
 
-                $('.pdfContainer').hide();
+            //     $('.pdfContainer').hide();
 
-                const url = '{{ route('suratmasuk.show', ':suratId') }}'.replace(':suratId', suratId);
+            //     const url = '{{ route('suratmasuk.show', ':suratId') }}'.replace(':suratId', suratId);
 
-                $.ajax({
-                    type: 'GET',
-                    url: url,
-                    success: function(data) {
-                        $('.id').html(data.data.id);
-                        $('.nomor_surat').html(data.data.nomor_surat);
-                        $('.tanggal_surat').html(data.data.tanggal_surat);
-                        $('.asal_surat').html(data.data.asal_surat);
-                        $('.tingkat_keamanan').html(data.data.tingkat_keamanan);
-                        $('.sifat').html(data.data.sifat);
-                        $('.lampiran').html(data.data.lampiran);
-                        $('.perihal').html(data.data.perihal);
-                        $('.tanggal_masuk').html(data.data.tanggal_masuk);
-                        $('.jenis').html(data.data.jenis);
-                        $('.downloadFile').attr('href', '{{ asset(':file') }}'.replace(
-                            ':file', data.data.file))
-                        $('.pdfViewerBtn').attr('data-url', '{{ asset(':file') }}'
-                            .replace(':file', data.data.file))
-                    },
-                });
+            //     $.ajax({
+            //         type: 'GET',
+            //         url: url,
+            //         success: function(data) {
+            //             $('.id').html(data.data.id);
+            //             $('.nomor_surat').html(data.data.nomor_surat);
+            //             $('.tanggal_surat').html(data.data.tanggal_surat);
+            //             $('.asal_surat').html(data.data.asal_surat);
+            //             $('.tingkat_keamanan').html(data.data.tingkat_keamanan);
+            //             $('.sifat').html(data.data.sifat);
+            //             $('.lampiran').html(data.data.lampiran);
+            //             $('.perihal').html(data.data.perihal);
+            //             $('.tanggal_masuk').html(data.data.tanggal_masuk);
+            //             $('.jenis').html(data.data.jenis);
+            //             $('.downloadFile').attr('href', '{{ asset(':file') }}'.replace(
+            //                 ':file', data.data.file))
+            //             $('.pdfViewerBtn').attr('data-url', '{{ asset(':file') }}'
+            //                 .replace(':file', data.data.file))
+            //         },
+            //     });
 
-                $.ajax({
-                    type: 'GET',
-                    url: `bidang/all`,
-                    success: function(data) {
-                        const bidang = data.bidang
-                        const selectElement = $('.bidang');
+            //     $.ajax({
+            //         type: 'GET',
+            //         url: `bidang/all`,
+            //         success: function(data) {
+            //             const bidang = data.bidang
+            //             const selectElement = $('.bidang');
 
-                        selectElement.empty();
+            //             selectElement.empty();
 
-                        // Populate the select element with options
-                        bidang.forEach(function(item) {
-                            if (item.id !== 1 && item.id !== 2 && item.id !== 3) {
-                                selectElement.append($('<option>', {
-                                    value: item.id,
-                                    text: item.bidang
-                                }));
-                            }
-                        });
-                    },
-                });
-            })
+            //             // Populate the select element with options
+            //             bidang.forEach(function(item) {
+            //                 if (item.id !== 1 && item.id !== 2 && item.id !== 3) {
+            //                     selectElement.append($('<option>', {
+            //                         value: item.id,
+            //                         text: item.bidang
+            //                     }));
+            //                 }
+            //             });
+            //         },
+            //     });
+            // })
 
             $('.pdfViewerBtn').click(function(e) {
                 const url = $(this).data('url');
