@@ -86,7 +86,7 @@
                     <select id="tindakan" class="form-control" name="tindakan">
                         <option value="" selected disabled>Pilih Tindakan</option>
                         <option value="{{ REVISI }}">Koreksi kembali</option>
-                        <option value="{{ TINDAK_LANJUT }}">Tindak Lanjut ke Kepala Dinas</option>
+                        <option value="{{ MENUNGGU_INSTRUKSI_KEPALA }}">Ajukan ke Kepala Dinas</option>
                     </select>
                 </div>
 

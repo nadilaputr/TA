@@ -314,7 +314,6 @@ return [
             'text' => 'Surat Masuk',
             'url'  => 'suratmasuk',
             'icon' => 'fas fa-envelope',
-            'can' => 'view',
         ],
         [
             'text' => 'Surat Keluar',

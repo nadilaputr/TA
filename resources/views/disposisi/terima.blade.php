@@ -67,7 +67,7 @@
                     <label>TindakanSurat</label>
                     <select id="tindakan" class="form-control" name="tindakan">
                         <option value="" selected disabled>Pilih TindakanSurat</option>
-                        <option value="{{ SELESAI }}">Diterima</option>
+                        <option value="{{ ARSIP }}">Diterima</option>
                     </select>
                 </div>
                 <x-slot name="footerSlot">
