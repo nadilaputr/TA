@@ -234,6 +234,7 @@
 
                 const url = '{{ route('suratmasuk.updateTindakan', ':suratId') }}'.replace(':suratId',
                     suratId);
+
                 $.ajax({
                     url: url,
                     type: form.attr('method'),

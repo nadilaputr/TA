@@ -1,34 +1,33 @@
-<x-adminlte-modal id="disposisiKepalaModal" title="Disposisi" theme="white" icon="fa fa-md fa-fw fa-info-circle " size='lg'
-    disable-animations v-centered scrollable>
+<x-adminlte-modal id="disposisiKepalaModal" title="Disposisi" theme="white" icon="fa fa-md fa-fw fa-info-circle "
+    size='lg' disable-animations v-centered scrollable>
 
-    
-        <div class="col-md-6">
-            <x-adminlte-card id="detailsurat" title="INFORMASI TAMBAHAN" theme="light">
-                <table class="table table-sm table-hover">
-                    <tr>
-                        <td>Tkt. Keamanan</td>
-                        <td class="tingkat_keamanan"></td>
-                    </tr>
-                    <tr>
-                        <td>Sifat</td>
-                        <td class="sifat"></td>
-                    </tr>
-                    <tr>
-                        <td style="width: 40%;">Jenis</td>
-                        <td class="jenis"></td>
-                    </tr>
-                    <tr>
-                        <td>Lampiran</td>
-                        <td class="lampiran"></td>
-                    </tr>
-                    <tr>
-                        <td>Tanggal Diterima</td>
-                        <td class="tanggal_masuk"></td>
-                    </tr>
-                </table>
-            </x-adminlte-card>
-        </div>
-        
+    <div class="col-md-6">
+        <x-adminlte-card id="detailsurat" title="INFORMASI TAMBAHAN" theme="light">
+            <table class="table table-sm table-hover">
+                <tr>
+                    <td>Tkt. Keamanan</td>
+                    <td class="tingkat_keamanan"></td>
+                </tr>
+                <tr>
+                    <td>Sifat</td>
+                    <td class="sifat"></td>
+                </tr>
+                <tr>
+                    <td style="width: 40%;">Jenis</td>
+                    <td class="jenis"></td>
+                </tr>
+                <tr>
+                    <td>Lampiran</td>
+                    <td class="lampiran"></td>
+                </tr>
+                <tr>
+                    <td>Tanggal Diterima</td>
+                    <td class="tanggal_masuk"></td>
+                </tr>
+            </table>
+        </x-adminlte-card>
+    </div>
+
 
     <x-adminlte-card id="detailsurat" title="INFORMASI DETAIL SURAT" theme="lightblue">
         <table class="table table-sm">
@@ -80,6 +79,8 @@
             <form id="disposisiKepalaForm" method="POST">
                 @csrf
                 @method('PUT')
+
+                <input type="hidden" name="tindakan" value="4">
 
                 <div class="form-group" id="catatanKepalaContainer">
                     <label>Catatan</label>
