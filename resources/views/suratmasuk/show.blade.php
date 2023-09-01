@@ -88,7 +88,7 @@
                 <td>File</td>
                 <td>
                     <button class="btn btn-xs btn-default text-primary mx-1 shadow pdfViewerBtn"
-                        title="Lihat File">Lihat PDF</button>
+                        title="Lihat File">View</button>
                 </td>
             </tr>
         </table>
