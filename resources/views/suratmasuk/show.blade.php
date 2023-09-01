@@ -1,4 +1,16 @@
 {{-- Modal Detail Surat Masuk --}}
+<script>
+    function resizeIframe(obj) {
+        const children = obj.contentWindow.document.body.innerHTML;
+        const iframeDocument = obj.contentWindow.document;
+        const images = iframeDocument.getElementsByTagName("img");
+
+        if (images.length > 0) {
+            images[0].style.width = "100%";
+        }
+    }
+</script>
+
 <x-adminlte-modal id="modalPurple" title="DETAIL" theme="white" icon="fa fa-md fa-fw fa-info-circle " size='lg'
     disable-animations v-centered scrollable>
 
@@ -85,17 +97,16 @@
     <div class="card">
         <div class="card-body">
             <div class="pdfContainer">
-                <iframe class="pdfViewer" style="width: 100%; height: 500px;"></iframe>
+                <iframe onload="resizeIframe(this)" class="pdfViewer" width="100%" height="500"
+                    scrolling="no"></iframe>
             </div>
 
         </div>
     </div>
 
-
-
-
     <x-slot name="footerSlot">
         <x-adminlte-button class="bg-danger text-white" label="Close" data-dismiss="modal" /> </x-slot>
 
 </x-adminlte-modal>
+
 {{-- End Modal Detail Surat Masuk --}}
