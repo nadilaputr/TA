@@ -14,7 +14,7 @@
     <h3 class="mt-3">Surat Masuk</h3>
 
     @unlessrole('sekretaris')
-    <button class="btn btn-info btn-create mb-3" data-toggle="modal" data-target="#createModal">Tambah</button>
+        <button class="btn btn-info btn-create mb-3" data-toggle="modal" data-target="#createModal">Tambah</button>
     @endunlessrole
 
     @if ($message = Session::get('massage'))
@@ -37,54 +37,61 @@
                 {{-- <td>{{ $row->catatan }}</td> --}}
                 <td>{!! $tindakanSurat->toBadge($row->tindakan) !!}</td>
                 {{-- <form action="{{ route('suratmasuk.destroy', $row->id) }}" method="POST"> --}}
-                    <td class="d-flex" style="justify-content: center">
-                        {{-- @csrf --}}
-                        {{-- @method('DELETE') --}}
+                <td class="d-flex" style="justify-content: center">
+                    {{-- @csrf --}}
+                    {{-- @method('DELETE') --}}
 
-                        @role('sekretaris')
-                        <button type="button" data-toggle="modal" data-target="#ajukanModal"
-                            data-id="{{ $row->id }}"
-                            class="btn btn-xs btn-default text-primary mx-1 shadow btn-ajukan font-weight-bold"
-                            title="Edit">
+                    @role('sekretaris')
+                        <button type="button" data-toggle="modal" data-target="#ajukanModal" data-id="{{ $row->id }}"
+                            class="btn btn-xs btn-default text-primary mx-1 shadow btn-ajukan font-weight-bold" title="Edit">
                             <span>Ajukan</span>
                             <i class="fa fa-lg fa-fw fa-pen"></i>
                         </button>
                     @endrole
-                        @unlessrole('sekretaris')
-                    @if ($row->tindakan == ARSIP)
-                        <button type="button" class="btn btn-xs btn-default text-success mx-1 shadow btn-detail"
-                            title="Detail" data-toggle="modal" data-target="#modalPurple" data-id="{{ $row->id }}">
-                            <i class="fa fa-lg fa-fw fa-info-circle"></i>
-                        </button>
-                        {{-- <a href="{{ route('disposisi.print', $row->id) }}" target="_blank"
+                    @unlessrole('sekretaris')
+                        @if ($row->tindakan == ARSIP)
+                            <button type="button" class="btn btn-xs btn-default text-success mx-1 shadow btn-detail"
+                                title="Detail" data-toggle="modal" data-target="#modalPurple" data-id="{{ $row->id }}">
+                                <i class="fa fa-lg fa-fw fa-info-circle"></i>
+                            </button>
+                            {{-- <a href="{{ route('disposisi.print', $row->id) }}" target="_blank"
                             class="btn btn-xs btn-default text-primary mx-1 shadow downloadFile" title="Cetak Disposisi">
                             <i class="fa fa-lg fa-fw fa-print"></i>
                         </a> --}}
-                        <button type="button" data-toggle="modal" data-target="#deleteModalSuratMasuk"
-                            data-id="{{ $row->id }}" class="btn btn-xs btn-default text-danger mx-1 shadow btn-delete"
-                            title="Delete">
-                            <i class="fa fa-lg fa-fw fa-trash"></i>
-                        </button>
-                    @else
-                        <button type="button" data-toggle="modal" data-target="#editModal" data-id="{{ $row->id }}"
-                            class="btn btn-xs btn-default text-primary mx-1 shadow btn-edit" title="Edit">
-                            <i class="fa fa-lg fa-fw fa-pen"></i>
-                        </button>
-                        <button type="button" data-toggle="modal" data-target="#editTindakanModal"
-                            data-id="{{ $row->id }}"
-                            class="btn btn-xs btn-default btn-edit-tindakan text-success mx-1 shadow" title="Edit Tindakan">
-                            <i class="fa fa-lg fa-fw fa-share-square"></i>
-                        </button>
-                        <button type="button" class="btn btn-xs btn-default text-success mx-1 shadow btn-detail"
-                            title="Detail" data-toggle="modal" data-target="#modalPurple" data-id="{{ $row->id }}">
-                            <i class="fa fa-lg fa-fw fa-info-circle"></i>
-                        </button>
-                        <button type="button" data-toggle="modal" data-target="#deleteModalSuratMasuk"
-                            data-id="{{ $row->id }}" class="btn btn-xs btn-default text-danger mx-1 shadow btn-delete"
-                            title="Delete">
-                            <i class="fa fa-lg fa-fw fa-trash"></i>
-                        </button>
-                    @endif
+                            <button type="button" data-toggle="modal" data-target="#deleteModalSuratMasuk"
+                                data-id="{{ $row->id }}" class="btn btn-xs btn-default text-danger mx-1 shadow btn-delete"
+                                title="Delete">
+                                <i class="fa fa-lg fa-fw fa-trash"></i>
+                            </button>
+                        @elseif ($row->tindakan == REVISI)
+                            <button type="button" class="btn btn-xs btn-default text-success mx-1 shadow btn-detail"
+                                title="Detail" data-toggle="modal" data-target="#modalPurple" data-id="{{ $row->id }}">
+                                <i class="fa fa-lg fa-fw fa-info-circle"></i>
+                            </button>
+                            <button type="button" data-toggle="modal" data-target="#editModal" data-id="{{ $row->id }}"
+                                class="btn btn-xs btn-default text-primary mx-1 shadow btn-edit" title="Edit">
+                                <i class="fa fa-lg fa-fw fa-pen"></i>
+                            </button>
+                            <button type="button" data-toggle="modal" data-target="#editTindakanModal"
+                                data-id="{{ $row->id }}"
+                                class="btn btn-xs btn-default btn-edit-tindakan text-success mx-1 shadow" title="Edit Tindakan">
+                                <i class="fa fa-lg fa-fw fa-share-square"></i>
+                            </button>
+                        @else
+                            <button type="button" class="btn btn-xs btn-default text-success mx-1 shadow btn-detail"
+                                title="Detail" data-toggle="modal" data-target="#modalPurple" data-id="{{ $row->id }}">
+                                <i class="fa fa-lg fa-fw fa-info-circle"></i>
+                            </button>
+                            <button type="button" data-toggle="modal" data-target="#editModal" data-id="{{ $row->id }}"
+                                class="btn btn-xs btn-default text-primary mx-1 shadow btn-edit" title="Edit">
+                                <i class="fa fa-lg fa-fw fa-pen"></i>
+                            </button>
+                            <button type="button" data-toggle="modal" data-target="#deleteModalSuratMasuk"
+                                data-id="{{ $row->id }}" class="btn btn-xs btn-default text-danger mx-1 shadow btn-delete"
+                                title="Delete">
+                                <i class="fa fa-lg fa-fw fa-trash"></i>
+                            </button>
+                        @endif
                     @endunlessrole
                 </td>
                 {{-- </form> --}}

@@ -1,4 +1,4 @@
-<x-adminlte-modal id="editTindakanModal" title="EDIT TINDAKAN" theme="white" icon="fa fa-md fa-fw fa-info-circle "
+<x-adminlte-modal id="editTindakanModal" title="REVISI" theme="white" icon="fa fa-md fa-fw fa-info-circle "
     size='lg' disable-animations v-centered static-backdrop scrollable>
 
     <div class="card card-info">
@@ -10,7 +10,7 @@
                     <label>Tindakan</label>
                     <x-adminlte-select id="tindakan" class="form-control" name="tindakan" error-key="tindakan">
                         <option selected disabled>Pilih Tindakan</option>
-                        <option value="{{ DITERIMA }}">Diteruskan</option>
+                        <option value="{{ DITERIMA }}">Ajukan Perbaikan</option>
                     </x-adminlte-select>
                 </div>
                 <div class="invalid-feedback"></div>
