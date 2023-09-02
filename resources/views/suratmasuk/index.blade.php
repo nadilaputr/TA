@@ -47,7 +47,7 @@
                                 class="btn btn-xs btn-default text-primary mx-1 shadow btn-bidang" title="Edit">
                                 <i class="fa fa-lg fa-fw fa-pen"></i>
                             </button>
-                        @else
+                        @elseif($row->tindakan == DITERIMA)
                             <button type="button" data-toggle="modal" data-target="#ajukanModal" data-id="{{ $row->id }}"
                                 class="btn btn-xs btn-default text-primary mx-1 shadow btn-ajukan font-weight-bold"
                                 title="Edit">
@@ -58,11 +58,13 @@
                     @endrole
 
                     @role('kepaladinas')
+                    @if($row->tindakan == MENUNGGU_INSTRUKSI_KEPALA)
                         <button type="button" data-toggle="modal" data-target="#disposisiKepalaModal"
                             data-id="{{ $row->id }}" class="btn btn-xs btn-default text-primary mx-1 shadow btn-disposisi"
                             title="Edit">
                             <i class="fa fa-lg fa-fw fa-pen"></i>
                         </button>
+                    @endif
                     @endrole
 
 
