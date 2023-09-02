@@ -37,8 +37,8 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="editTanggalMasuk">Tanggal Diterima</label>
-                            <input id="editTanggalMasuk" type="datetime-local" class="form-control" name="tanggal_masuk" disabled
+                            <label for="editTanggalMasuk">Tanggal Input</label>
+                            <input id="editTanggalMasuk" type="datetime-local" class="form-control" name="tanggal_masuk" 
                                 value="{{ old('tanggal_masuk') }}">
                             <div class="invalid-feedback"></div>
                         </div>

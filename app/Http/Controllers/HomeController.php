@@ -55,9 +55,10 @@ class HomeController extends Controller
             ->get();
 
         } else if (Auth::user()->hasRole('kepaladinas')) {
-            $suratMasuk = SuratMasuk::where('tindakan', TindakanSurat::MENUNGGU_INSTRUKSI_KEPALA)
-                ->orderBy('created_at', 'desc')
-                ->get();
+            $suratMasuk = SuratMasuk::where('tindakan', '<>', TindakanSurat::DITERIMA)
+            ->where('tindakan', '<>', TindakanSurat::ARSIP)
+            ->orderBy('created_at', 'desc')
+            ->get();
         } else {
             $suratMasuk = SuratMasuk::whereHas("disposisi", function ($query) {
                 $query->where('id_bidang', auth()->user()->id_bidang);

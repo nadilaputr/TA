@@ -29,7 +29,7 @@ class SuratMasukController extends Controller
         $heads = [
             'No',
             'Nomor Surat',
-            'Tanggal Diterima',
+            'Tanggal Input',
             // 'Tanggal Surat',
             'Asal Surat',
             'Perihal',
@@ -51,13 +51,18 @@ class SuratMasukController extends Controller
         }
 
         if (Auth::user()->hasRole('sekretaris')) {
-            $suratmasuk = SuratMasuk::where('tindakan', TindakanSurat::DITERIMA)
+            $suratmasuk = SuratMasuk::where('tindakan', '<>', TindakanSurat::TINDAK_LANJUT)
+            ->where('tindakan', '<>', TindakanSurat::MENUNGGU_INSTRUKSI_KEPALA)
             ->orderBy('created_at', 'desc')
             ->get();
         }
 
         if (Auth::user()->hasRole('kepaladinas')) {
-            $suratmasuk = SuratMasuk::where('tindakan', TindakanSurat::ARSIP)
+            $suratmasuk = SuratMasuk::where('tindakan', '<>', TindakanSurat::DITERIMA)
+            ->where('tindakan', '<>', TindakanSurat::REVISI)
+            ->where('tindakan', '<>', TindakanSurat::TELAH_DIREVISI)
+            ->where('tindakan', '<>', TindakanSurat::DISPOSISI)
+            ->where('tindakan', '<>', TindakanSurat::TINDAK_LANJUT)
             ->orderBy('created_at', 'desc')
             ->get();
         }

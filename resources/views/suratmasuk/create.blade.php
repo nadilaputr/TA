@@ -38,8 +38,8 @@
 
 
                         <div class="form-group">
-                            <label for="tanggal_masuk">Tanggal Masuk</label>
-                            <input id="tanggal_masuk" type="date" class="form-control" name="tanggal_masuk" disabled
+                            <label for="tanggal_masuk">Tanggal Input</label>
+                            <input id="tanggal_masuk" type="date" class="form-control" name="tanggal_masuk" required
                                 value="{{ old('tanggal_masuk') }}">
                             <div class="invalid-feedback"></div>
                         </div>

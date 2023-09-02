@@ -26,7 +26,7 @@
                     <td>{!! $tindakanSurat->toBadge($row->surat_masuk->tindakan) !!}</td>
                     <td>{!! $row->bidang->bidang !!}</td>
                     <td>
-                        @if ($row->surat_masuk->tindakan == SELESAI)
+                        @if ($row->surat_masuk->tindakan == ARSIP)
                             <a href="{{ route('disposisi.print', $row->id) }}"
                                 class="btn btn-xs btn-default text-secondary mx-1 shadow btn-cetak-tindakan"
                                 title="Cetak Disposisi">

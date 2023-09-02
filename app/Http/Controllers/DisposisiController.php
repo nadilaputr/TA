@@ -30,7 +30,7 @@ class DisposisiController extends Controller
         if (auth()->user()->hasAnyRole(['kepaladinas', 'admin', 'sekretaris'])) {
             $disposisi = Disposisi::with(['surat_masuk', 'bidang'])
                 ->whereHas('surat_masuk', function ($query) {
-                    $query->where('tindakan', TindakanSurat::SELESAI);
+                    $query->where('tindakan', TindakanSurat::ARSIP);
                 })->orderBy('created_at', 'desc')->get();
         } else {
             $bidang = auth()->user()->id_bidang;
@@ -39,7 +39,7 @@ class DisposisiController extends Controller
                     $query->where('id', $bidang);
                 })
                 ->whereHas('surat_masuk', function ($query) {
-                    $query->where('tindakan', TindakanSurat::SELESAI);
+                    $query->where('tindakan', TindakanSurat::ARSIP);
                 })
                 ->orderBy('created_at', 'desc')
                 ->get();
@@ -141,7 +141,7 @@ class DisposisiController extends Controller
             ->first();
 
         // Memeriksa apakah tindakan surat sudah selesai (SELESAI)
-        if ($disposisi->surat_masuk->tindakan == TindakanSurat::SELESAI) {
+        if ($disposisi->surat_masuk->tindakan == TindakanSurat::ARSIP) {
             // Jika tindakan sudah selesai, tambahkan data paraf
             $paraf = 'Sudah diparaf'; // Gantilah dengan data paraf yang sesuai
         } else {
@@ -164,7 +164,7 @@ class DisposisiController extends Controller
         }
 
         // Tandai disposisi sebagai selesai
-        $disposisi->status = TindakanSurat::SELESAI;
+        $disposisi->status = TindakanSurat::ARSIP;
 
         // Atur tanggal penyelesaian ke waktu saat ini
         $disposisi->tanggal_penyelesaian = Carbon::now();

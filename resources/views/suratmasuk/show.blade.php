@@ -54,7 +54,7 @@
                         <td><span class="badge tindakan"></span></td>
                     </tr>
                     <tr>
-                        <td>Tanggal Diterima</td>
+                        <td>Tanggal Input</td>
                         <td class="tanggal_masuk"></td>
                     </tr>
                 </table>

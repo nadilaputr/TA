@@ -10,6 +10,7 @@ class TindakanSurat
     const DISPOSISI = 3;
     const TINDAK_LANJUT = 4;
     const ARSIP = 5;
+    const TELAH_DIREVISI = 6;
 
     public function toBadge($status)
     {
@@ -34,6 +35,8 @@ class TindakanSurat
                 return "Tindak Lanjut";
             case self::ARSIP:
                 return "Arsip";
+            case self::TELAH_DIREVISI:
+                return "Telah Direvisi";
         }
     }
 
@@ -41,6 +44,7 @@ class TindakanSurat
     {
         switch ($status) {
             case self::DITERIMA:
+            case self::TELAH_DIREVISI:
                 return "info";
             case self::REVISI:
                 return "danger";

@@ -80,7 +80,7 @@
                 @csrf
                 @method('PUT')
 
-                <input type="hidden" name="tindakan" value="4">
+                <input type="hidden" name="tindakan" value="3">
 
                 <div class="form-group" id="catatanKepalaContainer">
                     <label>Catatan</label>

@@ -101,13 +101,13 @@
                                     <i class="fa fa-lg fa-fw fa-pen"></i>
                                 </button>
                             @endrole --}}
-                            @role('kepaladinas')
+                            {{-- @role('kepaladinas')
                                 <button type="button" data-toggle="modal" data-target="#disposisiKepalaModal"
                                     data-id="{{ $row->id }}"
                                     class="btn btn-xs btn-default text-primary mx-1 shadow btn-disposisi" title="Edit">
                                     <i class="fa fa-lg fa-fw fa-pen"></i>
                                 </button>
-                            @endrole
+                            @endrole --}}
                             @unlessrole('sekretaris|kepaladinas|admin')
                                 <button type="button" data-toggle="modal" data-target="#terimaModal"
                                     data-id="{{ $row->id }}"
@@ -222,50 +222,50 @@
                 });
             });
 
-            $('#btn-disposisi-submit').on('click', function(e) {
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
+            // $('#btn-disposisi-submit').on('click', function(e) {
+            //     $.ajaxSetup({
+            //         headers: {
+            //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            //         }
+            //     });
 
-                const form = $('#disposisiKepalaForm');
-                const formData = new FormData(form[0]);
+            //     const form = $('#disposisiKepalaForm');
+            //     const formData = new FormData(form[0]);
 
-                const url = '{{ route('suratmasuk.updateTindakan', ':suratId') }}'.replace(':suratId',
-                    suratId);
+            //     const url = '{{ route('suratmasuk.updateTindakan', ':suratId') }}'.replace(':suratId',
+            //         suratId);
 
-                $.ajax({
-                    url: url,
-                    type: form.attr('method'),
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    success: function(response) {
-                        window.location.href = '{{ route('home') }}';
-                    },
-                    error: function(xhr, status, error) {
-                        if (xhr.status === 422) {
-                            const errors = JSON.parse(xhr.responseText)
+            //     $.ajax({
+            //         url: url,
+            //         type: form.attr('method'),
+            //         data: formData,
+            //         processData: false,
+            //         contentType: false,
+            //         success: function(response) {
+            //             window.location.href = '{{ route('suratmasuk.index') }}';
+            //         },
+            //         error: function(xhr, status, error) {
+            //             if (xhr.status === 422) {
+            //                 const errors = JSON.parse(xhr.responseText)
 
-                            // Clear previous error messages
-                            $('.invalid-feedback').empty();
-                            $('.is-invalid').removeClass('is-invalid');
+            //                 // Clear previous error messages
+            //                 $('.invalid-feedback').empty();
+            //                 $('.is-invalid').removeClass('is-invalid');
 
-                            // Iterate through each error and display next to the input
-                            $.each(errors, function(field, messages) {
-                                const input = $('[name="' + field + '"]');
-                                const errorContainer = input.siblings(
-                                    '.invalid-feedback');
-                                errorContainer.text(messages[0]);
-                                input.addClass('is-invalid');
-                            });
-                        } else {
-                            alert('Terjadi kesalahan pada server!');
-                        }
-                    }
-                });
-            });
+            //                 // Iterate through each error and display next to the input
+            //                 $.each(errors, function(field, messages) {
+            //                     const input = $('[name="' + field + '"]');
+            //                     const errorContainer = input.siblings(
+            //                         '.invalid-feedback');
+            //                     errorContainer.text(messages[0]);
+            //                     input.addClass('is-invalid');
+            //                 });
+            //             } else {
+            //                 alert('Terjadi kesalahan pada server!');
+            //             }
+            //         }
+            //     });
+            // });
 
             // $('.btn-submit-bidang').on('click', function(event) {
             //     const form = $('#tindakanBidangForm');
@@ -321,34 +321,34 @@
             // });
 
 
-            $('.btn-disposisi').on('click', function() {
-                suratId = $(this).data('id')
+            // $('.btn-disposisi').on('click', function() {
+            //     suratId = $(this).data('id')
 
-                $('.pdfContainer').hide();
+            //     $('.pdfContainer').hide();
 
-                const url = '{{ route('suratmasuk.show', ':suratId') }}'.replace(':suratId', suratId);
+            //     const url = '{{ route('suratmasuk.show', ':suratId') }}'.replace(':suratId', suratId);
 
-                $.ajax({
-                    type: 'GET',
-                    url: url,
-                    success: function(data) {
-                        $('.id').html(data.data.id);
-                        $('.nomor_surat').html(data.data.nomor_surat);
-                        $('.tanggal_surat').html(data.data.tanggal_surat);
-                        $('.asal_surat').html(data.data.asal_surat);
-                        $('.lampiran').html(data.data.lampiran);
-                        $('.tanggal_masuk').html(data.data.tanggal_masuk);
-                        $('.perihal').html(data.data.perihal);
-                        $('.jenis').html(data.data.jenis);
-                        $('.sifat').html(data.data.sifat);
-                        $('.tingkat_keamanan').html(data.data.tingkat_keamanan);
-                        $('.downloadFile').attr('href', '{{ asset(':file') }}'.replace(
-                            ':file', data.data.file))
-                        $('.pdfViewerBtn').attr('data-url', '{{ asset(':file') }}'
-                            .replace(':file', data.data.file))
-                    },
-                });
-            })
+            //     $.ajax({
+            //         type: 'GET',
+            //         url: url,
+            //         success: function(data) {
+            //             $('.id').html(data.data.id);
+            //             $('.nomor_surat').html(data.data.nomor_surat);
+            //             $('.tanggal_surat').html(data.data.tanggal_surat);
+            //             $('.asal_surat').html(data.data.asal_surat);
+            //             $('.lampiran').html(data.data.lampiran);
+            //             $('.tanggal_masuk').html(data.data.tanggal_masuk);
+            //             $('.perihal').html(data.data.perihal);
+            //             $('.jenis').html(data.data.jenis);
+            //             $('.sifat').html(data.data.sifat);
+            //             $('.tingkat_keamanan').html(data.data.tingkat_keamanan);
+            //             $('.downloadFile').attr('href', '{{ asset(':file') }}'.replace(
+            //                 ':file', data.data.file))
+            //             $('.pdfViewerBtn').attr('data-url', '{{ asset(':file') }}'
+            //                 .replace(':file', data.data.file))
+            //         },
+            //     });
+            // })
 
             // $('.btn-bidang').on('click', function() {
             //     suratId = $(this).data('id')

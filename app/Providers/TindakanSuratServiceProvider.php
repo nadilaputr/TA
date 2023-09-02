@@ -20,6 +20,7 @@ class TindakanSuratServiceProvider extends ServiceProvider
         define('DISPOSISI', TindakanSurat::DISPOSISI);
         define('TINDAK_LANJUT', TindakanSurat::TINDAK_LANJUT);
         define('ARSIP', TindakanSurat::ARSIP);
+        define('TELAH_DIREVISI', TindakanSurat::TELAH_DIREVISI);
 
         view()->composer('*', function ($view) {
             $view->with('tindakanSurat', new TindakanSurat());
