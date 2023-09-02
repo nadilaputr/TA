@@ -59,7 +59,7 @@
                         <i class="fa fa-lg fa-fw fa-file"></i>
                     </a> --}}
                     <button class="btn btn-xs btn-default text-primary mx-1 shadow pdfViewerBtn"
-                        title="Lihat File">Lihat PDF
+                        title="Lihat File">View
                     </button>
                 </td>
             </tr>
