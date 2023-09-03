@@ -151,6 +151,22 @@
                 }
             });
 
+            if ($("#tindakanbidang").val() === "4") {
+                $('#containerbidang').show();
+            } else {
+                $('#containerbidang').hide();
+            }
+
+            $("#tindakanbidang").change(function() {
+                var selectedOption = $(this).val();
+
+                if (selectedOption === "4") {
+                    $('#containerbidang').show();
+                } else {
+                    $('#containerbidang').hide();
+                }
+            });
+
             const tindakanToString = (status) => {
                 console.log(status);
                 switch (status) {
@@ -472,35 +488,37 @@
             $('.btn-submit-bidang').on('click', function(event) {
                 const form = $('#tindakanBidangForm');
                 const formData = new FormData(form[0]);
-
-                formData.append('id_surat', suratId);
-
-                $.ajax({
-                    url: '{{ route('disposisi.store') }}',
-                    type: form.attr('method'),
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    success: function(response) {
-                        if (suratId) {
-                            $.ajax({
-                                type: 'POST',
-                                url: `suratmasuk/${suratId}/tindakan`,
-                                data: {
-                                    _method: 'PUT',
-                                    _token: '{{ csrf_token() }}',
-                                    tindakan: 4,
-                                },
-                                success: function(response) {
-                                    window.location.href =
-                                        "{{ route('disposisi.index') }}";
-                                },
-                            });
-                        }
-                    },
-                    error: function(xhr, status, error) {
+                // Mendapatkan nilai yang dipilih dari dropdown 'Tindakan'
+                const selectedTindakan = $('#tindakanbidang').val();
+                const catatan = $('#catatanBidang').val();
+                if (selectedTindakan === '4') {
+                    formData.append('id_surat', suratId);
+                    $.ajax({
+                        url: '{{ route('disposisi.store') }}',
+                        type: form.attr('method'),
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        success: function(response) {
+                            if (suratId) {
+                                $.ajax({
+                                    type: 'POST',
+                                    url: `suratmasuk/${suratId}/tindakan`,
+                                    data: {
+                                        _method: 'PUT',
+                                        _token: '{{ csrf_token() }}',
+                                        tindakan: 4,
+                                    },
+                                    success: function(response) {
+                                        window.location.href =
+                                            "{{ route('disposisi.index') }}";
+                                    },
+                                });
+                            }
+                        },
+                        error: function(xhr, status, error) {
                         if (xhr.status === 422) {
-                            const errors = JSON.parse(xhr.responseText)
+                            const errors = JSON.parse(xhr.responseText);
 
                             // Clear previous error messages
                             $('.invalid-feedback').empty();
@@ -515,11 +533,50 @@
                                 input.addClass('is-invalid');
                             });
                         } else {
-                            console.log(error)
+                            console.log(error);
                             alert('Terjadi kesalahan pada server!');
                         }
                     }
                 });
+                } else {
+                    const url = '{{ route('suratmasuk.updateTindakan', ':suratId') }}'.replace(':suratId',
+                    suratId);
+                    formData.append('_method', 'PUT');
+                    formData.delete('id_surat');
+                    formData.delete('catatan');
+                    formData.delete('id_bidang');
+
+                    $.ajax({
+                        url: url,
+                        type: form.attr('method'),
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        success: function(response) {
+                            window.location.href = '{{ route('suratmasuk.index') }}';
+                        },
+                        error: function(xhr, status, error) {
+                            if (xhr.status === 422) {
+                                const errors = JSON.parse(xhr.responseText)
+
+                                // Clear previous error messages
+                                $('.invalid-feedback').empty();
+                                $('.is-invalid').removeClass('is-invalid');
+
+                                // Iterate through each error and display next to the input
+                                $.each(errors, function(field, messages) {
+                                    const input = $('[name="' + field + '"]');
+                                    const errorContainer = input.siblings(
+                                        '.invalid-feedback');
+                                    errorContainer.text(messages[0]);
+                                    input.addClass('is-invalid');
+                                });
+                            } else {
+                                alert('Terjadi kesalahan pada server!');
+                            }
+                        }
+                    });
+                }
             });
 
             $('.btn-bidang').on('click', function() {
@@ -561,7 +618,7 @@
 
                         // Populate the select element with options
                         bidang.forEach(function(item) {
-                            if (item.id !== 2 && item.id !== 3) {
+                            if (item.id !== 1 && item.id !== 2 && item.id !== 3) {
                                 selectElement.append($('<option>', {
                                     value: item.id,
                                     text: item.bidang
@@ -645,9 +702,6 @@
                     }
                 });
             });
-
-
-
             $('.pdfViewerBtn').click(function(e) {
                 const url = $(this).data('url');
 
@@ -655,5 +709,6 @@
                 $('.pdfContainer').show();
             })
         });
+        
     </script>
 @stop

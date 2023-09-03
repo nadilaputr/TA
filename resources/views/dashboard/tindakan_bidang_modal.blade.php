@@ -79,12 +79,21 @@
                 @csrf
 
                 <div class="form-group">
+                    <label for="tindakanbidang">Tindakan Surat</label>
+                    <select id="tindakanbidang" class="form-control" name="tindakan">
+                        <option value="" selected disabled>Pilih Tindakan</option>
+                        <option value="{{ ARSIP }}">Tidak Disposisi</option>
+                        <option value="{{ TINDAK_LANJUT }}">Disposisi</option>
+                    </select>
+                </div>
+
+                <div class="form-group" id="containerbidang">
                     <label>Bidang</label>
                     <select class="form-control bidang" name="id_bidang" id="bidang" required>
                     </select>
                 </div>
 
-                <div class="form-group" id="catatanBidangContainer">
+                <div class="form-group" id="container">
                     <label>Catatan</label>
                     <x-adminlte-textarea name="catatan" placeholder="Tambah catatan" id="catatanBidang" required />
                 </div>
