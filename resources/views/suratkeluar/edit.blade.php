@@ -52,6 +52,7 @@
                         <div class="form-group">
                             <label>Lampiran</label>
                             <x-adminlte-select id="editLampiran" name="lampiran">
+                                <option value="0 Lampiran">0 Lembar</option>
                                 <option value="1 Lampiran">1 Lembar</option>
                                 <option value="2 Lampiran">2 Lembar</option>
                                 <option value="3 Lampiran">3 Lembar</option>
@@ -107,7 +108,7 @@
         </div>
 
         <x-slot name="footerSlot">
-            <x-adminlte-button class="btn-secondary" label="Close" data-dismiss="modal" />
+            <x-adminlte-button class="bg-danger text-white" label="Close" data-dismiss="modal" />
             <button type="button" class="btn btn-success" id="editSubmitBtn">Submit</button>
         </x-slot>
         </form>

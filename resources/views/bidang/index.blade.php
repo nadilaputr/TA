@@ -45,11 +45,11 @@
         </x-adminlte-alert>
     @endrole
 
-    <x-adminlte-modal id="deleteModal" title="Hapus Akun" size="sm" theme="danger" icon="fas fa-trash" v-centered
+    <x-adminlte-modal id="deleteModal" title="Hapus Bidang" size="md" theme="white" icon="fas fa-trash" v-centered
         static-backdrop scrollable>
-        <div>Anda yakin ingin menghapus operator ?</div>
+        <div>Anda yakin ingin menghapus Bidang ?</div>
         <x-slot name="footerSlot">
-            <x-adminlte-button class="mr-auto" theme="success" label="Batal" data-dismiss="modal" />
+            <x-adminlte-button class="mr-auto" theme="secondary" label="Batal" data-dismiss="modal" />
             <x-adminlte-button theme="danger" label="Hapus" id="confirmDeleteBtn" />
         </x-slot>
     </x-adminlte-modal>

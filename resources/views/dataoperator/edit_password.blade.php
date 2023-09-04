@@ -38,7 +38,7 @@
                     <input type="password" class="form-control" name="password_confirmation"
                         placeholder="Konfirmasi password" required>
                 </div>
-                <button type="submit" class="btn btn-primary">Ubah Password</button>
+                <button type="submit" class="btn btn-primary">Simpan</button>
             </form>
         </div>
     </div>

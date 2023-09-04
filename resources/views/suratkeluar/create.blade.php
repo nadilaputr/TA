@@ -21,9 +21,9 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="alamat_surat">Alamat Surat</label>
+                            <label for="alamat_surat">Alamat Penerima</label>
                             <input id="alamat_surat" type="text" name="alamat_surat" class="form-control"
-                                placeholder="Alamat Surat" required>
+                                placeholder="Alamat Penerima" required>
                             <div class="invalid-feedback"></div>
                         </div>
                     </div>
@@ -52,6 +52,7 @@
                             <label for="lampiran">Lampiran</label>
                             <x-adminlte-select id="lampiran" name="lampiran" required>
                                 <option selected disabled>Pilih Lampiran</option>
+                                <option value="0 Lampiran">0 Lampiran</option>
                                 <option value="1 Lampiran">1 Lampiran</option>
                                 <option value="2 Lampiran">2 Lampiran</option>
                                 <option value="3 Lampiran">3 Lampiran</option>

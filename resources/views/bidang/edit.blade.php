@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Edit Data Operato')
+@section('title', 'Edit Bidang')
 
 @section('content_header')
     <h1>Edit Bidang</h1>
@@ -20,10 +20,6 @@
 
 
     <div class="card">
-        <div class="card-header">
-            <h3 class="card-title">Form Edit Data Operator</h3>
-        </div>
-
         <div class="card-body">
             <form action="{{ route('bidang.update', $bidang->id) }}" method="POST">
                 @csrf

@@ -70,6 +70,7 @@
                             <label for="lampiran">Lampiran</label>
                             <x-adminlte-select id="lampiran" name="lampiran" required>
                                 <option selected disabled>Pilih Lampiran</option>
+                                <option value="0 Lampiran">0 Lampiran</option>
                                 <option value="1 Lampiran">1 Lampiran</option>
                                 <option value="2 Lampiran">2 Lampiran</option>
                                 <option value="3 Lampiran">3 Lampiran</option>

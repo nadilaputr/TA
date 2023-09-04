@@ -55,8 +55,8 @@
     <x-adminlte-modal id="deleteModalOperator" title="Hapus Akun" size="md" theme="white" icon="fa fa-sm fa-fw fa-trash" v-centered scrollable>
         <div>Anda yakin ingin menghapus operator ?</div>
         <x-slot name="footerSlot">
-            <x-adminlte-button class="mr-auto" theme="danger" label="Batal" data-dismiss="modal" />
-            <x-adminlte-button theme="secondary" label="Hapus" id="confirmDeleteOperatorBtn" />
+            <x-adminlte-button class="mr-auto" theme="secondary" label="Batal" data-dismiss="modal" />
+            <x-adminlte-button theme="danger" label="Hapus" id="confirmDeleteOperatorBtn" />
         </x-slot>
     </x-adminlte-modal>
 @stop

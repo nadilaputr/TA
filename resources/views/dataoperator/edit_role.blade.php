@@ -39,7 +39,7 @@
                     </select>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Ubah Role</button>
+                <button type="submit" class="btn btn-primary">Simpan</button>
             </form>
         </div>
     </div>

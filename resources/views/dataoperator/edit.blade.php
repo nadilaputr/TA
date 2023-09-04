@@ -44,7 +44,7 @@
                     <input type="text" class="form-control" name="jabatan" required value="{{ $edit->jabatan }}">
                 </div>
                 <div class="form-group">
-                    <label>Role</label>
+                    <label>Bidang</label>
                     <select class="form-control" id="bidang" name="id_bidang">
                         @foreach ($bidang as $row)
                             <option value="{{ $row->id }}" {{ $row->id == $edit->id_bidang? 'selected' : '' }}>

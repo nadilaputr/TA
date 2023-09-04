@@ -35,30 +35,21 @@
                 <td>{{ $row->perihal }}</td>
                 <td>{{ $dateFormat->from($row->tanggal_surat) }}</td>
                 <td>{{ $row->lampiran }}</td>
-
-                {{-- <td>{!! $tindakanSurat->toBadge($row->tindakan) !!}</td> --}}
                 <td class="d-flex">
-                    {{-- @csrf --}}
-                    {{-- @method('DELETE') --}}
-
-                    {{-- <button type="button" class="btn btn-xs btn-default text-success mx-1 shadow btn-detail" title="Detail"
-                        data-toggle="modal" data-target="#modalPurple" data-id="{{ $row->id }}">
-                        <i class="fa fa-lg fa-fw fa-info-circle"></i>
-                    </button> --}}
-                    <a href="{{ Storage::url($row->file) }}" target="_blank"
-                        class="btn btn-xs btn-default text-secondary mx-1 shadow" title="Lihat File">
+                    <a href="{{ asset($row->file) }}" target="_blank" class="btn btn-xs btn-default text-secondary mx-1 shadow"
+                        title="Lihat File">
                         <i class="fa fa-lg fa-fw fas fa-print"></i>
                     </a>
                     @role('admin')
-                    <button type="button" data-toggle="modal" data-target="#editModal" data-id="{{ $row->id }}"
-                        class="btn btn-xs btn-default text-primary mx-1 shadow btn-edit" title="Edit">
-                        <i class="fa fa-lg fa-fw fa-pen"></i>
-                    </button>
-                    <button type="button" data-toggle="modal" data-target="#deleteModalSuratKeluar"
-                        data-id="{{ $row->id }}" class="btn btn-xs btn-default text-danger mx-1 shadow btn-delete"
-                        title="Delete">
-                        <i class="fa fa-lg fa-fw fa-trash"></i>
-                    </button>
+                        <button type="button" data-toggle="modal" data-target="#editModal" data-id="{{ $row->id }}"
+                            class="btn btn-xs btn-default text-primary mx-1 shadow btn-edit" title="Edit">
+                            <i class="fa fa-lg fa-fw fa-pen"></i>
+                        </button>
+                        <button type="button" data-toggle="modal" data-target="#deleteModalSuratKeluar"
+                            data-id="{{ $row->id }}" class="btn btn-xs btn-default text-danger mx-1 shadow btn-delete"
+                            title="Delete">
+                            <i class="fa fa-lg fa-fw fa-trash"></i>
+                        </button>
                     @endrole
             </tr>
         @endforeach
@@ -66,8 +57,6 @@
     @include('suratkeluar.create')
     @include('suratkeluar.delete')
     @include('suratkeluar.edit')
-    {{-- @include('suratkeluar.show') --}}
-
 
 @stop
 @section('js')
@@ -213,25 +202,6 @@
                     }
                 });
             });
-
-            // $('.btn-detail').on('click', function(event) {
-
-            //     $('.pdfContainer').hide();
-
-            //     var id = $(this).data('id');
-
-            //     $.get(`suratkeluar/${id}`, function(data) {
-            //         $('.id').html(data.data.id);
-            //         $('.nomor_surat').html(data.data.nomor_surat);
-            //         $('.tanggal_surat').html(data.data.tanggal_surat);
-            //         $('.alamat_surat').html(data.data.alamat_surat);
-            //         $('.perihal').html(data.data.perihal);
-            //         $('.sifat').html(data.data.sifat);
-            //         $('.lampiran').html(data.data.lampiran);
-            //         $('.pdfViewerBtn').attr('data-url', '{{ Storage::url(':file') }}'
-            //             .replace(':file', data.data.file))
-            //     })
-            // });
 
         });
     </script>

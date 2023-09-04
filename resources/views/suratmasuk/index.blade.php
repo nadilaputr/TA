@@ -171,7 +171,7 @@
                 console.log(status);
                 switch (status) {
                     case {{ DITERIMA }}:
-                        return "Arsip";
+                        return "Diterima";
                     case {{ REVISI }}:
                         return "Revisi";
                     case {{ ARSIP }}:
