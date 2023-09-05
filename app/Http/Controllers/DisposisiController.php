@@ -45,7 +45,7 @@ class DisposisiController extends Controller
                 ->get();
         }
 
-      
+
         return view('disposisi.index', [
             "disposisi" => $disposisi,
             "heads" => $heads,
@@ -135,9 +135,7 @@ class DisposisiController extends Controller
     {
 
         $disposisi = Disposisi::with(['surat_masuk', 'bidang'])
-            ->whereHas('surat_masuk', function ($query) use ($id) {
-                $query->where('id', $id);
-            })
+            ->where('id', $id)
             ->first();
 
         // Memeriksa apakah tindakan surat sudah selesai (SELESAI)
