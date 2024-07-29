@@ -54,17 +54,24 @@
                                 <span>Ajukan</span>
                                 <i class="fa fa-lg fa-fw fa-pen"></i>
                             </button>
+                        @elseif($row->tindakan == TELAH_DIREVISI)
+                            <button type="button" data-toggle="modal" data-target="#ajukanModal" data-id="{{ $row->id }}"
+                                class="btn btn-xs btn-default text-primary mx-1 shadow btn-ajukan font-weight-bold"
+                                title="Edit">
+                                <span>Ajukan</span>
+                                <i class="fa fa-lg fa-fw fa-pen"></i>
+                            </button>
                         @endif
                     @endrole
 
                     @role('kepaladinas')
-                    @if($row->tindakan == MENUNGGU_INSTRUKSI_KEPALA)
-                        <button type="button" data-toggle="modal" data-target="#disposisiKepalaModal"
-                            data-id="{{ $row->id }}" class="btn btn-xs btn-default text-primary mx-1 shadow btn-disposisi"
-                            title="Edit">
-                            <i class="fa fa-lg fa-fw fa-pen"></i>
-                        </button>
-                    @endif
+                        @if ($row->tindakan == MENUNGGU_INSTRUKSI_KEPALA)
+                            <button type="button" data-toggle="modal" data-target="#disposisiKepalaModal"
+                                data-id="{{ $row->id }}"
+                                class="btn btn-xs btn-default text-primary mx-1 shadow btn-disposisi" title="Edit">
+                                <i class="fa fa-lg fa-fw fa-pen"></i>
+                            </button>
+                        @endif
                     @endrole
 
 
@@ -130,24 +137,37 @@
 
 @stop
 
-@section('js')
+@push('js')
     <script>
+        console.log('test');
+
         $(document).ready(function() {
             let suratId;
 
             if ($("#tindakan").val() === "1") {
                 $('#catatanContainer').show();
+                $('#informasi_tambahan').hide();
+            } else if ($("#tindakan").val() === "2") {
+                $('#informasi_tambahan').show();
+                $('#catatanContainer').hide();
             } else {
                 $('#catatanContainer').hide();
+                $('#informasi_tambahan').hide();
             }
 
             $("#tindakan").change(function() {
                 var selectedOption = $(this).val();
 
-                if (selectedOption === "1") {
+                if ($("#tindakan").val() === "1") {
                     $('#catatanContainer').show();
+                    $('#informasi_tambahan').hide();
+                } else if ($("#tindakan").val() === "2") {
+                    $('#informasi_tambahan').show();
+                    $('#catatanContainer').hide();
                 } else {
                     $('#catatanContainer').hide();
+                    $('#informasi_tambahan').hide();
+
                 }
             });
 
@@ -219,8 +239,10 @@
             });
 
 
+
             //Handle Create Form Submit
             $('#createSubmitBtn').on('click', function(e) {
+                console.log('dsd');
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -403,7 +425,6 @@
                         .catatan :
                         "-");
                     $('.catatan').html(data.data.catatan ?? "-");
-                    $('.tingkat_keamanan').html(data.data.tingkat_keamanan);
                     $('.pdfViewerBtn').attr('data-url', '{{ asset(':file') }}'
                         .replace(':file', data.data.file))
                 })
@@ -473,7 +494,6 @@
                         $('.perihal').html(data.data.perihal);
                         $('.jenis').html(data.data.jenis);
                         $('.sifat').html(data.data.sifat);
-                        $('.tingkat_keamanan').html(data.data.tingkat_keamanan);
                         $('.downloadFile').attr('href', '{{ asset(':file') }}'.replace(
                             ':file', data.data.file))
                         $('.pdfViewerBtn').attr('data-url', '{{ asset(':file') }}'
@@ -517,30 +537,30 @@
                             }
                         },
                         error: function(xhr, status, error) {
-                        if (xhr.status === 422) {
-                            const errors = JSON.parse(xhr.responseText);
+                            if (xhr.status === 422) {
+                                const errors = JSON.parse(xhr.responseText);
 
-                            // Clear previous error messages
-                            $('.invalid-feedback').empty();
-                            $('.is-invalid').removeClass('is-invalid');
+                                // Clear previous error messages
+                                $('.invalid-feedback').empty();
+                                $('.is-invalid').removeClass('is-invalid');
 
-                            // Iterate through each error and display next to the input
-                            $.each(errors, function(field, messages) {
-                                const input = $('[name="' + field + '"]');
-                                const errorContainer = input.siblings(
-                                    '.invalid-feedback');
-                                errorContainer.text(messages[0]);
-                                input.addClass('is-invalid');
-                            });
-                        } else {
-                            console.log(error);
-                            alert('Terjadi kesalahan pada server!');
+                                // Iterate through each error and display next to the input
+                                $.each(errors, function(field, messages) {
+                                    const input = $('[name="' + field + '"]');
+                                    const errorContainer = input.siblings(
+                                        '.invalid-feedback');
+                                    errorContainer.text(messages[0]);
+                                    input.addClass('is-invalid');
+                                });
+                            } else {
+                                console.log(error);
+                                alert('Terjadi kesalahan pada server!');
+                            }
                         }
-                    }
-                });
+                    });
                 } else {
                     const url = '{{ route('suratmasuk.updateTindakan', ':suratId') }}'.replace(':suratId',
-                    suratId);
+                        suratId);
                     formData.append('_method', 'PUT');
                     formData.delete('id_surat');
                     formData.delete('catatan');
@@ -594,7 +614,6 @@
                         $('.nomor_surat').html(data.data.nomor_surat);
                         $('.tanggal_surat').html(data.data.tanggal_surat);
                         $('.asal_surat').html(data.data.asal_surat);
-                        $('.tingkat_keamanan').html(data.data.tingkat_keamanan);
                         $('.sifat').html(data.data.sifat);
                         $('.lampiran').html(data.data.lampiran);
                         $('.perihal').html(data.data.perihal);
@@ -629,7 +648,7 @@
                 });
             })
 
-              $('.btn-disposisi').on('click', function() {
+            $('.btn-disposisi').on('click', function() {
                 suratId = $(this).data('id')
 
                 $('.pdfContainer').hide();
@@ -649,7 +668,6 @@
                         $('.perihal').html(data.data.perihal);
                         $('.jenis').html(data.data.jenis);
                         $('.sifat').html(data.data.sifat);
-                        $('.tingkat_keamanan').html(data.data.tingkat_keamanan);
                         $('.downloadFile').attr('href', '{{ asset(':file') }}'.replace(
                             ':file', data.data.file))
                         $('.pdfViewerBtn').attr('data-url', '{{ asset(':file') }}'
@@ -709,6 +727,5 @@
                 $('.pdfContainer').show();
             })
         });
-        
     </script>
-@stop
+@endpush

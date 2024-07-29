@@ -19,10 +19,6 @@
             <x-adminlte-card id="detailsurat" title="INFORMASI TAMBAHAN" theme="light">
                 <table class="table table-sm table-hover">
                     <tr>
-                        <td>Tkt. Keamanan</td>
-                        <td class="tingkat_keamanan"></td>
-                    </tr>
-                    <tr>
                         <td>Sifat</td>
                         <td class="sifat"></td>
                     </tr>

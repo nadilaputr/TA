@@ -37,34 +37,34 @@ class SuratMasukController extends Controller
             // 'Catatan',
             'Status',
             ['label' => 'Actions', 'no-export' => true, 'width' => 5, 'text-align' => 'center'],
-            
+
         ];
 
         $suratmasuk = [];
 
         if (Auth::user()->hasRole('admin')) {
             $suratmasuk = SuratMasuk::where('tindakan', '<>', TindakanSurat::MENUNGGU_INSTRUKSI_KEPALA)
-            ->where('tindakan', '<>', TindakanSurat::DISPOSISI)
-            ->where('tindakan', '<>', TindakanSurat::TINDAK_LANJUT)
-            ->orderBy('created_at', 'desc')
-            ->get();
+                ->where('tindakan', '<>', TindakanSurat::DISPOSISI)
+                ->where('tindakan', '<>', TindakanSurat::TINDAK_LANJUT)
+                ->orderBy('created_at', 'desc')
+                ->get();
         }
 
         if (Auth::user()->hasRole('sekretaris')) {
             $suratmasuk = SuratMasuk::where('tindakan', '<>', TindakanSurat::TINDAK_LANJUT)
-            ->where('tindakan', '<>', TindakanSurat::MENUNGGU_INSTRUKSI_KEPALA)
-            ->orderBy('created_at', 'desc')
-            ->get();
+                ->where('tindakan', '<>', TindakanSurat::MENUNGGU_INSTRUKSI_KEPALA)
+                ->orderBy('created_at', 'desc')
+                ->get();
         }
 
         if (Auth::user()->hasRole('kepaladinas')) {
             $suratmasuk = SuratMasuk::where('tindakan', '<>', TindakanSurat::DITERIMA)
-            ->where('tindakan', '<>', TindakanSurat::REVISI)
-            ->where('tindakan', '<>', TindakanSurat::TELAH_DIREVISI)
-            ->where('tindakan', '<>', TindakanSurat::DISPOSISI)
-            ->where('tindakan', '<>', TindakanSurat::TINDAK_LANJUT)
-            ->orderBy('created_at', 'desc')
-            ->get();
+                ->where('tindakan', '<>', TindakanSurat::REVISI)
+                ->where('tindakan', '<>', TindakanSurat::TELAH_DIREVISI)
+                ->where('tindakan', '<>', TindakanSurat::DISPOSISI)
+                ->where('tindakan', '<>', TindakanSurat::TINDAK_LANJUT)
+                ->orderBy('created_at', 'desc')
+                ->get();
         }
 
         // $suratmasuk = SuratMasuk::whereIn('tindakan', [0, 1, 5])->orderBy('created_at', 'desc')->get();
@@ -87,10 +87,9 @@ class SuratMasukController extends Controller
             'tanggal_surat' => 'required|date',
             'asal_surat' => 'required',
             'perihal' => 'required',
-            'lampiran' => 'required',
-            'jenis' => 'required',
-            'sifat' => 'required',
-            'tingkat_keamanan' => 'required',
+            'lampiran' => 'nullable',
+            'jenis' => 'nullable',
+            'sifat' => 'nullable',
             'file' => 'required|mimes:jpg,jpeg,pdf,png',
         ]);
 
@@ -167,7 +166,6 @@ class SuratMasukController extends Controller
             'lampiran' => 'required',
             'sifat' => 'required',
             'jenis' => 'required',
-            'tingkat_keamanan' => 'required',
             'file' => 'nullable|mimes:jpg,jpeg,pdf',
 
         ]);

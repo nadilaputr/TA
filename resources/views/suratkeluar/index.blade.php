@@ -51,6 +51,7 @@
                             <i class="fa fa-lg fa-fw fa-trash"></i>
                         </button>
                     @endrole
+                </td>
             </tr>
         @endforeach
     </x-adminlte-datatable>
@@ -203,6 +204,6 @@
                 });
             });
 
-        });
+     ,
     </script>
 @stop

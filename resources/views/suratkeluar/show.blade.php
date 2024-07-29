@@ -70,4 +70,4 @@
         <x-adminlte-button class="bg-danger text-white" label="Close" data-dismiss="modal" /> </x-slot>
 
 </x-adminlte-modal>
-{{-- End Modal Detail Surat Masuk --}}
+

@@ -1,4 +1,5 @@
 @extends('adminlte::page')
+@php($register_url = View::getSection('register_url') ?? config('adminlte.register_url', 'register'))
 
 @section('title', 'Data Operator')
 
@@ -8,6 +9,11 @@
 
 @section('content')
     @role('admin')
+        @if ($register_url)
+            <a href="/register">
+                <button class="btn btn-info btn-create mb-3">Tambah</button>
+            </a>
+        @endif
         <x-adminlte-datatable id="table5" :heads="$heads" striped hoverable>
             @foreach ($dataOperator as $row)
                 <tr>
@@ -32,8 +38,9 @@
                             class="btn btn-xs btn-default text-primary mx-1 shadow" title="Ubah Role">
                             <i class="fa fa-lg fa-fw fa-user-shield"></i>
                         </a>
-                        <button type="button" data-toggle="modal" data-target="#deleteModalOperator" data-id="{{ $row->id }}"
-                            class="btn btn-xs btn-default text-danger mx-1 shadow btn-delete" title="Delete">
+                        <button type="button" data-toggle="modal" data-target="#deleteModalOperator"
+                            data-id="{{ $row->id }}" class="btn btn-xs btn-default text-danger mx-1 shadow btn-delete"
+                            title="Delete">
                             <i class="fa fa-lg fa-fw fa-trash"></i>
                         </button>
 
@@ -52,7 +59,8 @@
         </x-adminlte-alert>
     @endrole
 
-    <x-adminlte-modal id="deleteModalOperator" title="Hapus Akun" size="md" theme="white" icon="fa fa-sm fa-fw fa-trash" v-centered scrollable>
+    <x-adminlte-modal id="deleteModalOperator" title="Hapus Akun" size="md" theme="white"
+        icon="fa fa-sm fa-fw fa-trash" v-centered scrollable>
         <div>Anda yakin ingin menghapus operator ?</div>
         <x-slot name="footerSlot">
             <x-adminlte-button class="mr-auto" theme="secondary" label="Batal" data-dismiss="modal" />

@@ -93,18 +93,6 @@
                             <div class="invalid-feedback"></div>
                         </div>
                     </div>
-
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label>Tkt. Keamanan</label>
-                            <x-adminlte-select id="editTingkatKeamanan" name="tingkat_keamanan">
-                                <option value="Biasa">Biasa</option>
-                                <option value="Segera">Segera</option>
-                                <option value="Sangat Segera">Sangat Segera</option>
-                            </x-adminlte-select>
-                            <div class="invalid-feedback"></div>
-                        </div>
-                    </div>
                     </div>
 
                     <b>

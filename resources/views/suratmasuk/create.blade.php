@@ -1,6 +1,5 @@
 <x-adminlte-modal id="createModal" title="TAMBAH SURAT MASUK" theme="white" icon="fa fa-md fa-fw fa-file-upload"
     size='lg' disable-animations v-centered scrollable>
-
     <div class="card card-info">
 
         <form id="createForm" action="{{ route('suratmasuk.store') }}" enctype="multipart/form-data" method="POST">
@@ -53,59 +52,6 @@
                     <div class="invalid-feedback"></div>
                 </div>
 
-                <b>
-                    <p class="text-lightblue">INFORMASI TAMBAHAN</p>
-                </b>
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label for="jenis">Jenis Surat</label>
-                            <input id="jenis" type="text" name="jenis" class="form-control"
-                                placeholder="Jenis Surat" required>
-                            <div class="invalid-feedback"></div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label for="lampiran">Lampiran</label>
-                            <x-adminlte-select id="lampiran" name="lampiran" required>
-                                <option selected disabled>Pilih Lampiran</option>
-                                <option value="0 Lampiran">0 Lampiran</option>
-                                <option value="1 Lampiran">1 Lampiran</option>
-                                <option value="2 Lampiran">2 Lampiran</option>
-                                <option value="3 Lampiran">3 Lampiran</option>
-                                <option value="4 Lampiran">4 Lampiran</option>
-                                <option value="5 Lampiran">5 Lampiran</option>
-                            </x-adminlte-select>
-                            <div class="invalid-feedback"></div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label for="sifat">Sifat</label>
-                            <x-adminlte-select id="sifat" name="sifat" required>
-                                <option selected disabled>Pilih Sifat</option>
-                                <option value="Biasa">Biasa</option>
-                                <option value="Segera">Segera</option>
-                                <option value="Sangat Segera">Sangat Segera</option>
-                            </x-adminlte-select>
-                            <div class="invalid-feedback"></div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label for="tingkat_keamanan">Tkt. Keamanan</label>
-                            <x-adminlte-select id="tingkat_keamanan" name="tingkat_keamanan" required>
-                                <option selected disabled>Pilih Tingkat Keamanan</option>
-                                <option value="Biasa">Biasa</option>
-                                <option value="Rahasia">Rahasia</option>
-                                <option value="Sangat Rahasia">Sangat Rahasia</option>
-                            </x-adminlte-select>
-                            <div class="invalid-feedback"></div>
-                        </div>
-                    </div>
-                </div>
 
                 <b>
                     <p class="text-lightblue">UPLOAD FILE</p>
@@ -126,7 +72,7 @@
 
             <x-slot name="footerSlot">
                 <x-adminlte-button class="bg-danger text-white" label="Close" data-dismiss="modal" />
-                <button type="button" class="btn btn-success" id="createSubmitBtn">Submit</button>
+                <button type="button" id="createSubmitBtn" class="btn btn-success">Submit</button>
             </x-slot>
         </form>
     </div>

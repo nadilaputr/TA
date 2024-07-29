@@ -5,16 +5,12 @@
         <x-adminlte-card id="detailsurat" title="INFORMASI TAMBAHAN" theme="light">
             <table class="table table-sm table-hover">
                 <tr>
-                    <td>Tkt. Keamanan</td>
-                    <td class="tingkat_keamanan"></td>
-                </tr>
-                <tr>
                     <td>Sifat</td>
                     <td class="sifat"></td>
                 </tr>
                 <tr>
                     <td style="width: 40%;">Jenis</td>
-                    <td class="jenis"></td>
+                    <td id="jn" class="jenis"></td>
                 </tr>
                 <tr>
                     <td>Lampiran</td>
@@ -57,8 +53,7 @@
                         title="Lihat File">Download
                         <i class="fa fa-lg fa-fw fa-file"></i>
                     </a> --}}
-                    <button class="btn btn-xs btn-default text-primary mx-1 shadow pdfViewerBtn"
-                        title="Lihat File">View
+                    <button class="btn btn-xs btn-default text-primary mx-1 shadow pdfViewerBtn" title="Lihat File">View
                     </button>
                 </td>
             </tr>
@@ -106,3 +101,115 @@
         </div>
     </div>
 </x-adminlte-modal>
+
+@section('js')
+    <script>
+        $(document).ready(function() {
+            if ($("#tindakan").val() === "1") {
+                $('#catatanContainer').show();
+                $('#informasi_tambahan').hide();
+            } else if ($("#tindakan").val() === "2") {
+                $('#informasi_tambahan').show();
+                $('#catatanContainer').hide();
+            } else {
+                $('#catatanContainer').hide();
+                $('#informasi_tambahan').hide();
+            }
+
+            $("#tindakan").change(function() {
+                var selectedOption = $(this).val();
+
+                if ($("#tindakan").val() === "1") {
+                    $('#catatanContainer').show();
+                    $('#informasi_tambahan').hide();
+                } else if ($("#tindakan").val() === "2") {
+                    $('#informasi_tambahan').show();
+                    $('#catatanContainer').hide();
+                } else {
+                    $('#catatanContainer').hide();
+                    $('#informasi_tambahan').hide();
+
+                }
+            });
+            const tindakanToString = (status) => {
+                console.log(status);
+                switch (status) {
+                    case {{ DITERIMA }}:
+                        return "Diterima";
+                    case {{ REVISI }}:
+                        return "Revisi";
+                    case {{ ARSIP }}:
+                        return "Arsip";
+                }
+            }
+
+            const tindakanToBadge = (status) => {
+                switch (status) {
+                    case {{ DITERIMA }}:
+                        return "success";
+                    case {{ REVISI }}:
+                        return "warning";
+                    case {{ ARSIP }}:
+                        return "success";
+                }
+            }
+
+            $('.pdfContainer').hide();
+
+            let suratId;
+
+            $('#bidangModal').on('show.bs.modal', function(e) {
+
+                //get data-id attribute of the clicked element
+                var suratId = $(e.relatedTarget).data('id');
+
+                $.get(`suratmasuk/${suratId}`, function(data) {
+                    console.log(data);
+
+                    $('.id').html(data.data.id);
+                    $('.nomor_surat').html(data.data.nomor_surat);
+                    $('.tanggal_surat').html(data.data.tanggal_surat);
+                    $('.asal_surat').html(data.data.asal_surat);
+                    $('.lampiran').html(data.data.lampiran);
+                    $('.tanggal_masuk').html(data.data.tanggal_masuk);
+                    $('.perihal').html(data.data.perihal);
+                    $('.jenis').html(data.data.jenis);
+                    $('.sifat').html(data.data.sifat);
+                    $('.downloadFile').attr('href', '{{ asset(':file') }}'.replace(
+                        ':file', data.data.file))
+                    $('.pdfViewerBtn').attr('data-url', '{{ asset(':file') }}'
+                        .replace(':file', data.data.file))
+                })
+            });
+        })
+
+
+
+        // $('.btn-detail').on('click', function(event) {
+
+        //     $('.pdfContainer').hide();
+
+        //     suratId = $(this).data('id');
+
+        //     $.get(`suratmasuk/${suratId}`, function(data) {
+        //         $('.id').html(data.data.id);
+        //         $('.nomor_surat').html(data.data.nomor_surat);
+        //         $('.tanggal_surat').html(data.data.tanggal_surat);
+        //         $('.asal_surat').html(data.data.asal_surat);
+        //         $('.tanggal_masuk').html(data.data.tanggal_masuk);
+        //         $('.perihal').html(data.data.perihal);
+        //         $('.sifat').html(data.data.sifat);
+        //         $('.tindakan').text(tindakanToString(data.data.tindakan));
+        //         $('.tindakan').addClass(`badge-${tindakanToBadge(data.data.tindakan)}`)
+        //         $('.lampiran').html(data.data.lampiran);
+        //         $('.jenis').html(data.data.jenis);
+        //         $('.catatanKadis').html(data.data.disposisi != null ? data.data.disposisi
+        //             .catatan :
+        //             "-");
+        //         $('.catatan').html(data.data.catatan ?? "-");
+        //         $('.pdfViewerBtn').attr('data-url', '{{ asset(':file') }}'
+        //             .replace(':file', data.data.file))
+        //     })
+        // });
+    </script>
+@endsection
