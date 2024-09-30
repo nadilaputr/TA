@@ -12,6 +12,7 @@ class Disposisi extends Model
     protected $table = "disposisi";
     protected $fillable = [
         'catatan',
+        'sifat',
         'id_bidang',
         'id_surat',
         'id_user',

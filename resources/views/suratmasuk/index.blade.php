@@ -90,16 +90,16 @@
                                 class="btn btn-xs btn-default text-primary mx-1 shadow btn-edit" title="Edit">
                                 <i class="fa fa-lg fa-fw fa-pen"></i>
                             </button>
-                            <button type="button" data-toggle="modal" data-target="#editTindakanModal"
+                            {{-- <button type="button" data-toggle="modal" data-target="#editTindakanModal"
                                 data-id="{{ $row->id }}"
                                 class="btn btn-xs btn-default btn-edit-tindakan text-success mx-1 shadow" title="Edit Tindakan">
                                 <i class="fa fa-lg fa-fw fa-share-square"></i>
-                            </button>
+                            </button> --}}
                             <button type="button" data-toggle="modal" data-target="#deleteModalSuratMasuk"
-                            data-id="{{ $row->id }}" class="btn btn-xs btn-default text-danger mx-1 shadow btn-delete"
-                            title="Delete">
-                            <i class="fa fa-lg fa-fw fa-trash"></i>
-                        </button>
+                                data-id="{{ $row->id }}" class="btn btn-xs btn-default text-danger mx-1 shadow btn-delete"
+                                title="Delete">
+                                <i class="fa fa-lg fa-fw fa-trash"></i>
+                            </button>
                         @else
                             <button type="button" class="btn btn-xs btn-default text-success mx-1 shadow btn-detail"
                                 title="Detail" data-toggle="modal" data-target="#modalPurple" data-id="{{ $row->id }}">
@@ -274,6 +274,7 @@
                                 input.addClass('is-invalid');
                             });
                         } else {
+                            console.error(error);
                             alert('Terjadi kesalahan pada server!');
                         }
                     }
@@ -678,6 +679,7 @@
                     type: 'GET',
                     url: url,
                     success: function(data) {
+                        console.log(data.data)
                         $('.id').html(data.data.id);
                         $('.nomor_surat').html(data.data.nomor_surat);
                         $('.tanggal_surat').html(data.data.tanggal_surat);
@@ -686,7 +688,7 @@
                         $('.tanggal_masuk').html(data.data.tanggal_masuk);
                         $('.perihal').html(data.data.perihal);
                         $('.jenis').html(data.data.jenis);
-                        $('.sifat').html(data.data.sifat);
+                        $('.sifat').html(data.data.disposisi.sifat);
                         $('.downloadFile').attr('href', '{{ asset(':file') }}'.replace(
                             ':file', data.data.file))
                         $('.pdfViewerBtn').attr('data-url', '{{ asset(':file') }}'

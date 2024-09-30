@@ -20,8 +20,6 @@ class SuratMasuk extends Model
         'catatan',
         'lampiran',
         'status',
-        'jenis',
-        'sifat',
         'tindakan',
         'file',
     ];
@@ -30,5 +28,8 @@ class SuratMasuk extends Model
     {
         return $this->hasOne(Disposisi::class, 'id_surat');
     }
-
+    public function bidang()
+    {
+        return $this->belongsTo(Bidang::class, 'id_bidang');
+    }
 }

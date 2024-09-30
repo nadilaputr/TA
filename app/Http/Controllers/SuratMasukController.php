@@ -117,6 +117,8 @@ class SuratMasukController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'tindakan' => 'required',
+            'catatan' => 'nullable',
+            'sifat' => 'nullable',
         ]);
 
         if ($validator->fails()) {
@@ -132,20 +134,28 @@ class SuratMasukController extends Controller
                     'id_bidang' => $request->id_bidang,
                     'id_surat' => $request->id_surat,
                     'id_user' => Auth::user()->id,
+                    'sifat' => $request->sifat,
                 ]);
 
                 SuratMasuk::where('id', $id)->update([
-                    'sifat' => $data['sifat'],
                     'tindakan' => $data['tindakan'],
                 ]);
             } else if ($data['tindakan'] == 5) {
                 SuratMasuk::where('id', $id)->update([
                     'tindakan' => $data['tindakan'],
                 ]);
-            } else {
+            } else if ($data['tindakan'] == 1) {
                 SuratMasuk::where('id', $id)->update([
                     'catatan' => $data['catatan'],
                     'tindakan' => $data['tindakan'],
+                ]);
+            } else {
+                SuratMasuk::where('id', $id)->update([
+                    'tindakan' => $data['tindakan'],
+                ]);
+
+                Disposisi::where('id_surat', $id)->update([
+                    'catatan' => $data['catatan'],
                 ]);
             }
 
