@@ -9,6 +9,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use App\Helpers\TindakanSurat;
+use App\Models\Disposisi;
 // use TindakanSurat;
 use Illuminate\Support\Facades\Auth;
 
@@ -30,11 +31,8 @@ class SuratMasukController extends Controller
             'No',
             'Nomor Surat',
             'Tanggal Input',
-            // 'Tanggal Surat',
             'Asal Surat',
             'Perihal',
-            // 'Jenis Surat',
-            // 'Catatan',
             'Status',
             ['label' => 'Actions', 'no-export' => true, 'width' => 5, 'text-align' => 'center'],
 
@@ -87,7 +85,7 @@ class SuratMasukController extends Controller
             'tanggal_surat' => 'required|date',
             'asal_surat' => 'required',
             'perihal' => 'required',
-            'lampiran' => 'nullable',
+            'lampiran' => 'required',
             'jenis' => 'nullable',
             'sifat' => 'nullable',
             'file' => 'required|mimes:jpg,jpeg,pdf,png',
@@ -128,11 +126,33 @@ class SuratMasukController extends Controller
         $data = $request->except(['_token', '_method']);
 
         try {
-            SuratMasuk::where('id', $id)->update($data);
+
+            if ($data['tindakan'] == 2) {
+                Disposisi::create([
+                    'id_bidang' => $request->id_bidang,
+                    'id_surat' => $request->id_surat,
+                    'id_user' => Auth::user()->id,
+                ]);
+
+                SuratMasuk::where('id', $id)->update([
+                    'sifat' => $data['sifat'],
+                    'tindakan' => $data['tindakan'],
+                ]);
+            } else if ($data['tindakan'] == 5) {
+                SuratMasuk::where('id', $id)->update([
+                    'tindakan' => $data['tindakan'],
+                ]);
+            } else {
+                SuratMasuk::where('id', $id)->update([
+                    'catatan' => $data['catatan'],
+                    'tindakan' => $data['tindakan'],
+                ]);
+            }
+
 
             return response()->json(['message' => 'Surat Masuk berhasil diteruskan'], 200);
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Terjadi kesalahan saat menyimpan TindakanSurat'], 500);
+            return response()->json(['error' => $e->getMessage()], 402);
         }
     }
 
@@ -164,10 +184,9 @@ class SuratMasukController extends Controller
             'asal_surat' => 'required',
             'perihal' => 'required',
             'lampiran' => 'required',
-            'sifat' => 'required',
-            'jenis' => 'required',
+            'sifat' => 'nullable',
+            'jenis' => 'nullable',
             'file' => 'nullable|mimes:jpg,jpeg,pdf',
-
         ]);
 
         if ($validator->fails()) {
@@ -186,11 +205,18 @@ class SuratMasukController extends Controller
         $data['tanggal_surat'] = Carbon::createFromFormat('d-m-Y', Carbon::parse($request->tanggal_surat)->format('d-m-Y'));
 
         try {
-            SuratMasuk::where('id', $id)->update($data);
+            $suratMasuk = SuratMasuk::find($id);
+
+            if ($suratMasuk->tindakan == 1) {
+                $data['tindakan'] = 6;
+            }
+
+            $suratMasuk->update($data);
+
 
             return response()->json(['message' => 'Surat Masuk berhasil diubah'], 200);
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Terjadi kesalahan saat mengubah Surat'], 500);
+            return response()->json(['error' => $e->getMessage()], 500);
         }
     }
 

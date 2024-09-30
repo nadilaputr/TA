@@ -17,7 +17,7 @@
                     <td class="lampiran"></td>
                 </tr>
                 <tr>
-                    <td>Tanggal Diterima</td>
+                    <td>Tanggal Input</td>
                     <td class="tanggal_masuk"></td>
                 </tr>
             </table>
@@ -94,7 +94,7 @@
                 </div>
 
                 <x-slot name="footerSlot">
-                    <x-adminlte-button class="bg-danger text-white" label="Close" data-dismiss="modal" />
+                    <x-adminlte-button class="bg-danger text-white" label="Tutup" data-dismiss="modal" />
                     <button type="button" class="btn btn-success btn-submit-bidang update">Simpan</button>
                 </x-slot>
             </form>

@@ -35,11 +35,17 @@
                             <div class="invalid-feedback"></div>
                         </div>
 
-
                         <div class="form-group">
-                            <label for="tanggal_masuk">Tanggal Input</label>
-                            <input id="tanggal_masuk" type="date" class="form-control" name="tanggal_masuk" required
-                                value="{{ old('tanggal_masuk') }}">
+                            <label for="lampiran">Lampiran</label>
+                            <x-adminlte-select id="lampiran" name="lampiran" required>
+                                <option selected disabled>Pilih Lampiran</option>
+                                <option value="0 Lampiran">0 Lampiran</option>
+                                <option value="1 Lampiran">1 Lampiran</option>
+                                <option value="2 Lampiran">2 Lampiran</option>
+                                <option value="3 Lampiran">3 Lampiran</option>
+                                <option value="4 Lampiran">4 Lampiran</option>
+                                <option value="5 Lampiran">5 Lampiran</option>
+                            </x-adminlte-select>
                             <div class="invalid-feedback"></div>
                         </div>
                     </div>
@@ -71,8 +77,8 @@
             </div>
 
             <x-slot name="footerSlot">
-                <x-adminlte-button class="bg-danger text-white" label="Close" data-dismiss="modal" />
-                <button type="button" id="createSubmitBtn" class="btn btn-success">Submit</button>
+                <x-adminlte-button class="bg-danger text-white" label="Tutup" data-dismiss="modal" />
+                <button type="button" id="createSubmitBtn" class="btn btn-success">Simpan</button>
             </x-slot>
         </form>
     </div>

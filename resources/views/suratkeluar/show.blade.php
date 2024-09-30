@@ -67,7 +67,7 @@
 
 
     <x-slot name="footerSlot">
-        <x-adminlte-button class="bg-danger text-white" label="Close" data-dismiss="modal" /> </x-slot>
+        <x-adminlte-button class="bg-danger text-white" label="Tutup" data-dismiss="modal" /> </x-slot>
 
 </x-adminlte-modal>
 

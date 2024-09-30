@@ -30,27 +30,21 @@
                 <td>{{ $row->id }}</td>
                 <td>{{ $row->nomor_surat }}</td>
                 <td>{{ $dateFormat->from($row->tanggal_masuk) }}</td>
-                {{-- <td>{{ $row->tanggal_surat }}</td> --}}
                 <td>{{ $row->asal_surat }}</td>
                 <td>{{ $row->perihal }}</td>
-                {{-- <td>{{ $row->jenis }}</td> --}}
-                {{-- <td>{{ $row->catatan }}</td> --}}
                 <td>{!! $tindakanSurat->toBadge($row->tindakan) !!}</td>
-                {{-- <form action="{{ route('suratmasuk.destroy', $row->id) }}" method="POST"> --}}
                 <td class="d-flex" style="justify-content: center">
-                    {{-- @csrf --}}
-                    {{-- @method('DELETE') --}}
 
                     @role('sekretaris')
-                        @if ($row->tindakan == DISPOSISI)
+                        {{-- @if ($row->tindakan == DISPOSISI)
                             <button type="button" data-toggle="modal" data-target="#bidangModal" data-id="{{ $row->id }}"
-                                class="btn btn-xs btn-default text-primary mx-1 shadow btn-bidang" title="Edit">
+                                class="btn btn-xs btn-default text-info mx-1 shadow btn-bidang font-weight-bold" title="Edit">
+                                <span>Disposisi Bidang</span>
                                 <i class="fa fa-lg fa-fw fa-pen"></i>
-                            </button>
-                        @elseif($row->tindakan == DITERIMA)
+                            </button> --}}
+                        @if ($row->tindakan == DITERIMA)
                             <button type="button" data-toggle="modal" data-target="#ajukanModal" data-id="{{ $row->id }}"
-                                class="btn btn-xs btn-default text-primary mx-1 shadow btn-ajukan font-weight-bold"
-                                title="Edit">
+                                class="btn btn-xs btn-default text-info mx-1 shadow btn-ajukan font-weight-bold" title="Edit">
                                 <span>Ajukan</span>
                                 <i class="fa fa-lg fa-fw fa-pen"></i>
                             </button>
@@ -81,10 +75,7 @@
                                 title="Detail" data-toggle="modal" data-target="#modalPurple" data-id="{{ $row->id }}">
                                 <i class="fa fa-lg fa-fw fa-info-circle"></i>
                             </button>
-                            {{-- <a href="{{ route('disposisi.print', $row->id) }}" target="_blank"
-                            class="btn btn-xs btn-default text-primary mx-1 shadow downloadFile" title="Cetak Disposisi">
-                            <i class="fa fa-lg fa-fw fa-print"></i>
-                        </a> --}}
+
                             <button type="button" data-toggle="modal" data-target="#deleteModalSuratMasuk"
                                 data-id="{{ $row->id }}" class="btn btn-xs btn-default text-danger mx-1 shadow btn-delete"
                                 title="Delete">
@@ -104,6 +95,11 @@
                                 class="btn btn-xs btn-default btn-edit-tindakan text-success mx-1 shadow" title="Edit Tindakan">
                                 <i class="fa fa-lg fa-fw fa-share-square"></i>
                             </button>
+                            <button type="button" data-toggle="modal" data-target="#deleteModalSuratMasuk"
+                            data-id="{{ $row->id }}" class="btn btn-xs btn-default text-danger mx-1 shadow btn-delete"
+                            title="Delete">
+                            <i class="fa fa-lg fa-fw fa-trash"></i>
+                        </button>
                         @else
                             <button type="button" class="btn btn-xs btn-default text-success mx-1 shadow btn-detail"
                                 title="Detail" data-toggle="modal" data-target="#modalPurple" data-id="{{ $row->id }}">
@@ -294,6 +290,7 @@
                     url: url,
                     type: 'GET',
                     success: function(response) {
+                        $('#tindakan_input').val(response.surat.tindakan);
                         $('#editNomorSurat').val(response.surat.nomor_surat);
                         $('#editTanggalSurat').val(response.surat.tanggal_surat);
                         $('#editAlamatSurat').val(response.surat.asal_surat);
@@ -427,6 +424,8 @@
                     $('.catatan').html(data.data.catatan ?? "-");
                     $('.pdfViewerBtn').attr('data-url', '{{ asset(':file') }}'
                         .replace(':file', data.data.file))
+                    $('.downloadFile').attr('href', '{{ asset(':file') }}'.replace(
+                        ':file', data.data.file))
                 })
             });
 
@@ -452,6 +451,7 @@
                         window.location.href = '{{ route('suratmasuk.index') }}';
                     },
                     error: function(xhr, status, error) {
+                        console.error("btn ajukan submit");
                         if (xhr.status === 422) {
                             const errors = JSON.parse(xhr.responseText)
 
@@ -486,6 +486,7 @@
                     url: url,
                     success: function(data) {
                         $('.id').html(data.data.id);
+                        $('#id_surat_input').val(data.data.id);
                         $('.nomor_surat').html(data.data.nomor_surat);
                         $('.tanggal_surat').html(data.data.tanggal_surat);
                         $('.asal_surat').html(data.data.asal_surat);
@@ -500,10 +501,28 @@
                             .replace(':file', data.data.file))
                     },
                 });
+
+                $.ajax({
+                    type: 'GET',
+                    url: `bidang/all`,
+                    success: function(data) {
+                        const bidang = data.bidang
+                        const selectElement = $('.bidang');
+
+                        selectElement.empty();
+
+                        // Populate the select element with options
+                        bidang.forEach(function(item) {
+                            if (item.id !== 1 && item.id !== 2 && item.id !== 3) {
+                                selectElement.append($('<option>', {
+                                    value: item.id,
+                                    text: item.bidang
+                                }));
+                            }
+                        });
+                    },
+                });
             })
-
-
-            // tryyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy
 
             $('.btn-submit-bidang').on('click', function(event) {
                 const form = $('#tindakanBidangForm');

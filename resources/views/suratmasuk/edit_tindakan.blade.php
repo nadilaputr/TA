@@ -16,8 +16,8 @@
                 <div class="invalid-feedback"></div>
             </form>
             <x-slot name="footerSlot">
-                <x-adminlte-button class="bg-danger text-white" label="Close" data-dismiss="modal" />
-                <button type="button" class="btn btn-success" id="editTindakanSubmitBtn">Submit</button>
+                <x-adminlte-button class="bg-danger text-white" label="Tutup" data-dismiss="modal" />
+                <button type="button" class="btn btn-success" id="editTindakanSubmitBtn">Simpan</button>
             </x-slot>
         </div>
     </div>

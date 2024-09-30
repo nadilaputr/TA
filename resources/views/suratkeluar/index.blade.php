@@ -60,7 +60,8 @@
     @include('suratkeluar.edit')
 
 @stop
-@section('js')
+
+@push('js')
     <script>
         $(document).ready(function() {
             let suratkeluarId;
@@ -203,7 +204,6 @@
                     }
                 });
             });
-
-     ,
+        });
     </script>
-@stop
+@endpush

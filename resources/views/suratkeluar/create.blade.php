@@ -108,8 +108,8 @@
             </div>
 
             <x-slot name="footerSlot">
-                <x-adminlte-button class="bg-danger text-white" label="Close" data-dismiss="modal" />
-                <button type="button" class="btn btn-success" id="createSubmitBtn">Submit</button>
+                <x-adminlte-button class="bg-danger text-white" label="Tutup" data-dismiss="modal" />
+                <button type="button" class="btn btn-success" id="createSubmitBtn">Simpan</button>
             </x-slot>
         </form>
     </div>

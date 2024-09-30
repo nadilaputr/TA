@@ -25,17 +25,16 @@
                     <td>{{ strtoupper($row->getRoleNames()->first()) }}</td>
                     <td class="d-flex">
 
-
                         <a href="{{ route('dataoperator.edit', $row->id) }}"
-                            class="btn btn-xs btn-default text-primary mx-1 shadow" title="Edit">
+                            class="btn btn-xs btn-default text-info mx-1 shadow" title="Edit">
                             <i class="fa fa-lg fa-fw fa-pen"></i>
                         </a>
                         <a href="{{ route('dataoperator.password', $row->id) }}"
-                            class="btn btn-xs btn-default text-primary mx-1 shadow" title="Ubah Password">
+                            class="btn btn-xs btn-default text-info mx-1 shadow" title="Ubah Password">
                             <i class="fa fa-lg fa-fw fa-lock"></i>
                         </a>
                         <a href="{{ route('dataoperator.role', $row->id) }}"
-                            class="btn btn-xs btn-default text-primary mx-1 shadow" title="Ubah Role">
+                            class="btn btn-xs btn-default text-info mx-1 shadow" title="Ubah Role">
                             <i class="fa fa-lg fa-fw fa-user-shield"></i>
                         </a>
                         <button type="button" data-toggle="modal" data-target="#deleteModalOperator"
@@ -44,11 +43,6 @@
                             <i class="fa fa-lg fa-fw fa-trash"></i>
                         </button>
 
-                        {{-- Kayaknya gk butuh button detail, karena data udah detail di tabel --}}
-                        {{-- <button type="button" class="btn btn-xs btn-default text-success mx-1 shadow btn-detail"
-                                title="Detail" data-toggle="modal" data-target="#detailmodal" data-id="{{ $row->id }}">
-                                <i class="fa fa-lg fa-fw fa-info-circle"></i>
-                            </button> --}}
                     </td>
                 </tr>
             @endforeach

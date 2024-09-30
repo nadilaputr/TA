@@ -319,6 +319,7 @@ return [
             'text' => 'Surat Keluar',
             'url'  => 'suratkeluar',
             'icon' => 'fas fa-envelope-open-text',
+            'can' => 'view',
         ],
         [
             'text' => 'Disposisi',

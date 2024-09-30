@@ -128,7 +128,7 @@
     @include('disposisi.terima')
 @stop
 
-@section('js')
+@push('js')
     <script>
         $(document).ready(function() {
 
@@ -180,6 +180,7 @@
             });
 
             $('#terimaTindakanSubmitBtn').on('click', function(e) {
+
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -408,4 +409,4 @@
             })
         })
     </script>
-@stop
+@endpush

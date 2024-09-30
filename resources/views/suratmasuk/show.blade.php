@@ -16,42 +16,34 @@
 
     <div class="row">
         <div class="col-md-6">
-            <x-adminlte-card id="detailsurat" title="INFORMASI TAMBAHAN" theme="light">
+            <x-adminlte-card id="detailsurat" title="AGENDA" theme="light">
                 <table class="table table-sm table-hover">
                     <tr>
-                        <td>Sifat</td>
-                        <td class="sifat"></td>
+                        <td>No</td>
+                        <td class="id"></td>
                     </tr>
                     <tr>
-                        <td style="width: 40%;">Jenis</td>
-                        <td class="jenis"></td>
+                        <td>Tanggal Diterima</td>
+                        <td class="tanggal_masuk"></td>
                     </tr>
                     <tr>
-                        <td>Lampiran</td>
-                        <td class="lampiran"></td>
+                        <td style="width: 40%;">Tindakan</td>
+                        <td><span class="badge tindakan"></span></td>
                     </tr>
                 </table>
             </x-adminlte-card>
         </div>
 
         <div class="col-md-6">
-            <x-adminlte-card id="detailsurat" title="INFORMASI TINDAKAN" theme="warning">
+            <x-adminlte-card id="detailsurat" title="CATATAN" theme="warning">
                 <table class="table table-sm table-hover">
                     <tr>
-                        <td style="width: 40%;">Catatan</td>
+                        <td style="width: 40%;">Sekretaris</td>
                         <td class="catatan"></td>
                     </tr>
                     <tr>
-                        <td style="width: 40%;">Catatan Kadis</td>
+                        <td style="width: 40%;">Kepala Dinas</td>
                         <td class="catatanKadis"></td>
-                    </tr>
-                    <tr>
-                        <td style="width: 40%;">Tindakan</td>
-                        <td><span class="badge tindakan"></span></td>
-                    </tr>
-                    <tr>
-                        <td>Tanggal Input</td>
-                        <td class="tanggal_masuk"></td>
                     </tr>
                 </table>
             </x-adminlte-card>
@@ -60,10 +52,6 @@
 
     <x-adminlte-card id="detailsurat" title="INFORMASI DETAIL SURAT" theme="lightblue">
         <table class="table table-sm">
-            <tr>
-                <td>No Agenda</td>
-                <td class="id"></td>
-            </tr>
             <tr>
                 <td>Nomor Surat</td>
                 <td class="nomor_surat"></td>
@@ -81,27 +69,30 @@
                 <td class="tanggal_surat"></td>
             </tr>
             <tr>
+                <td>Lampiran</td>
+                <td class="lampiran"></td>
+            </tr>
+            <tr>
                 <td>File</td>
-                <td>
-                    <button class="btn btn-xs btn-default text-primary mx-1 shadow pdfViewerBtn"
-                        title="Lihat File">View</button>
+                <td class="d-flex">
+                    <a target="_blank" class="btn btn-xs btn-info text-white mx-1 shadow font-weight-bold downloadFile"
+                        title="Lihat File">View
+                        <i class="fa fa-lg fa-fw fa-eye"></i>
+                    </a>
                 </td>
             </tr>
         </table>
     </x-adminlte-card>
 
     <div class="card">
-        <div class="card-body">
             <div class="pdfContainer">
                 <iframe onload="resizeIframe(this)" class="pdfViewer" width="100%" height="500"
                     scrolling="no"></iframe>
             </div>
-
-        </div>
     </div>
 
     <x-slot name="footerSlot">
-        <x-adminlte-button class="bg-danger text-white" label="Close" data-dismiss="modal" /> </x-slot>
+        <x-adminlte-button class="bg-danger text-white" label="Tutup" data-dismiss="modal" /> </x-slot>
 
 </x-adminlte-modal>
 
