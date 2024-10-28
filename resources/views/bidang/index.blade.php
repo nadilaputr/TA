@@ -19,22 +19,14 @@
                     <td>{{ $row->id }}</td>
                     <td>{{ $row->bidang }}</td>
                     <td class="d-flex">
-
                         <a href="{{ route('bidang.edit', $row->id) }}"
                             class="btn btn-xs btn-default text-primary mx-1 shadow" title="Edit">
                             <i class="fa fa-lg fa-fw fa-pen"></i>
                         </a>
-                      
                         <button type="button" data-toggle="modal" data-target="#deleteModal" data-id="{{ $row->id }}"
                             class="btn btn-xs btn-default text-danger mx-1 shadow btn-delete" title="Delete">
                             <i class="fa fa-lg fa-fw fa-trash"></i>
                         </button>
-
-                        {{-- Kayaknya gk butuh button detail, karena data udah detail di tabel --}}
-                        {{-- <button type="button" class="btn btn-xs btn-default text-success mx-1 shadow btn-detail"
-                                title="Detail" data-toggle="modal" data-target="#detailmodal" data-id="{{ $row->id }}">
-                                <i class="fa fa-lg fa-fw fa-info-circle"></i>
-                            </button> --}}
                     </td>
                 </tr>
             @endforeach

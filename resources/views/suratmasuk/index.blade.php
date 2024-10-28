@@ -36,46 +36,34 @@
                 <td class="d-flex" style="justify-content: center">
 
                     @role('sekretaris')
-                        {{-- @if ($row->tindakan == DISPOSISI)
-                            <button type="button" data-toggle="modal" data-target="#bidangModal" data-id="{{ $row->id }}"
-                                class="btn btn-xs btn-default text-info mx-1 shadow btn-bidang font-weight-bold" title="Edit">
-                                <span>Disposisi Bidang</span>
-                                <i class="fa fa-lg fa-fw fa-pen"></i>
-                            </button> --}}
                         @if ($row->tindakan == DITERIMA)
                             <button type="button" data-toggle="modal" data-target="#ajukanModal" data-id="{{ $row->id }}"
-                                class="btn btn-xs btn-default text-info mx-1 shadow btn-ajukan font-weight-bold" title="Edit">
+                                class="btn btn-xs btn-default text-info mx-1 shadow btn-ajukan font-weight-bold" title="Ajukan">
                                 <span>Ajukan</span>
                                 <i class="fa fa-lg fa-fw fa-pen"></i>
                             </button>
                         @elseif($row->tindakan == TELAH_DIREVISI)
                             <button type="button" data-toggle="modal" data-target="#ajukanModal" data-id="{{ $row->id }}"
-                                class="btn btn-xs btn-default text-primary mx-1 shadow btn-ajukan font-weight-bold"
-                                title="Edit">
+                                class="btn btn-xs btn-default text-info mx-1 shadow btn-ajukan font-weight-bold"
+                                title="Ajukan">
                                 <span>Ajukan</span>
                                 <i class="fa fa-lg fa-fw fa-pen"></i>
                             </button>
-                        @endif
-                    @endrole
-
-                    @role('kepaladinas')
-                        @if ($row->tindakan == MENUNGGU_INSTRUKSI_KEPALA)
-                            <button type="button" data-toggle="modal" data-target="#disposisiKepalaModal"
-                                data-id="{{ $row->id }}"
-                                class="btn btn-xs btn-default text-primary mx-1 shadow btn-disposisi" title="Edit">
-                                <i class="fa fa-lg fa-fw fa-pen"></i>
+                        @elseif($row->tindakan == ARSIP)
+                            <button type="button" class="btn btn-xs btn-default text-success mx-1 shadow btn-detail"
+                                title="Detail" data-toggle="modal" data-target="#modalPurple" data-id="{{ $row->id }}">
+                                <i class="fa fa-lg fa-fw fa-info-circle"></i>
                             </button>
                         @endif
                     @endrole
 
-
+                    
                     @unlessrole('sekretaris|kepaladinas')
                         @if ($row->tindakan == ARSIP)
                             <button type="button" class="btn btn-xs btn-default text-success mx-1 shadow btn-detail"
                                 title="Detail" data-toggle="modal" data-target="#modalPurple" data-id="{{ $row->id }}">
                                 <i class="fa fa-lg fa-fw fa-info-circle"></i>
                             </button>
-
                             <button type="button" data-toggle="modal" data-target="#deleteModalSuratMasuk"
                                 data-id="{{ $row->id }}" class="btn btn-xs btn-default text-danger mx-1 shadow btn-delete"
                                 title="Delete">
@@ -87,14 +75,9 @@
                                 <i class="fa fa-lg fa-fw fa-info-circle"></i>
                             </button>
                             <button type="button" data-toggle="modal" data-target="#editModal" data-id="{{ $row->id }}"
-                                class="btn btn-xs btn-default text-primary mx-1 shadow btn-edit" title="Edit">
+                                class="btn btn-xs btn-default text-info mx-1 shadow btn-edit" title="Edit">
                                 <i class="fa fa-lg fa-fw fa-pen"></i>
                             </button>
-                            {{-- <button type="button" data-toggle="modal" data-target="#editTindakanModal"
-                                data-id="{{ $row->id }}"
-                                class="btn btn-xs btn-default btn-edit-tindakan text-success mx-1 shadow" title="Edit Tindakan">
-                                <i class="fa fa-lg fa-fw fa-share-square"></i>
-                            </button> --}}
                             <button type="button" data-toggle="modal" data-target="#deleteModalSuratMasuk"
                                 data-id="{{ $row->id }}" class="btn btn-xs btn-default text-danger mx-1 shadow btn-delete"
                                 title="Delete">
@@ -106,7 +89,7 @@
                                 <i class="fa fa-lg fa-fw fa-info-circle"></i>
                             </button>
                             <button type="button" data-toggle="modal" data-target="#editModal" data-id="{{ $row->id }}"
-                                class="btn btn-xs btn-default text-primary mx-1 shadow btn-edit" title="Edit">
+                                class="btn btn-xs btn-default text-info mx-1 shadow btn-edit" title="Edit">
                                 <i class="fa fa-lg fa-fw fa-pen"></i>
                             </button>
                             <button type="button" data-toggle="modal" data-target="#deleteModalSuratMasuk"
@@ -124,7 +107,6 @@
 
     @include('dashboard.ajukan_modal')
     @include('dashboard.tindakan_bidang_modal')
-    @include('dashboard.disposisi_kepala_modal')
     @include('suratmasuk.delete')
     @include('suratmasuk.show')
     @include('suratmasuk.create')
@@ -668,79 +650,79 @@
                 });
             })
 
-            $('.btn-disposisi').on('click', function() {
-                suratId = $(this).data('id')
+            // $('.btn-disposisi').on('click', function() {
+            //     suratId = $(this).data('id')
 
-                $('.pdfContainer').hide();
+            //     $('.pdfContainer').hide();
 
-                const url = '{{ route('suratmasuk.show', ':suratId') }}'.replace(':suratId', suratId);
+            //     const url = '{{ route('suratmasuk.show', ':suratId') }}'.replace(':suratId', suratId);
 
-                $.ajax({
-                    type: 'GET',
-                    url: url,
-                    success: function(data) {
-                        console.log(data.data)
-                        $('.id').html(data.data.id);
-                        $('.nomor_surat').html(data.data.nomor_surat);
-                        $('.tanggal_surat').html(data.data.tanggal_surat);
-                        $('.asal_surat').html(data.data.asal_surat);
-                        $('.lampiran').html(data.data.lampiran);
-                        $('.tanggal_masuk').html(data.data.tanggal_masuk);
-                        $('.perihal').html(data.data.perihal);
-                        $('.jenis').html(data.data.jenis);
-                        $('.sifat').html(data.data.disposisi.sifat);
-                        $('.downloadFile').attr('href', '{{ asset(':file') }}'.replace(
-                            ':file', data.data.file))
-                        $('.pdfViewerBtn').attr('data-url', '{{ asset(':file') }}'
-                            .replace(':file', data.data.file))
-                    },
-                });
-            })
+            //     $.ajax({
+            //         type: 'GET',
+            //         url: url,
+            //         success: function(data) {
+            //             console.log(data.data)
+            //             $('.id').html(data.data.id);
+            //             $('.nomor_surat').html(data.data.nomor_surat);
+            //             $('.tanggal_surat').html(data.data.tanggal_surat);
+            //             $('.asal_surat').html(data.data.asal_surat);
+            //             $('.lampiran').html(data.data.lampiran);
+            //             $('.tanggal_masuk').html(data.data.tanggal_masuk);
+            //             $('.perihal').html(data.data.perihal);
+            //             $('.jenis').html(data.data.jenis);
+            //             $('.sifat').html(data.data.disposisi.sifat);
+            //             $('.downloadFile').attr('href', '{{ asset(':file') }}'.replace(
+            //                 ':file', data.data.file))
+            //             $('.pdfViewerBtn').attr('data-url', '{{ asset(':file') }}'
+            //                 .replace(':file', data.data.file))
+            //         },
+            //     });
+            // })
 
-            $('#btn-disposisi-submit').on('click', function(e) {
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
+            // $('#btn-disposisi-submit').on('click', function(e) {
+            //     $.ajaxSetup({
+            //         headers: {
+            //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            //         }
+            //     });
 
-                const form = $('#disposisiKepalaForm');
-                const formData = new FormData(form[0]);
+            //     const form = $('#disposisiKepalaForm');
+            //     const formData = new FormData(form[0]);
 
-                const url = '{{ route('suratmasuk.updateTindakan', ':suratId') }}'.replace(':suratId',
-                    suratId);
+            //     const url = '{{ route('suratmasuk.updateTindakan', ':suratId') }}'.replace(':suratId',
+            //         suratId);
 
-                $.ajax({
-                    url: url,
-                    type: form.attr('method'),
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    success: function(response) {
-                        window.location.href = '{{ route('suratmasuk.index') }}';
-                    },
-                    error: function(xhr, status, error) {
-                        if (xhr.status === 422) {
-                            const errors = JSON.parse(xhr.responseText)
+            //     $.ajax({
+            //         url: url,
+            //         type: form.attr('method'),
+            //         data: formData,
+            //         processData: false,
+            //         contentType: false,
+            //         success: function(response) {
+            //             window.location.href = '{{ route('suratmasuk.index') }}';
+            //         },
+            //         error: function(xhr, status, error) {
+            //             if (xhr.status === 422) {
+            //                 const errors = JSON.parse(xhr.responseText)
 
-                            // Clear previous error messages
-                            $('.invalid-feedback').empty();
-                            $('.is-invalid').removeClass('is-invalid');
+            //                 // Clear previous error messages
+            //                 $('.invalid-feedback').empty();
+            //                 $('.is-invalid').removeClass('is-invalid');
 
-                            // Iterate through each error and display next to the input
-                            $.each(errors, function(field, messages) {
-                                const input = $('[name="' + field + '"]');
-                                const errorContainer = input.siblings(
-                                    '.invalid-feedback');
-                                errorContainer.text(messages[0]);
-                                input.addClass('is-invalid');
-                            });
-                        } else {
-                            alert('Terjadi kesalahan pada server!');
-                        }
-                    }
-                });
-            });
+            //                 // Iterate through each error and display next to the input
+            //                 $.each(errors, function(field, messages) {
+            //                     const input = $('[name="' + field + '"]');
+            //                     const errorContainer = input.siblings(
+            //                         '.invalid-feedback');
+            //                     errorContainer.text(messages[0]);
+            //                     input.addClass('is-invalid');
+            //                 });
+            //             } else {
+            //                 alert('Terjadi kesalahan pada server!');
+            //             }
+            //         }
+            //     });
+            // });
             $('.pdfViewerBtn').click(function(e) {
                 const url = $(this).data('url');
 

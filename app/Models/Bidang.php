@@ -20,7 +20,7 @@ class Bidang extends Model
 
     public function disposisi()
     {
-        return $this->hasMany(Disposisi::class);
+        return $this->hasMany(Disposisi::class, 'id_bidang');
     }
 
     public function surat_keluar()

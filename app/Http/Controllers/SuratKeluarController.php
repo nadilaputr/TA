@@ -67,7 +67,7 @@ class SuratKeluarController extends Controller
 
         $file = $request->file('file');
         $fileName = 'suratkeluar-' . $file->getClientOriginalName();
-        $filePath = public_path('suratkeluar'); // Path to the public folder
+        $filePath = public_path('surat-keluar'); // Path to the public folder
         $file->move($filePath, $fileName); // Move the file to the public folder
 
         $data['file'] = 'surat-keluar/' . $fileName; // Save relative path

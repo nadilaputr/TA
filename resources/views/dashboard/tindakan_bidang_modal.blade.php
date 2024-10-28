@@ -1,4 +1,4 @@
-<x-adminlte-modal id="bidangModal" title="Disposisi Bidang" theme="white" icon="fas fa-solid fa-file-medical" size='lg'
+{{-- <x-adminlte-modal id="bidangModal" title="Disposisi Bidang" theme="white" icon="fas fa-solid fa-file-medical" size='lg'
     v-centered scrollable>
 
     <div class="col-md-6">
@@ -49,10 +49,10 @@
             <tr>
                 <td>File</td>
                 <td class="d-flex">
-                    {{-- <a target="_blank" class="btn btn-xs btn-default text-primary mx-1 shadow downloadFile"
+                    <a target="_blank" class="btn btn-xs btn-default text-primary mx-1 shadow downloadFile"
                         title="Lihat File">Download
                         <i class="fa fa-lg fa-fw fa-file"></i>
-                    </a> --}}
+                    </a>
                     <button class="btn btn-xs btn-default text-primary mx-1 shadow pdfViewerBtn" title="Lihat File">View
                     </button>
                 </td>
@@ -100,88 +100,88 @@
             </form>
         </div>
     </div>
-</x-adminlte-modal>
+</x-adminlte-modal> --}}
 
 @section('js')
     <script>
-        $(document).ready(function() {
-            if ($("#tindakan").val() === "1") {
-                $('#catatanContainer').show();
-                $('#informasi_tambahan').hide();
-            } else if ($("#tindakan").val() === "2") {
-                $('#informasi_tambahan').show();
-                $('#catatanContainer').hide();
-            } else {
-                $('#catatanContainer').hide();
-                $('#informasi_tambahan').hide();
-            }
+        // $(document).ready(function() {
+        //     if ($("#tindakan").val() === "1") {
+        //         $('#catatanContainer').show();
+        //         $('#informasi_tambahan').hide();
+        //     } else if ($("#tindakan").val() === "2") {
+        //         $('#informasi_tambahan').show();
+        //         $('#catatanContainer').hide();
+        //     } else {
+        //         $('#catatanContainer').hide();
+        //         $('#informasi_tambahan').hide();
+        //     }
 
-            $("#tindakan").change(function() {
-                var selectedOption = $(this).val();
+        //     $("#tindakan").change(function() {
+        //         var selectedOption = $(this).val();
 
-                if ($("#tindakan").val() === "1") {
-                    $('#catatanContainer').show();
-                    $('#informasi_tambahan').hide();
-                } else if ($("#tindakan").val() === "2") {
-                    $('#informasi_tambahan').show();
-                    $('#catatanContainer').hide();
-                } else {
-                    $('#catatanContainer').hide();
-                    $('#informasi_tambahan').hide();
+        //         if ($("#tindakan").val() === "1") {
+        //             $('#catatanContainer').show();
+        //             $('#informasi_tambahan').hide();
+        //         } else if ($("#tindakan").val() === "2") {
+        //             $('#informasi_tambahan').show();
+        //             $('#catatanContainer').hide();
+        //         } else {
+        //             $('#catatanContainer').hide();
+        //             $('#informasi_tambahan').hide();
 
-                }
-            });
-            const tindakanToString = (status) => {
-                console.log(status);
-                switch (status) {
-                    case {{ DITERIMA }}:
-                        return "Diterima";
-                    case {{ REVISI }}:
-                        return "Revisi";
-                    case {{ ARSIP }}:
-                        return "Arsip";
-                }
-            }
+        //         }
+        //     });
+        //     const tindakanToString = (status) => {
+        //         console.log(status);
+        //         switch (status) {
+        //             case {{ DITERIMA }}:
+        //                 return "Diterima";
+        //             case {{ REVISI }}:
+        //                 return "Revisi";
+        //             case {{ ARSIP }}:
+        //                 return "Arsip";
+        //         }
+        //     }
 
-            const tindakanToBadge = (status) => {
-                switch (status) {
-                    case {{ DITERIMA }}:
-                        return "success";
-                    case {{ REVISI }}:
-                        return "warning";
-                    case {{ ARSIP }}:
-                        return "success";
-                }
-            }
+        //     const tindakanToBadge = (status) => {
+        //         switch (status) {
+        //             case {{ DITERIMA }}:
+        //                 return "success";
+        //             case {{ REVISI }}:
+        //                 return "warning";
+        //             case {{ ARSIP }}:
+        //                 return "success";
+        //         }
+        //     }
 
-            $('.pdfContainer').hide();
+        //     $('.pdfContainer').hide();
 
-            let suratId;
+        //     let suratId;
 
-            $('#bidangModal').on('show.bs.modal', function(e) {
+        //     $('#bidangModal').on('show.bs.modal', function(e) {
 
-                //get data-id attribute of the clicked element
-                var suratId = $(e.relatedTarget).data('id');
+        //         //get data-id attribute of the clicked element
+        //         var suratId = $(e.relatedTarget).data('id');
 
-                $.get(`suratmasuk/${suratId}`, function(data) {
-                    console.log(data);
+        //         $.get(`suratmasuk/${suratId}`, function(data) {
+        //             console.log(data);
 
-                    $('.id').html(data.data.id);
-                    $('.nomor_surat').html(data.data.nomor_surat);
-                    $('.tanggal_surat').html(data.data.tanggal_surat);
-                    $('.asal_surat').html(data.data.asal_surat);
-                    $('.lampiran').html(data.data.lampiran);
-                    $('.tanggal_masuk').html(data.data.tanggal_masuk);
-                    $('.perihal').html(data.data.perihal);
-                    $('.jenis').html(data.data.jenis);
-                    $('.sifat').html(data.data.sifat);
-                    $('.downloadFile').attr('href', '{{ asset(':file') }}'.replace(
-                        ':file', data.data.file))
-                    $('.pdfViewerBtn').attr('data-url', '{{ asset(':file') }}'
-                        .replace(':file', data.data.file))
-                })
-            });
-        })
+        //             $('.id').html(data.data.id);
+        //             $('.nomor_surat').html(data.data.nomor_surat);
+        //             $('.tanggal_surat').html(data.data.tanggal_surat);
+        //             $('.asal_surat').html(data.data.asal_surat);
+        //             $('.lampiran').html(data.data.lampiran);
+        //             $('.tanggal_masuk').html(data.data.tanggal_masuk);
+        //             $('.perihal').html(data.data.perihal);
+        //             $('.jenis').html(data.data.jenis);
+        //             $('.sifat').html(data.data.sifat);
+        //             $('.downloadFile').attr('href', '{{ asset(':file') }}'.replace(
+        //                 ':file', data.data.file))
+        //             $('.pdfViewerBtn').attr('data-url', '{{ asset(':file') }}'
+        //                 .replace(':file', data.data.file))
+        //         })
+        //     });
+        // })
 
 
 
@@ -193,7 +193,7 @@
 
         //     $.get(`suratmasuk/${suratId}`, function(data) {
         //         $('.id').html(data.data.id);
-        //         $('.nomor_surat').html(data.data.nomor_surat);
+        //         $('.nomor_surat').html(data.data.nomor_surat);z
         //         $('.tanggal_surat').html(data.data.tanggal_surat);
         //         $('.asal_surat').html(data.data.asal_surat);
         //         $('.tanggal_masuk').html(data.data.tanggal_masuk);

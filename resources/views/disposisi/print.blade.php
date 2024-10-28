@@ -68,8 +68,8 @@
                     <td class="font-bold text-left">Nomor Agenda</td>
                     <td style="width: 25%;"> {{ $disposisi->surat_masuk->id }}</td>
 
-                    <td class="font-bold text-left" style=" width: 25%;">Tkt. Keamanan</td>
-                    <td style="width: 25%;">{{ $disposisi->surat_masuk->tingkat_keamanan }}</td>
+                    <td class="font-bold text-left" style=" width: 25%;">Sifat</td>
+                    <td style="width: 25%;">{{ $disposisi->sifat }}</td>
                 </tr>
                 <tr>
                     <td class="font-bold text-left">Tgl. Penerimaan</td>

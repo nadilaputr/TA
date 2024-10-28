@@ -11,7 +11,7 @@
     }
 </script>
 
-<x-adminlte-modal id="modalPurple" title="DETAIL" theme="white" icon="fa fa-md fa-fw fa-info-circle " size='lg'
+<x-adminlte-modal id="modalPurple" title="Detail" theme="white" icon="fa fa-md fa-fw fa-info-circle " size='lg'
     disable-animations v-centered scrollable>
 
     <div class="row">
@@ -26,10 +26,10 @@
                         <td>Tanggal Diterima</td>
                         <td class="tanggal_masuk"></td>
                     </tr>
-                    <tr>
+                    {{-- <tr>
                         <td style="width: 40%;">Tindakan</td>
                         <td><span class="badge tindakan"></span></td>
-                    </tr>
+                    </tr> --}}
                 </table>
             </x-adminlte-card>
         </div>
@@ -38,11 +38,11 @@
             <x-adminlte-card id="detailsurat" title="CATATAN" theme="warning">
                 <table class="table table-sm table-hover">
                     <tr>
-                        <td style="width: 40%;">Sekretaris</td>
+                        <td style="width: 40%;">Revisi</td>
                         <td class="catatan"></td>
                     </tr>
                     <tr>
-                        <td style="width: 40%;">Kepala Dinas</td>
+                        <td style="width: 40%;">Disposisi</td>
                         <td class="catatanKadis"></td>
                     </tr>
                 </table>

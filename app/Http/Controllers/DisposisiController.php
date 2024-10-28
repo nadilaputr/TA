@@ -21,9 +21,8 @@ class DisposisiController extends Controller
             'Asal Surat',
             'Perihal',
             'Catatan',
-            'Tindakan',
             'Bidang',
-            // 'Tindakan',
+            'Status',
             ['label' => 'Actions', 'no-export' => true, 'width' => 5, 'text-align' => 'center'],
         ];
 
@@ -66,6 +65,7 @@ class DisposisiController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'catatan' => 'required',
+            'sifat' => 'required',
             'id_bidang' => 'required',
 
         ]);

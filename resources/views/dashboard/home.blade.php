@@ -72,7 +72,7 @@
             </div>
         </div>
 
-        <div class="container-fluid mt-5">
+        <div class="container-fluid mt-3">
             <x-adminlte-datatable id="table7" :heads="$heads" :config="$config" head-theme="info" striped hoverable
                 with-buttons>
 
@@ -83,38 +83,25 @@
                         <td>{{ $dateFormat->from($row->tanggal_masuk) }}</td>
                         <td>{{ $row->asal_surat }}</td>
                         <td>{{ $row->perihal }}</td>
+                        <td>{{ $row->disposisi->bidang->bidang ?? 'Tidak Diketahui' }}</td>
                         <td>{!! $tindakanSurat->toBadge($row->tindakan) !!}</td>
                         <td>
-                            {{-- @role('sekretaris')
-                                <button type="button" data-toggle="modal" data-target="#ajukanModal"
-                                    data-id="{{ $row->id }}"
-                                    class="btn btn-xs btn-default text-primary mx-1 shadow btn-ajukan font-weight-bold"
-                                    title="Edit">
-                                    <span>Ajukan</span>
-                                    <i class="fa fa-lg fa-fw fa-pen"></i>
-                                </button>
-                            @endrole --}}
-                            {{-- @role('kepaladinas')
-                                <button type="button" data-toggle="modal" data-target="#bidangModal"
-                                    data-id="{{ $row->id }}"
-                                    class="btn btn-xs btn-default text-primary mx-1 shadow btn-bidang" title="Edit">
-                                    <i class="fa fa-lg fa-fw fa-pen"></i>
-                                </button>
-                            @endrole --}}
-                            {{-- @role('kepaladinas')
+                            @role('kepaladinas')
+                            @if ($row->tindakan == MENUNGGU_INSTRUKSI_KEPALA)
                                 <button type="button" data-toggle="modal" data-target="#disposisiKepalaModal"
                                     data-id="{{ $row->id }}"
-                                    class="btn btn-xs btn-default text-primary mx-1 shadow btn-disposisi" title="Edit">
+                                    class="btn btn-xs btn-default text-info mx-1 shadow btn-disposisi" title="Edit">
                                     <i class="fa fa-lg fa-fw fa-pen"></i>
                                 </button>
-                            @endrole --}}
+                            @endif
+                            @endrole
                             @unlessrole('sekretaris|kepaladinas|admin')
                                 <button type="button" data-toggle="modal" data-target="#terimaModal"
                                     data-id="{{ $row->id }}"
-                                    class="btn btn-xs btn-default text-primary mx-1 shadow btn-terima-tindakan"
+                                    class="btn btn-xs btn-default text-info mx-1 shadow btn-terima-tindakan"
                                     title="Terima Disposisi">
                                     <i class="fa fa-lg fa-fw fa-pen"></i>
-                                </button>
+                                </button>    
                             @endunlessrole
                         </td>
                     </tr>
@@ -122,7 +109,7 @@
             </x-adminlte-datatable>
         </div>
     </div>
-    {{-- @include('dashboard.ajukan_modal') --}}
+
     @include('dashboard.disposisi_kepala_modal')
     @include('dashboard.tindakan_bidang_modal')
     @include('disposisi.terima')
@@ -168,13 +155,14 @@
                         $('.tanggal_masuk').html(data.data.tanggal_masuk);
                         $('.perihal').html(data.data.perihal);
                         $('.jenis').html(data.data.jenis);
+                        $('.lampiran').html(data.data.lampiran);
+                        $('.sifat').html(data.data.disposisi != null ? data.data.disposisi
+                        .sifat : "-");
                         $('.catatan').html(data.data.disposisi != null ? data.data.disposisi
                             .catatan : "-");
                         $('.bidang').html(data.data.bidang);
                         $('.downloadFile').attr('href', '{{ asset(':file') }}'.replace(
                             ':file', data.data.file))
-                        $('.pdfViewerBtn').attr('data-url', '{{ asset(':file') }}'
-                            .replace(':file', data.data.file))
                     },
                 });
             });
@@ -198,7 +186,7 @@
                     processData: false, // Don't process the data (already in FormData)
                     contentType: false, // Don't set content type (handled by FormData)
                     success: function(response) {
-                        window.location.href = '{{ route('disposisi.index') }}';
+                        window.location.href = '{{ route('home') }}';
                     },
                     error: function(xhr, status, error) {
                         if (xhr.status === 422) {
@@ -401,12 +389,87 @@
             //     });
             // })
 
+            $('.btn-disposisi').on('click', function() {
+                suratId = $(this).data('id')
+
+                $('.pdfContainer').hide();
+
+                const url = '{{ route('suratmasuk.show', ':suratId') }}'.replace(':suratId', suratId);
+
+                $.ajax({
+                    type: 'GET',
+                    url: url,
+                    success: function(data) {
+                        console.log(data.data)
+                        $('.id').html(data.data.id);
+                        $('.nomor_surat').html(data.data.nomor_surat);
+                        $('.tanggal_surat').html(data.data.tanggal_surat);
+                        $('.asal_surat').html(data.data.asal_surat);
+                        $('.lampiran').html(data.data.lampiran);
+                        $('.tanggal_masuk').html(data.data.tanggal_masuk);
+                        $('.perihal').html(data.data.perihal);
+                        $('.jenis').html(data.data.jenis);
+                        $('.sifat').html(data.data.disposisi.sifat);
+                        $('.downloadFile').attr('href', '{{ asset(':file') }}'.replace(
+                            ':file', data.data.file))
+                        $('.pdfViewerBtn').attr('data-url', '{{ asset(':file') }}'
+                            .replace(':file', data.data.file))
+                    },
+                });
+            })
+
+            $('#btn-disposisi-submit').on('click', function(e) {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                const form = $('#disposisiKepalaForm');
+                const formData = new FormData(form[0]);
+
+                const url = '{{ route('suratmasuk.updateTindakan', ':suratId') }}'.replace(':suratId',
+                    suratId);
+
+                $.ajax({
+                    url: url,
+                    type: form.attr('method'),
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        window.location.href = '{{ route('home') }}';
+                    },
+                    error: function(xhr, status, error) {
+                        if (xhr.status === 422) {
+                            const errors = JSON.parse(xhr.responseText)
+
+                            // Clear previous error messages
+                            $('.invalid-feedback').empty();
+                            $('.is-invalid').removeClass('is-invalid');
+
+                            // Iterate through each error and display next to the input
+                            $.each(errors, function(field, messages) {
+                                const input = $('[name="' + field + '"]');
+                                const errorContainer = input.siblings(
+                                    '.invalid-feedback');
+                                errorContainer.text(messages[0]);
+                                input.addClass('is-invalid');
+                            });
+                        } else {
+                            alert('Terjadi kesalahan pada server!');
+                        }
+                    }
+                });
+            });
+           
+
             $('.pdfViewerBtn').click(function(e) {
                 const url = $(this).data('url');
 
                 $('.pdfViewer').attr('src', url);
                 $('.pdfContainer').show();
             })
-        })
+        });
     </script>
 @endpush

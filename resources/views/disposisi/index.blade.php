@@ -12,9 +12,8 @@
 
 @section('content')
 
-    <h1>Disposisi</h1>
-
-    <div class="container-fluid mt-5">
+    <h3 class="mt-3">Disposisi</h3>
+    <div class="container-fluid mt-3">
         <x-adminlte-datatable id="table5" :heads="$heads" :config="$config" striped hoverable with-buttons>
             @foreach ($disposisi as $row)
                 <tr>
@@ -23,8 +22,8 @@
                     <td>{!! $row->surat_masuk->perihal !!}</td>
                     <td>{!! $row->surat_masuk->asal_surat !!}</td>
                     <td>{!! $row->catatan !!}</td>
-                    <td>{!! $tindakanSurat->toBadge($row->surat_masuk->tindakan) !!}</td>
                     <td>{!! $row->bidang->bidang !!}</td>
+                    <td>{!! $tindakanSurat->toBadge($row->surat_masuk->tindakan) !!}</td>
                     <td>
                         @if ($row->surat_masuk->tindakan == ARSIP)
                             <a href="{{ route('disposisi.print', $row->id) }}"

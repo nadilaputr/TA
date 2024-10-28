@@ -18,7 +18,6 @@ class TindakanSuratServiceProvider extends ServiceProvider
         define('REVISI', TindakanSurat::REVISI);
         define('MENUNGGU_INSTRUKSI_KEPALA', TindakanSurat::MENUNGGU_INSTRUKSI_KEPALA);
         define('DISPOSISI', TindakanSurat::DISPOSISI);
-        define('TINDAK_LANJUT', TindakanSurat::TINDAK_LANJUT);
         define('ARSIP', TindakanSurat::ARSIP);
         define('TELAH_DIREVISI', TindakanSurat::TELAH_DIREVISI);
 

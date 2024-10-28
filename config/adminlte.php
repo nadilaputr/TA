@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 3',
+    'title' => 'PASTI - Pengelolaan Surat Badan Pusat Statistik',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -307,29 +307,31 @@ return [
         [
             'text' => 'Dashboard',
             'url'  => 'home',
-
             'icon' => 'fas fa-inbox',
+            'can'  => 'view-all',
         ],
         [
             'text' => 'Surat Masuk',
             'url'  => 'suratmasuk',
             'icon' => 'fas fa-envelope',
+            'can'  => 'view-surat-masuk',
         ],
         [
             'text' => 'Surat Keluar',
             'url'  => 'suratkeluar',
             'icon' => 'fas fa-envelope-open-text',
-            'can' => 'view',
+            'can'  => 'view-admin',
         ],
         [
             'text' => 'Disposisi',
             'url'  => 'disposisi',
             'icon' => 'fas fa-reply-all',
+            'can'  => 'view-all',
         ],
 
         [
             'header' => 'PENGATURAN',
-            'can' => 'view',
+            'can'  => 'view-admin',
         ],
 
         // [
@@ -342,70 +344,16 @@ return [
             'text' => 'Data Operator',
             'url'  => 'dataoperator',
             'icon' => 'fas fa-users-cog',
-            'can' => 'view',
+            'can'  => 'view-admin',
         ],
 
         [
             'text' => 'Bidang',
             'url'  => 'bidang',
             'icon' => 'fas fa-fw fa-lock',
-            'can' => 'view',
+            'can'  => 'view-admin',
         ],
-        // [
-        //     'text'    => 'multilevel',
-        //     'icon'    => 'fas fa-fw fa-share',
-        //     'submenu' => [
-        //         [
-        //             'text' => 'level_one',
-        //             'url'  => '#',
-        //         ],
-        //         [
-        //             'text'    => 'level_one',
-        //             'url'     => '#',
-        //             'submenu' => [
-        //                 [
-        //                     'text' => 'level_two',
-        //                     'url'  => '#',
-        //                 ],
-        //                 [
-        //                     'text'    => 'level_two',
-        //                     'url'     => '#',
-        //                     'submenu' => [
-        //                         [
-        //                             'text' => 'level_three',
-        //                             'url'  => '#',
-        //                         ],
-        //                         [
-        //                             'text' => 'level_three',
-        //                             'url'  => '#',
-        //                         ],
-        //                     ],
-        //                 ],
-        //             ],
-        //         ],
-        //         [
-        //             'text' => 'level_one',
-        //             'url'  => '#',
-        //         ],
-        //     ],
-        // ],
-
-        // ['header' => 'labels'],
-        // [
-        //     'text'       => 'important',
-        //     'icon_color' => 'red',
-        //     'url'        => '#',
-        // ],
-        // [
-        //     'text'       => 'warning',
-        //     'icon_color' => 'yellow',
-        //     'url'        => '#',
-        // ],
-        // [
-        //     'text'       => 'information',
-        //     'icon_color' => 'cyan',
-        //     'url'        => '#',
-        // ],
+        
     ],
 
     /*
