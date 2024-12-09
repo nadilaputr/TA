@@ -65,7 +65,7 @@ class DisposisiController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'catatan' => 'required',
-            'sifat' => 'required',
+
             'id_bidang' => 'required',
 
         ]);

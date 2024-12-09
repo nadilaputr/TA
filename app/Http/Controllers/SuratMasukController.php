@@ -195,8 +195,10 @@ class SuratMasukController extends Controller
         if ($request->hasFile('file')) {
             $file = $request->file('file');
             $fileName = 'updateSuratMasuk-' . time() . '.' . $file->getClientOriginalExtension();
-            $path = $file->storeAs('updateSuratMasuk', $fileName, 'public');
-            $data['file'] = $path;
+            $filepath = public_path('updateSuratMasuk');
+            $file->move($filepath, $fileName);
+
+            $data['file'] = 'updateSuratMasuk/' . $fileName;
         }
 
         $data['tanggal_surat'] = Carbon::createFromFormat('d-m-Y', Carbon::parse($request->tanggal_surat)->format('d-m-Y'));

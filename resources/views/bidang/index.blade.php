@@ -20,7 +20,7 @@
                     <td>{{ $row->bidang }}</td>
                     <td class="d-flex">
                         <a href="{{ route('bidang.edit', $row->id) }}"
-                            class="btn btn-xs btn-default text-primary mx-1 shadow" title="Edit">
+                            class="btn btn-xs btn-default text-info mx-1 shadow" title="Edit">
                             <i class="fa fa-lg fa-fw fa-pen"></i>
                         </a>
                         <button type="button" data-toggle="modal" data-target="#deleteModal" data-id="{{ $row->id }}"

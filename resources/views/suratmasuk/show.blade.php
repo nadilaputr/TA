@@ -26,10 +26,6 @@
                         <td>Tanggal Diterima</td>
                         <td class="tanggal_masuk"></td>
                     </tr>
-                    {{-- <tr>
-                        <td style="width: 40%;">Tindakan</td>
-                        <td><span class="badge tindakan"></span></td>
-                    </tr> --}}
                 </table>
             </x-adminlte-card>
         </div>

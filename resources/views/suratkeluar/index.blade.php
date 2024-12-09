@@ -38,11 +38,11 @@
                 <td class="d-flex">
                     <a href="{{ asset($row->file) }}" target="_blank" class="btn btn-xs btn-default text-secondary mx-1 shadow"
                         title="Lihat File">
-                        <i class="fa fa-lg fa-fw fas fa-print"></i>
+                        <i class="fa fa-lg fa-fw fas fa-eye"></i>
                     </a>
                     @role('admin')
                         <button type="button" data-toggle="modal" data-target="#editModal" data-id="{{ $row->id }}"
-                            class="btn btn-xs btn-default text-primary mx-1 shadow btn-edit" title="Edit">
+                            class="btn btn-xs btn-default text-info mx-1 shadow btn-edit" title="Edit">
                             <i class="fa fa-lg fa-fw fa-pen"></i>
                         </button>
                         <button type="button" data-toggle="modal" data-target="#deleteModalSuratKeluar"
